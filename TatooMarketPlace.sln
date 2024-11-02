@@ -1,0 +1,71 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35219.272
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TatooMarket.Api", "src\backend\TatooMarket.Api\TatooMarket.Api.csproj", "{E23A998E-EE78-4D15-B8F5-8BD89AC6039B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TatooMarket.Application", "src\backend\TatooMarket.Application\TatooMarket.Application.csproj", "{25FCDF83-FDB9-4B6A-9F19-A7B3FB1E9C6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TatooMarket.Infrastructure", "src\backend\TatooMarket.Infrastructure\TatooMarket.Infrastructure.csproj", "{4E816391-D5CD-44B2-A54C-3C77EE21FED3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DD4F2236-186D-46C3-B7DB-B5EF04872754}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{4287926B-3532-4651-AA8D-0087580388EC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{AB0E0499-8AF6-4322-A4D6-50CC10374A74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TatooMarket.Exception", "src\shared\TatooMarket.Exception\TatooMarket.Exception\TatooMarket.Exception.csproj", "{8C5DDEEC-5518-4377-A149-07F92620B2E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TatooMarket.Domain", "src\backend\TatooMarket.Domain\TatooMarket.Domain.csproj", "{A3E2BB81-6FC6-4607-9538-F7F187278965}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TatooMarket.Communication", "src\shared\TatooMarket.Communication\TatooMarket.Communication.csproj", "{FB9B3C94-F5CD-4DD8-9B7F-6AA585D763D9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E23A998E-EE78-4D15-B8F5-8BD89AC6039B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E23A998E-EE78-4D15-B8F5-8BD89AC6039B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E23A998E-EE78-4D15-B8F5-8BD89AC6039B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E23A998E-EE78-4D15-B8F5-8BD89AC6039B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25FCDF83-FDB9-4B6A-9F19-A7B3FB1E9C6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25FCDF83-FDB9-4B6A-9F19-A7B3FB1E9C6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25FCDF83-FDB9-4B6A-9F19-A7B3FB1E9C6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25FCDF83-FDB9-4B6A-9F19-A7B3FB1E9C6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E816391-D5CD-44B2-A54C-3C77EE21FED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E816391-D5CD-44B2-A54C-3C77EE21FED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E816391-D5CD-44B2-A54C-3C77EE21FED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E816391-D5CD-44B2-A54C-3C77EE21FED3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C5DDEEC-5518-4377-A149-07F92620B2E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C5DDEEC-5518-4377-A149-07F92620B2E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C5DDEEC-5518-4377-A149-07F92620B2E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C5DDEEC-5518-4377-A149-07F92620B2E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3E2BB81-6FC6-4607-9538-F7F187278965}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3E2BB81-6FC6-4607-9538-F7F187278965}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3E2BB81-6FC6-4607-9538-F7F187278965}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3E2BB81-6FC6-4607-9538-F7F187278965}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB9B3C94-F5CD-4DD8-9B7F-6AA585D763D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB9B3C94-F5CD-4DD8-9B7F-6AA585D763D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB9B3C94-F5CD-4DD8-9B7F-6AA585D763D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB9B3C94-F5CD-4DD8-9B7F-6AA585D763D9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E23A998E-EE78-4D15-B8F5-8BD89AC6039B} = {4287926B-3532-4651-AA8D-0087580388EC}
+		{25FCDF83-FDB9-4B6A-9F19-A7B3FB1E9C6E} = {4287926B-3532-4651-AA8D-0087580388EC}
+		{4E816391-D5CD-44B2-A54C-3C77EE21FED3} = {4287926B-3532-4651-AA8D-0087580388EC}
+		{4287926B-3532-4651-AA8D-0087580388EC} = {DD4F2236-186D-46C3-B7DB-B5EF04872754}
+		{AB0E0499-8AF6-4322-A4D6-50CC10374A74} = {DD4F2236-186D-46C3-B7DB-B5EF04872754}
+		{8C5DDEEC-5518-4377-A149-07F92620B2E9} = {AB0E0499-8AF6-4322-A4D6-50CC10374A74}
+		{A3E2BB81-6FC6-4607-9538-F7F187278965} = {4287926B-3532-4651-AA8D-0087580388EC}
+		{FB9B3C94-F5CD-4DD8-9B7F-6AA585D763D9} = {AB0E0499-8AF6-4322-A4D6-50CC10374A74}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C1970740-4820-4336-9805-F6E6EB854150}
+	EndGlobalSection
+EndGlobal

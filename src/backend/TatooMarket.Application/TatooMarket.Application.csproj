@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\shared\TatooMarket.Communication\TatooMarket.Communication.csproj" />
+    <ProjectReference Include="..\..\shared\TatooMarket.Exception\TatooMarket.Exception\TatooMarket.Exception.csproj" />
+    <ProjectReference Include="..\TatooMarket.Domain\TatooMarket.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
