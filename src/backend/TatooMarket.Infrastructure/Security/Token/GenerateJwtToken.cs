@@ -15,9 +15,13 @@ namespace TatooMarket.Infrastructure.Security.Token
         private readonly string _signKey;
 
         public GenerateJwtToken(string signKey) => _signKey = signKey;
-        public string GenerateToken(Guid uid)
+        public string GenerateToken(Guid uid, List<Claim>? claimsUser = null!)
         {
             var claims = new List<Claim>() { new Claim(ClaimTypes.Sid, uid.ToString()) };
+
+            if(claimsUser is not null)
+                claims.AddRange(claimsUser);
+
             var descriptor = new SecurityTokenDescriptor()
             {
                 Subject = new ClaimsIdentity(claims),

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TatooMarket.Application.Extensions;
 using TatooMarket.Application.Services.Validator.User;
-using TatooMarket.Application.UseCases.Repositories;
+using TatooMarket.Application.UseCases.Repositories.User;
 using TatooMarket.Communication.Requests;
 using TatooMarket.Communication.Responses;
 using TatooMarket.Domain.Entities.Identity;
@@ -16,7 +17,7 @@ using TatooMarket.Domain.Repositories.Security.Cryptography;
 using TatooMarket.Domain.Repositories.User;
 using TatooMarket.Exception.Exceptions;
 
-namespace TatooMarket.Application.UseCases
+namespace TatooMarket.Application.UseCases.User
 {
     public class CreateUser : ICreateUser
     {
@@ -26,10 +27,12 @@ namespace TatooMarket.Application.UseCases
         private readonly IMapper _mapper;
         private readonly IPasswordCryptography _cryptography;
         private readonly IAzureStorageService _storageService;
+        private readonly UserManager<UserEntity> _userManager;
 
-        public CreateUser(IUserWriteRepository userWrite, IUserReadRepository userRead, 
-            IUnitOfWork uof, IMapper mapper, 
-            IPasswordCryptography cryptography, IAzureStorageService storageService)
+        public CreateUser(IUserWriteRepository userWrite, IUserReadRepository userRead,
+            IUnitOfWork uof, IMapper mapper,
+            IPasswordCryptography cryptography, IAzureStorageService storageService,
+            UserManager<UserEntity> userManager)
         {
             _userWrite = userWrite;
             _userRead = userRead;
@@ -37,6 +40,7 @@ namespace TatooMarket.Application.UseCases
             _mapper = mapper;
             _cryptography = cryptography;
             _storageService = storageService;
+            _userManager = userManager;
         }
 
         public async Task<ResponseCreateUser> Execute(RequestCreateUser request)
@@ -65,6 +69,13 @@ namespace TatooMarket.Application.UseCases
             await _userWrite.Add(user);
             await _uof.Commit();
 
+            var role = "customer";
+
+            if (user.IsSeller)
+                role = "seller";
+
+            await _userManager.AddToRoleAsync(user, role);
+
             return _mapper.Map<ResponseCreateUser>(user);
         }
 
@@ -82,7 +93,7 @@ namespace TatooMarket.Application.UseCases
             if (await _userRead.UserNameExists(request.UserName))
                 result.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, ResourceExceptMessages.USERNAME_EXISTS));
 
-            if(result.IsValid == false)
+            if (result.IsValid == false)
             {
                 var errorMessages = result.Errors.Select(d => d.ErrorMessage).ToList();
             }

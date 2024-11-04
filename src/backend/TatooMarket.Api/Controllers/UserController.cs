@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TatooMarket.Application.UseCases.Repositories;
+using TatooMarket.Application.UseCases.Repositories.User;
 using TatooMarket.Communication.Requests;
 
 namespace TatooMarket.Api.Controllers

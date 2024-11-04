@@ -7,8 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TatooMarket.Application.UseCases;
-using TatooMarket.Application.UseCases.Repositories;
+using TatooMarket.Application.UseCases.Login;
+using TatooMarket.Application.UseCases.Repositories.Login;
+using TatooMarket.Application.UseCases.Repositories.User;
+using TatooMarket.Application.UseCases.User;
 
 namespace TatooMarket.Application
 {
@@ -23,6 +25,7 @@ namespace TatooMarket.Application
         private static void AddRepositories(IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<ICreateUser, CreateUser>();
+            services.AddScoped<ILoginByApplication, LoginByApplication>();
         }
 
         private static void AddMapper(this IServiceCollection services)

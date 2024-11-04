@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TatooMarket.Domain.Entities.Identity;
 
 namespace TatooMarket.Domain.Repositories.User
 {
@@ -10,5 +11,6 @@ namespace TatooMarket.Domain.Repositories.User
     {
         public Task<bool> EmailExists(string email);
         public Task<bool> UserNameExists(string username);
+        public Task<UserEntity?> LoginByEmailAndPassword(string email);
     }
 }

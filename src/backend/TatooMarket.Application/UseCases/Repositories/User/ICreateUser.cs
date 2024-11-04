@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TatooMarket.Communication.Requests;
 using TatooMarket.Communication.Responses;
 
-namespace TatooMarket.Application.UseCases.Repositories
+namespace TatooMarket.Application.UseCases.Repositories.User
 {
     public interface ICreateUser
     {
