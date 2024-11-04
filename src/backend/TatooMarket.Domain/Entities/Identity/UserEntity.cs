@@ -10,7 +10,7 @@ using TatooMarket.Domain.Entities.Tattoo;
 
 namespace TatooMarket.Domain.Entities.Identity
 {
-    public class User : IdentityUser<long>
+    public class UserEntity : IdentityUser<long>
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
@@ -25,5 +25,6 @@ namespace TatooMarket.Domain.Entities.Identity
         [NotMapped]
         public Studio? Studio { get; set; }
         public string? UserImage { get; set; }
+        public Guid UserIdentifier { get; set; }
     }
 }

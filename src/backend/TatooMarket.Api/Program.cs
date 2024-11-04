@@ -1,9 +1,8 @@
-
-
-
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using TatooMarket.Application;
 using TatooMarket.Domain.Entities.Identity;
+using TatooMarket.Infrastructure;
 using TatooMarket.Infrastructure.DataEntity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,18 +10,19 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
-builder.Services.AddIdentity<User, RoleEntity>()
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication(builder.Configuration);
+
+builder.Services.AddIdentity<UserEntity, RoleEntity>()
     .AddEntityFrameworkStores<ProjectDbContext>()
     .AddDefaultTokenProviders();
     
-var dbConnect = builder.Configuration.GetConnectionString("sqlserverconnection");
-
-builder.Services.AddDbContext<ProjectDbContext>(opt => opt.UseSqlServer(dbConnect));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddRouting(d => d.LowercaseUrls = true);
 
 var app = builder.Build();
 

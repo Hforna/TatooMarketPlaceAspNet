@@ -27,6 +27,6 @@ namespace TatooMarket.Domain.Entities.Communication
         [ForeignKey("TattooId")]
         public TattooEntity Tattoo { get; set; }
         [ForeignKey("CustomerId")]
-        public User Customer { get; set; }
+        public UserEntity Customer { get; set; }
     }
 }

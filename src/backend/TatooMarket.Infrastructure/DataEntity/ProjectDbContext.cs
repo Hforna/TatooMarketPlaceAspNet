@@ -11,7 +11,7 @@ using TatooMarket.Domain.Entities.Tattoo;
 
 namespace TatooMarket.Infrastructure.DataEntity
 {
-    public class ProjectDbContext : IdentityDbContext<User, RoleEntity, long>
+    public class ProjectDbContext : IdentityDbContext<UserEntity, RoleEntity, long>
     {
         public ProjectDbContext(DbContextOptions<ProjectDbContext> options) : base(options) { }
 

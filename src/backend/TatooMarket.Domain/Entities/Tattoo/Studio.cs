@@ -17,12 +17,12 @@ namespace TatooMarket.Domain.Entities.Tattoo
         [ForeignKey("User")]
         public long OwnerId { get; set; }
         [Required]
-        public User? Owner { get; set; }
+        public UserEntity? Owner { get; set; }
         public int CustomerQuantity { get; set; }
         [Range(1, 5, ErrorMessage = "Range must be between 1 and 5")]
         public int Note { get; set; }
         [NotMapped]
-        public ICollection<User> Customers { get; set; } = [];
+        public ICollection<UserEntity> Customers { get; set; } = [];
         public string? Address { get; set; }
         public string? PhoneNumber { get; set; }
         public string? ImageStudio { get; set; }
