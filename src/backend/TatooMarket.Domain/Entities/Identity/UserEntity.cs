@@ -15,7 +15,6 @@ namespace TatooMarket.Domain.Entities.Identity
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
         public bool Active { get; set; } = true;
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime LastAccess { get; set; } = DateTime.UtcNow;
         [MinLength(8, ErrorMessage = "Password length must be greater than 7")]
         [Required]

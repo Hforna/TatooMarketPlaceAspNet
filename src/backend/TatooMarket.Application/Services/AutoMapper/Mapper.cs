@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TatooMarket.Communication.Requests;
+using TatooMarket.Communication.Responses;
 using TatooMarket.Domain.Entities.Identity;
 
 namespace TatooMarket.Application.Services.AutoMapper
@@ -13,7 +14,8 @@ namespace TatooMarket.Application.Services.AutoMapper
     {
         public Mapper()
         {
-
+            RequestToEntitie();
+            EntitieToResponse();
         }
 
         private void RequestToEntitie()
@@ -24,7 +26,7 @@ namespace TatooMarket.Application.Services.AutoMapper
 
         private void EntitieToResponse()
         {
-            CreateMap<UserEntity, RequestCreateUser>();
+            CreateMap<UserEntity, ResponseCreateUser>();
         }
     }
 }

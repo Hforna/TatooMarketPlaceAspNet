@@ -120,4 +120,19 @@
   <data name="PASSWORD_GREATER_OR_EQUAL_EIGHT" xml:space="preserve">
     <value>Password must have 8 or more digits</value>
   </data>
+  <data name="FILE_FORMAT" xml:space="preserve">
+    <value>File format is wrong</value>
+  </data>
+  <data name="EMAIL_FORMAT" xml:space="preserve">
+    <value>Email format is wrong</value>
+  </data>
+  <data name="EMAIL_EXISTS" xml:space="preserve">
+    <value>This e-mail already exists</value>
+  </data>
+  <data name="USERNAME_EXISTS" xml:space="preserve">
+    <value>This username already exists</value>
+  </data>
+  <data name="REPEAT_PASSWORD_ERROR" xml:space="preserve">
+    <value>Password is not the same</value>
+  </data>
 </root>

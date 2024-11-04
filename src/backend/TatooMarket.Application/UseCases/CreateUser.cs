@@ -11,6 +11,7 @@ using TatooMarket.Communication.Requests;
 using TatooMarket.Communication.Responses;
 using TatooMarket.Domain.Entities.Identity;
 using TatooMarket.Domain.Repositories;
+using TatooMarket.Domain.Repositories.Azure;
 using TatooMarket.Domain.Repositories.Security.Cryptography;
 using TatooMarket.Domain.Repositories.User;
 using TatooMarket.Exception.Exceptions;
@@ -24,6 +25,19 @@ namespace TatooMarket.Application.UseCases
         private readonly IUnitOfWork _uof;
         private readonly IMapper _mapper;
         private readonly IPasswordCryptography _cryptography;
+        private readonly IAzureStorageService _storageService;
+
+        public CreateUser(IUserWriteRepository userWrite, IUserReadRepository userRead, 
+            IUnitOfWork uof, IMapper mapper, 
+            IPasswordCryptography cryptography, IAzureStorageService storageService)
+        {
+            _userWrite = userWrite;
+            _userRead = userRead;
+            _uof = uof;
+            _mapper = mapper;
+            _cryptography = cryptography;
+            _storageService = storageService;
+        }
 
         public async Task<ResponseCreateUser> Execute(RequestCreateUser request)
         {
@@ -38,7 +52,9 @@ namespace TatooMarket.Application.UseCases
                 (bool isValid, string fileName) = ImageValidator.Validate(image);
 
                 if (!isValid)
-                    throw new UserException("File must be a image");
+                    throw new UserException(ResourceExceptMessages.FILE_FORMAT);
+
+                await _storageService.UploadUser(user, image, fileName);
 
                 user.UserImage = fileName;
             }
@@ -57,11 +73,14 @@ namespace TatooMarket.Application.UseCases
             var validator = new CreateUserValidator();
             var result = validator.Validate(request);
 
+            if (request.Password != request.RepeatPassword)
+                result.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, ResourceExceptMessages.REPEAT_PASSWORD_ERROR));
+
             if (await _userRead.EmailExists(request.Email))
-                result.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, "E-mail already exists"));
+                result.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, ResourceExceptMessages.EMAIL_EXISTS));
 
             if (await _userRead.UserNameExists(request.UserName))
-                result.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, "Username already exists"));
+                result.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, ResourceExceptMessages.USERNAME_EXISTS));
 
             if(result.IsValid == false)
             {
