@@ -31,9 +31,9 @@ namespace TatooMarket.Infrastructure.Security.Token
 
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            var token = tokenHandler.CreateJwtSecurityToken(descriptor);
-
-            return token.ToString();
+            var token = tokenHandler.CreateToken(descriptor);
+            
+            return tokenHandler.WriteToken(token);
         }
     }
 }
