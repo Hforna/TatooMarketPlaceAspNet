@@ -58,13 +58,16 @@ namespace TatooMarket.Application.UseCases.User
                 if (!isValid)
                     throw new UserException(ResourceExceptMessages.FILE_FORMAT);
 
-                await _storageService.UploadUser(user, image, fileName);
+                //await _storageService.UploadUser(user, image, fileName);
 
                 user.UserImage = fileName;
             }
 
             var password = _cryptography.Cryptography(request.Password);
             user.Password = password;
+
+            user.UserIdentifier = Guid.NewGuid();
+            user.SecurityStamp = Guid.NewGuid().ToString();
 
             await _userWrite.Add(user);
             await _uof.Commit();
