@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TatooMarket.Application.UseCases.Repositories.User;
-using TatooMarket.Communication.Requests;
+using TatooMarket.Communication.Requests.User;
 
 namespace TatooMarket.Api.Controllers
 {
@@ -13,6 +13,14 @@ namespace TatooMarket.Api.Controllers
             var result = await useCase.Execute(request);
 
             return Created(string.Empty, result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetProfile([FromServices]IGetUserProfile useCase)
+        {
+            var result = await useCase.Execute();
+
+            return Ok(result);
         }
     }
 }

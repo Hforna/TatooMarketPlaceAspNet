@@ -17,16 +17,21 @@ namespace TatooMarket.Application.Extensions
             if(file.Is<JointPhotographicExpertsGroup>())
             {
                 isImage = true;
-                fileName = $"{Guid.NewGuid()}{JointPhotographicExpertsGroup.TypeExtension}";
+                fileName = $"{Guid.NewGuid()}{GetExtension(JointPhotographicExpertsGroup.TypeExtension)}";
             } else if(file.Is<PortableNetworkGraphic>())
             {
                 isImage = true;
-                fileName = $"{Guid.NewGuid()}{PortableNetworkGraphic.TypeExtension}";
+                fileName = $"{Guid.NewGuid()}{GetExtension(PortableNetworkGraphic.TypeExtension)}";
             }
 
             file.Position = 0;
 
             return (isImage, fileName);
+        }
+
+        public static string GetExtension(string ext)
+        {
+            return ext.StartsWith(".") ? ext : $".{ext}";
         }
     }
 }

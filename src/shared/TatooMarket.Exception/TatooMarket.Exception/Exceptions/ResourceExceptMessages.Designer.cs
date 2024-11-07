@@ -79,6 +79,15 @@ namespace TatooMarket.Exception.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a E-mail or password invalid.
+        /// </summary>
+        public static string EMAIL_PASSWORD_INVALID {
+            get {
+                return ResourceManager.GetString("EMAIL_PASSWORD_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a File format is wrong.
         /// </summary>
         public static string FILE_FORMAT {

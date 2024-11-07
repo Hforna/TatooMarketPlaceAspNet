@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TatooMarket.Communication.Requests
+namespace TatooMarket.Communication.Requests.User
 {
     public class RequestCreateUser
     {

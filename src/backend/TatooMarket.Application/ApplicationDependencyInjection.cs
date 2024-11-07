@@ -26,6 +26,7 @@ namespace TatooMarket.Application
         {
             services.AddScoped<ICreateUser, CreateUser>();
             services.AddScoped<ILoginByApplication, LoginByApplication>();
+            services.AddScoped<IGetUserProfile, GetUserProfile>();
         }
 
         private static void AddMapper(this IServiceCollection services)

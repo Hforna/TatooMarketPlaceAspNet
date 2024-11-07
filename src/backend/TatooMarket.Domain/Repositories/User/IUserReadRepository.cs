@@ -12,5 +12,6 @@ namespace TatooMarket.Domain.Repositories.User
         public Task<bool> EmailExists(string email);
         public Task<bool> UserNameExists(string username);
         public Task<UserEntity?> LoginByEmailAndPassword(string email);
+        public Task<UserEntity?> UserByUid(Guid uid);
     }
 }

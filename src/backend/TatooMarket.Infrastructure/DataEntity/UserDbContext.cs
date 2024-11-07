@@ -35,6 +35,11 @@ namespace TatooMarket.Infrastructure.DataEntity
             _dbContext.Users.Update(user);
         }
 
+        public async Task<UserEntity?> UserByUid(Guid uid)
+        {
+            return await _dbContext.Users.Include(d => d.Studio).FirstOrDefaultAsync(d => d.UserIdentifier == uid && d.Active);
+        }
+
         public async Task<bool> UserNameExists(string username)
         {
             return await _dbContext.Users.AnyAsync(u => u.UserName == username);

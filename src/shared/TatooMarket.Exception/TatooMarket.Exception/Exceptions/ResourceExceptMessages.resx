@@ -135,4 +135,7 @@
   <data name="REPEAT_PASSWORD_ERROR" xml:space="preserve">
     <value>Password is not the same</value>
   </data>
+  <data name="EMAIL_PASSWORD_INVALID" xml:space="preserve">
+    <value>E-mail or password invalid</value>
+  </data>
 </root>

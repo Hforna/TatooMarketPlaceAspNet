@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TatooMarket.Communication.Requests;
+using TatooMarket.Communication.Requests.User;
 using TatooMarket.Exception.Exceptions;
 
 namespace TatooMarket.Application.Services.Validator.User

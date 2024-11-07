@@ -120,4 +120,22 @@
   <data name="PASSWORD_GREATER_OR_EQUAL_EIGHT" xml:space="preserve">
     <value>Senha deve conter 8 digitos ou mais</value>
   </data>
+  <data name="FILE_FORMAT" xml:space="preserve">
+    <value>Format de arquivo está errado</value>
+  </data>
+  <data name="EMAIL_FORMAT" xml:space="preserve">
+    <value>Format de e-mail está errado</value>
+  </data>
+  <data name="EMAIL_EXISTS" xml:space="preserve">
+    <value>Este e-mail já existe</value>
+  </data>
+  <data name="USERNAME_EXISTS" xml:space="preserve">
+    <value>Esse nome já está em uso</value>
+  </data>
+  <data name="REPEAT_PASSWORD_ERROR" xml:space="preserve">
+    <value>Senha não é a mesma</value>
+  </data>
+  <data name="EMAIL_PASSWORD_INVALID" xml:space="preserve">
+    <value>E-mail ou senha incorreta</value>
+  </data>
 </root>

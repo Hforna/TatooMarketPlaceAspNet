@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TatooMarket.Communication.Responses
+namespace TatooMarket.Communication.Responses.User
 {
     public class ResponseCreateUser
     {

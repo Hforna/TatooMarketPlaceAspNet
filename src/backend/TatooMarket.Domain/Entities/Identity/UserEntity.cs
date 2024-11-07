@@ -21,7 +21,6 @@ namespace TatooMarket.Domain.Entities.Identity
         public required string Password { get; set; }
         public bool IsSeller { get; set; } = false;
         [InverseProperty("Owner")]
-        [NotMapped]
         public Studio? Studio { get; set; }
         public string? UserImage { get; set; }
         public Guid UserIdentifier { get; set; }

@@ -12,6 +12,7 @@ using TatooMarket.Domain.Repositories;
 using TatooMarket.Domain.Repositories.Azure;
 using TatooMarket.Domain.Repositories.Security.Cryptography;
 using TatooMarket.Domain.Repositories.Security.Token;
+using TatooMarket.Domain.Repositories.Tattoo;
 using TatooMarket.Domain.Repositories.User;
 using TatooMarket.Infrastructure.Azure;
 using TatooMarket.Infrastructure.DataEntity;
@@ -50,6 +51,10 @@ namespace TatooMarket.Infrastructure
             //User
             services.AddScoped<IUserReadRepository, UserDbContext>();
             services.AddScoped<IUserWriteRepository, UserDbContext>();
+            services.AddScoped<IGetUserByToken, GetUserByToken>();
+
+            //Tattoo
+            services.AddScoped<ITattooReadOnly, TattooDbContext>();
         }
 
         private static void AddStorageBlob(IServiceCollection services, IConfiguration configuration)
