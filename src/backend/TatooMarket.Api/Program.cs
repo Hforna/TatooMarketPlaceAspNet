@@ -51,6 +51,8 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication(builder.Configuration);
 
+
+
 builder.Services.AddScoped<IGetHeaderToken, GetHeaderToken>();
 
 builder.Services.AddIdentity<UserEntity, RoleEntity>()

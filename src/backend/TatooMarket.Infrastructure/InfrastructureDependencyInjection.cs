@@ -52,9 +52,11 @@ namespace TatooMarket.Infrastructure
             services.AddScoped<IUserReadRepository, UserDbContext>();
             services.AddScoped<IUserWriteRepository, UserDbContext>();
             services.AddScoped<IGetUserByToken, GetUserByToken>();
+            services.AddScoped<ITokenValidator>(opt => new TokenValidator(configuration.GetValue<string>("sercurity:token:sign_key")!));
 
             //Tattoo
             services.AddScoped<ITattooReadOnly, TattooDbContext>();
+
         }
 
         private static void AddStorageBlob(IServiceCollection services, IConfiguration configuration)

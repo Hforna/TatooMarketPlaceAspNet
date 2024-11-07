@@ -1,11 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using TatooMarket.Domain.Repositories.Security.Token;
 
 namespace TatooMarket.Infrastructure.Security.Token
@@ -15,11 +10,12 @@ namespace TatooMarket.Infrastructure.Security.Token
         private readonly string _signKey;
 
         public GenerateJwtToken(string signKey) => _signKey = signKey;
+
         public string GenerateToken(Guid uid, List<Claim>? claimsUser = null!)
         {
             var claims = new List<Claim>() { new Claim(ClaimTypes.Sid, uid.ToString()) };
 
-            if(claimsUser is not null)
+            if (claimsUser is not null)
                 claims.AddRange(claimsUser);
 
             var descriptor = new SecurityTokenDescriptor()
@@ -32,7 +28,7 @@ namespace TatooMarket.Infrastructure.Security.Token
             var tokenHandler = new JwtSecurityTokenHandler();
 
             var token = tokenHandler.CreateToken(descriptor);
-            
+
             return tokenHandler.WriteToken(token);
         }
     }

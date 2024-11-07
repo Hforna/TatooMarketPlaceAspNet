@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using TatooMarket.Domain.Entities.Identity;
 using TatooMarket.Domain.Repositories.Security.Token;
 using TatooMarket.Domain.Repositories.User;

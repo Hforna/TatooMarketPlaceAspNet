@@ -97,6 +97,15 @@ namespace TatooMarket.Exception.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The authorization token is invaild or expired.
+        /// </summary>
+        public static string INVALID_TOKEN {
+            get {
+                return ResourceManager.GetString("INVALID_TOKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Password must have 8 or more digits.
         /// </summary>
         public static string PASSWORD_GREATER_OR_EQUAL_EIGHT {
@@ -111,6 +120,16 @@ namespace TatooMarket.Exception.Exceptions {
         public static string REPEAT_PASSWORD_ERROR {
             get {
                 return ResourceManager.GetString("REPEAT_PASSWORD_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a User doens&apos;t exists
+        ///.
+        /// </summary>
+        public static string USER_DOESNT_EXISTS {
+            get {
+                return ResourceManager.GetString("USER_DOESNT_EXISTS", resourceCulture);
             }
         }
         
