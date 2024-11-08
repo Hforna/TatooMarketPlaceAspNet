@@ -39,7 +39,7 @@ namespace TatooMarket.Application.UseCases.User
             var response = _mapper.Map<ResponseGetUserProfile>(user);
 
             if(user.Studio is not null)
-                response.UserStudio.RecentTattoss = _mapper.Map<IList<ResponseShortTatto>>(_tattooRead.GetRecentTattoss(user.Studio));
+                response.UserStudio.RecentTattoss = _mapper.Map<IList<ResponseShortTatto>>(user.Studio.StudioTattoss.Take(5).OrderBy(d => d.CreatedOn).ToList());
 
             return response;
         }
