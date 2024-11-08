@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TatooMarket.Communication.Requests.Studio;
 using TatooMarket.Communication.Requests.User;
 using TatooMarket.Communication.Responses.Studio;
 using TatooMarket.Communication.Responses.Tatto;
@@ -25,6 +26,8 @@ namespace TatooMarket.Application.Services.AutoMapper
         {
             CreateMap<RequestCreateUser, UserEntity>()
                 .ForMember(u => u.Password, opt => opt.Ignore());
+
+            CreateMap<RequestCreateStudio, Studio>();
         }
 
         private void EntitieToResponse()
@@ -35,7 +38,8 @@ namespace TatooMarket.Application.Services.AutoMapper
                 .ForMember(d => d.UserStudio, opt => opt.MapFrom(d => d.Studio));
 
             CreateMap<Studio, ResponseShortStudio>()
-                .ForMember(d => d.RecentTattoss, opt => opt.Ignore());
+                .ForMember(d => d.RecentTattoss, opt => opt.Ignore())
+                .ForMember(d => d.OwnerId, opt => opt.Ignore());
 
             CreateMap<TattooEntity, ResponseShortTatto>();
         }

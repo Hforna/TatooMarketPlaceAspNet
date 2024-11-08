@@ -1,12 +1,17 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 using TatooMarket.Api.Filters;
 using TatooMarket.Application;
 using TatooMarket.Domain.Entities.Identity;
 using TatooMarket.Domain.Repositories.Security.Token;
 using TatooMarket.Infrastructure;
 using TatooMarket.Infrastructure.DataEntity;
+using TatooMarket.Infrastructure.Security.Token;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,10 +63,35 @@ builder.Services.AddScoped<IGetHeaderToken, GetHeaderToken>();
 builder.Services.AddIdentity<UserEntity, RoleEntity>()
     .AddEntityFrameworkStores<ProjectDbContext>()
     .AddDefaultTokenProviders();
-    
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var tokenValidationParams = new TokenValidationParameters
+{
+    ValidateIssuerSigningKey = true,
+    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration.GetValue<string>("security:token:sign_key"))!),
+    ValidateIssuer = false,
+    ValidateAudience = false,
+    ValidateLifetime = true,
+    RequireExpirationTime = false,
+    ClockSkew = TimeSpan.Zero
+};
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(jwt => {
+    jwt.SaveToken = true;
+    jwt.TokenValidationParameters = tokenValidationParams;
+});
+
+builder.Services.AddAuthorization(opt =>
+{
+    opt.AddPolicy("OnlySeller", opt => opt.RequireRole("seller"));
+});
 
 
 builder.Services.AddRouting(d => d.LowercaseUrls = true);

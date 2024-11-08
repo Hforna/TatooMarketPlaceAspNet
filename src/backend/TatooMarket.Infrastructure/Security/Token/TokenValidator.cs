@@ -14,10 +14,7 @@ namespace TatooMarket.Infrastructure.Security.Token
     {
         private readonly string _signKey;
 
-        public TokenValidator(string signKey)
-        {
-            _signKey = signKey;
-        }
+        public TokenValidator(string signKey) => _signKey = signKey;
 
         public bool Validate(string token)
         {
@@ -26,7 +23,7 @@ namespace TatooMarket.Infrastructure.Security.Token
                 ClockSkew = TimeSpan.Zero,
                 ValidateAudience = false,
                 ValidateIssuer = false,
-                IssuerSigningKey = GetSignKeyAsSecurity.GenerateSecurityKey(token),
+                IssuerSigningKey = GetSignKeyAsSecurity.GenerateSecurityKey(_signKey),
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();

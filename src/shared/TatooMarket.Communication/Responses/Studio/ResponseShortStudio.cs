@@ -10,7 +10,7 @@ namespace TatooMarket.Communication.Responses.Studio
     public class ResponseShortStudio
     {
         public string StudioName { get; set; }
-        public long OwnerId { get; set; }
+        public string OwnerId { get; set; }
         public string ImageStudio {  get; set; }
         public int Note {  get; set; }
         public IList<ResponseShortTatto>? RecentTattoss { get; set; }

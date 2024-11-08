@@ -16,7 +16,6 @@ namespace TatooMarket.Domain.Entities.Tattoo
     {
         [ForeignKey("Studio")]
         public long StudioId { get; set; }
-        [ForeignKey("StudioId")]
         public Studio? Studio { get; set; }
         public string? TattooImage { get; set; }
         public BodyPlacementEnum BodyPlacement { get; set; }

@@ -12,6 +12,7 @@ using TatooMarket.Domain.Repositories;
 using TatooMarket.Domain.Repositories.Azure;
 using TatooMarket.Domain.Repositories.Security.Cryptography;
 using TatooMarket.Domain.Repositories.Security.Token;
+using TatooMarket.Domain.Repositories.StudioRepository;
 using TatooMarket.Domain.Repositories.Tattoo;
 using TatooMarket.Domain.Repositories.User;
 using TatooMarket.Infrastructure.Azure;
@@ -26,6 +27,7 @@ namespace TatooMarket.Infrastructure
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             AddDbContext(services, configuration);
+            AddJwtTokenRepositories(services, configuration);
             AddRepositories(services, configuration);
             AddStorageBlob(services, configuration);
             AddCryptography(services);
@@ -42,9 +44,15 @@ namespace TatooMarket.Infrastructure
             services.AddSingleton<IPasswordCryptography, BcryptNet>();
         }
 
+        private static void AddJwtTokenRepositories(IServiceCollection services, IConfiguration configuration)
+        {
+            var signKey = configuration.GetValue<string>("security:token:sign_key")!;
+            services.AddScoped<ITokenValidator>(opt => new TokenValidator(signKey));
+            services.AddScoped<ITokenGenerator>(d => new GenerateJwtToken(signKey));
+        }
+
         private static void AddRepositories(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<ITokenGenerator>(d => new GenerateJwtToken(configuration.GetValue<string>("security:token:sign_key")!));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -52,10 +60,13 @@ namespace TatooMarket.Infrastructure
             services.AddScoped<IUserReadRepository, UserDbContext>();
             services.AddScoped<IUserWriteRepository, UserDbContext>();
             services.AddScoped<IGetUserByToken, GetUserByToken>();
-            services.AddScoped<ITokenValidator>(opt => new TokenValidator(configuration.GetValue<string>("sercurity:token:sign_key")!));
 
             //Tattoo
             services.AddScoped<ITattooReadOnly, TattooDbContext>();
+
+            //Studio
+            services.AddScoped<IStudioReadOnly, StudioDbContext>();
+            services.AddScoped<IStudioWriteOnly, StudioDbContext>();
 
         }
 

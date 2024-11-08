@@ -145,4 +145,7 @@
   <data name="INVALID_TOKEN" xml:space="preserve">
     <value>The authorization token is invaild or expired</value>
   </data>
+  <data name="STUDIO_NAME_EXISTS" xml:space="preserve">
+    <value>This studio name already exists</value>
+  </data>
 </root>
