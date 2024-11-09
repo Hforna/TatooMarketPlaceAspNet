@@ -12,8 +12,8 @@ using TatooMarket.Infrastructure.DataEntity;
 namespace TatooMarket.Infrastructure.Migrations
 {
     [DbContext(typeof(ProjectDbContext))]
-    [Migration("20241108215852_AddStudioIdUsers")]
-    partial class AddStudioIdUsers
+    [Migration("20241109033623_CreateInitialTables")]
+    partial class CreateInitialTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -201,6 +201,24 @@ namespace TatooMarket.Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            ConcurrencyStamp = "System.Func`1[System.Guid]",
+                            CreatedOn = new DateTime(2024, 11, 9, 3, 36, 23, 16, DateTimeKind.Utc).AddTicks(8663),
+                            Name = "seller",
+                            NormalizedName = "SELLER"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            ConcurrencyStamp = "System.Func`1[System.Guid]",
+                            CreatedOn = new DateTime(2024, 11, 9, 3, 36, 23, 16, DateTimeKind.Utc).AddTicks(8682),
+                            Name = "customer",
+                            NormalizedName = "CUSTOMER"
+                        });
                 });
 
             modelBuilder.Entity("TatooMarket.Domain.Entities.Identity.UserEntity", b =>
@@ -294,7 +312,9 @@ namespace TatooMarket.Infrastructure.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("StudioId");
+                    b.HasIndex("StudioId")
+                        .IsUnique()
+                        .HasFilter("[StudioId] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -336,9 +356,6 @@ namespace TatooMarket.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OwnerId")
-                        .IsUnique();
 
                     b.ToTable("studios");
                 });
@@ -462,20 +479,12 @@ namespace TatooMarket.Infrastructure.Migrations
 
             modelBuilder.Entity("TatooMarket.Domain.Entities.Identity.UserEntity", b =>
                 {
-                    b.HasOne("TatooMarket.Domain.Entities.Tattoo.Studio", null)
-                        .WithMany("Customers")
-                        .HasForeignKey("StudioId");
-                });
+                    b.HasOne("TatooMarket.Domain.Entities.Tattoo.Studio", "Studio")
+                        .WithOne("Owner")
+                        .HasForeignKey("TatooMarket.Domain.Entities.Identity.UserEntity", "StudioId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity("TatooMarket.Domain.Entities.Tattoo.Studio", b =>
-                {
-                    b.HasOne("TatooMarket.Domain.Entities.Identity.UserEntity", "Owner")
-                        .WithOne("Studio")
-                        .HasForeignKey("TatooMarket.Domain.Entities.Tattoo.Studio", "OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Owner");
+                    b.Navigation("Studio");
                 });
 
             modelBuilder.Entity("TatooMarket.Domain.Entities.Tattoo.TattooEntity", b =>
@@ -489,14 +498,10 @@ namespace TatooMarket.Infrastructure.Migrations
                     b.Navigation("Studio");
                 });
 
-            modelBuilder.Entity("TatooMarket.Domain.Entities.Identity.UserEntity", b =>
-                {
-                    b.Navigation("Studio");
-                });
-
             modelBuilder.Entity("TatooMarket.Domain.Entities.Tattoo.Studio", b =>
                 {
-                    b.Navigation("Customers");
+                    b.Navigation("Owner")
+                        .IsRequired();
 
                     b.Navigation("StudioTattoss");
                 });

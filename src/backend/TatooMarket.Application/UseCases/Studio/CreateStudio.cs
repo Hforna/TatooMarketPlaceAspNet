@@ -13,6 +13,7 @@ using TatooMarket.Domain.Entities.Tattoo;
 using TatooMarket.Domain.Repositories;
 using TatooMarket.Domain.Repositories.Security.Token;
 using TatooMarket.Domain.Repositories.StudioRepository;
+using TatooMarket.Domain.Repositories.User;
 using TatooMarket.Exception.Exceptions;
 
 namespace TatooMarket.Application.UseCases.Studio
@@ -25,9 +26,11 @@ namespace TatooMarket.Application.UseCases.Studio
         private readonly IGetUserByToken _getUserByToken;
         private readonly IStudioReadOnly _studioRead;
         private readonly SqidsEncoder<long> _sqidsEncoder;
+        private readonly IUserWriteRepository _userWrite;
 
         public CreateStudio(IMapper mapper, IStudioReadOnly studioRead, IStudioWriteOnly studioWrite, 
-            IUnitOfWork unitOfWork, IGetUserByToken getUserByToken, SqidsEncoder<long> sqidsEncoder)
+            IUnitOfWork unitOfWork, IGetUserByToken getUserByToken, 
+            SqidsEncoder<long> sqidsEncoder, IUserWriteRepository userWrite)
         {
             _mapper = mapper;
             _studioRead = studioRead;
@@ -35,6 +38,7 @@ namespace TatooMarket.Application.UseCases.Studio
             _unitOfWork = unitOfWork;
             _getUserByToken = getUserByToken;
             _sqidsEncoder = sqidsEncoder;
+            _userWrite = userWrite;
         }
 
         
@@ -43,9 +47,14 @@ namespace TatooMarket.Application.UseCases.Studio
             if (await _studioRead.StudioNameExists(request.StudioName))
                 throw new StudioException(ResourceExceptMessages.STUDIO_NAME_EXISTS);
 
+            var user = await _getUserByToken.GetUser();
+
+            if (await _studioRead.StudioByOwner(user!) != null)
+                throw new StudioException(ResourceExceptMessages.USER_ALREADY_HAS_STUDIO);
+
             var studio = _mapper.Map<TatooMarket.Domain.Entities.Tattoo.Studio>(request);
 
-            if (request.StudioName != null)
+            if (request.ImageStudio != null)
             {
                 var image = request.ImageStudio.OpenReadStream();
 
@@ -57,13 +66,19 @@ namespace TatooMarket.Application.UseCases.Studio
                 studio.ImageStudio = $"{Guid.NewGuid}{ext}";
             }
 
-            var user = await _getUserByToken.GetUser();
             studio.OwnerId = user.Id;
+
 
             _studioWrite.Add(studio);
             await _unitOfWork.Commit();
 
+            user.StudioId = studio.Id;
+
+            _userWrite.Update(user);
+            await _unitOfWork.Commit();
+
             var response = _mapper.Map<ResponseShortStudio>(studio);
+
             response.OwnerId = _sqidsEncoder.Encode(studio.OwnerId);
 
             return response;

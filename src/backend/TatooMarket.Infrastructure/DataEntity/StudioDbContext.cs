@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TatooMarket.Domain.Entities.Identity;
 using TatooMarket.Domain.Entities.Tattoo;
 using TatooMarket.Domain.Repositories.StudioRepository;
 
@@ -19,6 +20,11 @@ namespace TatooMarket.Infrastructure.DataEntity
         public void Add(Studio studio)
         {
             _dbContext.Studios.Add(studio);
+        }
+
+        public async Task<Studio?> StudioByOwner(UserEntity user)
+        {
+            return await _dbContext.Studios.FirstOrDefaultAsync(s => s.OwnerId == user.Id);
         }
 
         public async Task<bool> StudioNameExists(string name)

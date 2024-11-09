@@ -35,7 +35,7 @@ namespace TatooMarket.Application.UseCases.User
 
         public async Task<ResponseGetUserProfile> Execute()
         {
-            var user = await _userByToken.GetUser();
+             var user = await _userByToken.GetUser();
 
             if (user is null)
                 throw new UserException("User doesn't exists or is not logged");
@@ -43,9 +43,10 @@ namespace TatooMarket.Application.UseCases.User
             var response = _mapper.Map<ResponseGetUserProfile>(user);
 
             if(user.Studio is not null)
+            {
                 response.UserStudio.RecentTattoss = _mapper.Map<IList<ResponseShortTatto>>(user.Studio.StudioTattoss.Take(5).OrderBy(d => d.CreatedOn).ToList());
-
-            response.UserStudio.OwnerId = _sqidsEncoder.Encode(user.Id);
+                response.UserStudio.OwnerId = _sqidsEncoder.Encode(user.Id);
+            }
 
             return response;
         }

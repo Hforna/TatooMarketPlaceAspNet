@@ -148,4 +148,7 @@
   <data name="STUDIO_NAME_EXISTS" xml:space="preserve">
     <value>This studio name already exists</value>
   </data>
+  <data name="USER_ALREADY_HAS_STUDIO" xml:space="preserve">
+    <value>User already has a studio</value>
+  </data>
 </root>

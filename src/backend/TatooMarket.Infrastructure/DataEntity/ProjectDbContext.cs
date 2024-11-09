@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using TatooMarket.Domain.Entities.Communication;
@@ -22,6 +23,29 @@ namespace TatooMarket.Infrastructure.DataEntity
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<UserEntity>()
+                .HasOne(u => u.Studio)
+                .WithOne(d => d.Owner)
+                .HasForeignKey<UserEntity>(d => d.StudioId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<RoleEntity>().HasData(new RoleEntity()
+            {
+                CreatedOn = DateTime.UtcNow,
+                Id = 1,
+                Name = "seller",
+                NormalizedName = "SELLER",
+                ConcurrencyStamp = $"{Guid.NewGuid}"
+            }, 
+            new RoleEntity()
+            {
+                CreatedOn = DateTime.UtcNow,
+                Id = 2,
+                Name = "customer",
+                NormalizedName = "CUSTOMER",
+                ConcurrencyStamp = $"{Guid.NewGuid}"
+            });
         }
     }
 }

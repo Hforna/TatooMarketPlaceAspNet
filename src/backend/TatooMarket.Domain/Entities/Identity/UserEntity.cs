@@ -19,9 +19,10 @@ namespace TatooMarket.Domain.Entities.Identity
         [MinLength(8, ErrorMessage = "Password length must be greater than 7")]
         [Required]
         public required string Password { get; set; }
-        public bool IsSeller { get; set; } = false;
-        [InverseProperty("Owner")]
+        public long? StudioId { get; set; }
+        [ForeignKey("StudioId")]
         public Studio? Studio { get; set; }
+        public bool IsSeller { get; set; } = false;
         public string? UserImage { get; set; }
         public Guid UserIdentifier { get; set; }
     }

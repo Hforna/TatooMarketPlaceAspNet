@@ -133,6 +133,15 @@ namespace TatooMarket.Exception.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a User already has a studio.
+        /// </summary>
+        public static string USER_ALREADY_HAS_STUDIO {
+            get {
+                return ResourceManager.GetString("USER_ALREADY_HAS_STUDIO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a User doens&apos;t exists
         ///.
         /// </summary>

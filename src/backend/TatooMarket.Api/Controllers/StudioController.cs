@@ -14,7 +14,7 @@ namespace TatooMarket.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromServices] ICreateStudio useCase, RequestCreateStudio request)
         {
-            var result = await useCase.Execute(request);
+           var result = await useCase.Execute(request);
 
             return Created(string.Empty, result);
         }

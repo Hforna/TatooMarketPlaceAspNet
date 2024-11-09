@@ -21,8 +21,8 @@ namespace TatooMarket.Application
     {
         public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
-            AddRepositories(services, configuration);
             AddSqIds(services, configuration);
+            AddRepositories(services, configuration);
             AddMapper(services);
         }
 
@@ -32,6 +32,7 @@ namespace TatooMarket.Application
             services.AddScoped<ILoginByApplication, LoginByApplication>();
             services.AddScoped<IGetUserProfile, GetUserProfile>();
             services.AddScoped<ICreateStudio, CreateStudio>();
+            services.AddScoped<IUpdateUser, UpdateUser>();
         }
 
         private static void AddSqIds(IServiceCollection services, IConfiguration configuration)

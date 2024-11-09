@@ -14,13 +14,14 @@ namespace TatooMarket.Domain.Entities.Tattoo
     public class Studio : BaseEntity
     {
         public required string StudioName { get; set; }
-        [ForeignKey("User")]
         public long OwnerId { get; set; }
         [Required]
-        public UserEntity? Owner { get; set; }
+        [ForeignKey("OwnerId")]
+        public UserEntity Owner { get; set; }
         public int CustomerQuantity { get; set; } = 0;
         [Range(1, 5, ErrorMessage = "Range must be between 1 and 5")]
         public int Note { get; set; } = 0;
+        [NotMapped]
         public ICollection<UserEntity>? Customers { get; set; }
         public string? Address { get; set; }
         public string? PhoneNumber { get; set; }
