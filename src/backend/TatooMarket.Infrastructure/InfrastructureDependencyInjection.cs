@@ -47,6 +47,7 @@ namespace TatooMarket.Infrastructure
         private static void AddJwtTokenRepositories(IServiceCollection services, IConfiguration configuration)
         {
             var signKey = configuration.GetValue<string>("security:token:sign_key")!;
+
             services.AddScoped<ITokenValidator>(opt => new TokenValidator(signKey));
             services.AddScoped<ITokenGenerator>(d => new GenerateJwtToken(signKey));
         }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using TatooMarket.Domain.Entities.Identity;
 using TatooMarket.Domain.Entities.Tattoo;
 using TatooMarket.Domain.Repositories.StudioRepository;
+using X.PagedList;
 
 namespace TatooMarket.Infrastructure.DataEntity
 {
@@ -25,6 +26,13 @@ namespace TatooMarket.Infrastructure.DataEntity
         public async Task<Studio?> StudioByOwner(UserEntity user)
         {
             return await _dbContext.Studios.FirstOrDefaultAsync(s => s.OwnerId == user.Id);
+        }
+
+        public  X.PagedList.IPagedList<Studio> GetStudios(int page)
+        {
+            var studios = _dbContext.Set<Studio>().Where(d => d.Active);
+
+            return studios.ToPagedList(page, 4);
         }
 
         public async Task<bool> StudioNameExists(string name)
