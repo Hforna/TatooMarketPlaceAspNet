@@ -10,5 +10,6 @@ namespace TatooMarket.Domain.Repositories.Azure
     public interface IAzureStorageService
     {
         public Task UploadUser(UserEntity user, Stream file, string fileName);
+        public Task<string> GetImage(string containerName, string fileName);
     }
 }

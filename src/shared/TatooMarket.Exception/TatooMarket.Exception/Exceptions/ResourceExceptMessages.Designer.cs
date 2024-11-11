@@ -79,6 +79,15 @@ namespace TatooMarket.Exception.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The e-mail field can&apos;t be empty.
+        /// </summary>
+        public static string EMAIL_IS_EMPTY {
+            get {
+                return ResourceManager.GetString("EMAIL_IS_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a E-mail or password invalid.
         /// </summary>
         public static string EMAIL_PASSWORD_INVALID {
@@ -157,6 +166,15 @@ namespace TatooMarket.Exception.Exceptions {
         public static string USERNAME_EXISTS {
             get {
                 return ResourceManager.GetString("USERNAME_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The username field can&apos;t be empty.
+        /// </summary>
+        public static string USERNAME_IS_EMPTY {
+            get {
+                return ResourceManager.GetString("USERNAME_IS_EMPTY", resourceCulture);
             }
         }
     }

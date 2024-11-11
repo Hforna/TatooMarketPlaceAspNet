@@ -7,7 +7,6 @@ using TatooMarket.Communication.Requests.Studio;
 
 namespace TatooMarket.Api.Controllers
 {
-    [AuthorizationUser]
     public class StudioController : BaseController
     {
         [Authorize(Policy = "OnlySeller")]
@@ -17,6 +16,14 @@ namespace TatooMarket.Api.Controllers
            var result = await useCase.Execute(request);
 
             return Created(string.Empty, result);
+        }
+
+        [HttpGet("{numberPage}")]
+        public async Task<IActionResult> GetStudios([FromServices]IGetStudios useCase, int numberPage)
+        {
+            var result = await useCase.Execute(numberPage);
+
+            return Ok(result);
         }
     }
 }

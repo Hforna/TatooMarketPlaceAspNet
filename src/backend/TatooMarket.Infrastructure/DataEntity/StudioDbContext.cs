@@ -28,9 +28,12 @@ namespace TatooMarket.Infrastructure.DataEntity
             return await _dbContext.Studios.FirstOrDefaultAsync(s => s.OwnerId == user.Id);
         }
 
-        public  X.PagedList.IPagedList<Studio> GetStudios(int page)
+        public  X.PagedList.IPagedList<Studio?> GetStudios(int page)
         {
             var studios = _dbContext.Set<Studio>().Where(d => d.Active);
+
+            if (studios is null)
+                return null!;
 
             return studios.ToPagedList(page, 4);
         }

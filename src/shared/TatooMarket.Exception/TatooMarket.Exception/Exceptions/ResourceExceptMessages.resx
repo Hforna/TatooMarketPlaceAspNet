@@ -151,4 +151,10 @@
   <data name="USER_ALREADY_HAS_STUDIO" xml:space="preserve">
     <value>User already has a studio</value>
   </data>
+  <data name="USERNAME_IS_EMPTY" xml:space="preserve">
+    <value>The username field can't be empty</value>
+  </data>
+  <data name="EMAIL_IS_EMPTY" xml:space="preserve">
+    <value>The e-mail field can't be empty</value>
+  </data>
 </root>

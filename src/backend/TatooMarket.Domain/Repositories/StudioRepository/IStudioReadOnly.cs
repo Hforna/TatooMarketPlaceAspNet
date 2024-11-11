@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TatooMarket.Domain.Entities.Identity;
 using TatooMarket.Domain.Entities.Tattoo;
+using X.PagedList;
 
 namespace TatooMarket.Domain.Repositories.StudioRepository
 {
@@ -13,5 +14,7 @@ namespace TatooMarket.Domain.Repositories.StudioRepository
         public Task<bool> StudioNameExists(string name);
 
         public Task<Studio?> StudioByOwner(UserEntity user);
+
+        public IPagedList<Studio?> GetStudios(int page);
     }
 }
