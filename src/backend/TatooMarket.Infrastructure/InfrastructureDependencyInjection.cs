@@ -1,4 +1,5 @@
-﻿using Azure.Storage.Blobs;
+﻿using Azure.Messaging.ServiceBus;
+using Azure.Storage.Blobs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,13 +31,16 @@ namespace TatooMarket.Infrastructure
             AddJwtTokenRepositories(services, configuration);
             AddRepositories(services, configuration);
             AddStorageBlob(services, configuration);
+            AddServiceBus(services, configuration);
             AddCryptography(services);
         }
 
         private static void AddDbContext(this IServiceCollection services, IConfiguration configuration)
         {
             var dbConnection = configuration.GetConnectionString("sqlserverconnection");
-            services.AddDbContext<ProjectDbContext>(opt => opt.UseSqlServer(dbConnection));
+            services.AddDbContext<ProjectDbContext>(opt => opt.UseSqlServer(dbConnection).LogTo
+            (Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information
+            ).EnableSensitiveDataLogging());
         }
 
         private static void AddCryptography(IServiceCollection services)
@@ -69,6 +73,23 @@ namespace TatooMarket.Infrastructure
             services.AddScoped<IStudioReadOnly, StudioDbContext>();
             services.AddScoped<IStudioWriteOnly, StudioDbContext>();
 
+        }
+
+        private static void AddServiceBus(IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionString = configuration.GetValue<string>("serviceBus:azure");
+
+            var client = new ServiceBusClient(connectionString, new ServiceBusClientOptions() { TransportType = ServiceBusTransportType.AmqpWebSockets});
+
+            var userSender = new DeleteUserSender(client.CreateSender("user"));
+            services.AddScoped<IDeleteUserSender>(d => userSender);
+
+            var processor = new DeleteProcessor(client.CreateProcessor("user", new ServiceBusProcessorOptions()
+            {
+                MaxConcurrentCalls = 1
+            }));
+
+            services.AddSingleton(processor);
         }
 
         private static void AddStorageBlob(IServiceCollection services, IConfiguration configuration)

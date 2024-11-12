@@ -20,6 +20,11 @@ namespace TatooMarket.Infrastructure.DataEntity
             await _dbContext.Users.AddAsync(user);
         }
 
+        public void Delete(UserEntity user)
+        {
+            _dbContext.Users.Remove(user);
+        }
+
         public async Task<bool> EmailExists(string email)
         {
             return await _dbContext.Users.AnyAsync(u => u.Email == email);

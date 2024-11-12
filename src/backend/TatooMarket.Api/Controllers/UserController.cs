@@ -7,11 +7,9 @@ using TatooMarket.Communication.Requests.User;
 
 namespace TatooMarket.Api.Controllers
 {
-    [AuthorizationUser]
     public class UserController : BaseController
     {
         [HttpPost]
-        [AllowAnonymous]
         public async Task<IActionResult> Create([FromServices]ICreateUser useCase, [FromForm]RequestCreateUser request)
         {
             var result = await useCase.Execute(request);
@@ -19,6 +17,7 @@ namespace TatooMarket.Api.Controllers
             return Created(string.Empty, result);
         }
 
+        [AuthorizationUser]
         [HttpGet]
         public async Task<IActionResult> GetProfile([FromServices]IGetUserProfile useCase)
         {
@@ -27,6 +26,16 @@ namespace TatooMarket.Api.Controllers
             return Ok(result);
         }
 
+        [AuthorizationUser]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteUser([FromServices] IDeleteUserRequest useCase)
+        {
+            await useCase.Execute();
+
+            return NoContent();
+        }
+
+        [AuthorizationUser]
         [HttpPost("update-user")]
         public async Task<IActionResult> UpdateUser([FromServices]IUpdateUser useCase, [FromBody]RequestUpdateUser request)
         {
@@ -34,5 +43,7 @@ namespace TatooMarket.Api.Controllers
 
             return NoContent();
         }
+
+
     }
 }

@@ -34,6 +34,8 @@ namespace TatooMarket.Application
             services.AddScoped<ICreateStudio, CreateStudio>();
             services.AddScoped<IUpdateUser, UpdateUser>();
             services.AddScoped<IGetStudios, GetStudios>();
+            services.AddScoped<IDeleteUserRequest, DeleteUserRequest>();
+            services.AddScoped<IDeleteUser, DeleteUser>();
         }
 
         private static void AddSqIds(IServiceCollection services, IConfiguration configuration)

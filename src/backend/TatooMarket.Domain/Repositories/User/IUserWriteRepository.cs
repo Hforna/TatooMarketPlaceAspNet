@@ -11,5 +11,6 @@ namespace TatooMarket.Domain.Repositories.User
     {
         public Task Add(UserEntity user);
         public void Update(UserEntity user);
+        public void Delete(UserEntity user);
     }
 }

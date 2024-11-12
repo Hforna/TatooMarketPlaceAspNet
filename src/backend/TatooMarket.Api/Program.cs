@@ -5,8 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using TatooMarket.Api.BackgroundServices;
 using TatooMarket.Api.Filters;
 using TatooMarket.Application;
+using TatooMarket.Application.UseCases.Repositories.User;
 using TatooMarket.Domain.Entities.Identity;
 using TatooMarket.Domain.Repositories.Security.Token;
 using TatooMarket.Infrastructure;
@@ -93,6 +95,11 @@ builder.Services.AddAuthorization(opt =>
     opt.AddPolicy("OnlySeller", opt => opt.RequireRole("seller"));
 });
 
+var cancellationTokenSource = new CancellationTokenSource();
+
+builder.Services.AddHostedService<DeleteService>();
+
+builder.Services.AddSingleton(cancellationTokenSource);
 
 builder.Services.AddRouting(d => d.LowercaseUrls = true);
 

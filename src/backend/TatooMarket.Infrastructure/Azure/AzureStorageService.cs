@@ -16,6 +16,13 @@ namespace TatooMarket.Infrastructure.Azure
 
         public AzureStorageService(BlobServiceClient blobClient) => _blobClient = blobClient;
 
+        public async Task DeleteContainer(string containerName)
+        {
+            var container = _blobClient.GetBlobContainerClient(containerName);
+
+            await container.DeleteIfExistsAsync();
+        }
+
         public async Task<string> GetImage(string containerName, string fileName)
         {
             var container = _blobClient.GetBlobContainerClient(containerName);

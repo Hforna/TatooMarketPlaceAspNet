@@ -11,5 +11,6 @@ namespace TatooMarket.Domain.Repositories.Azure
     {
         public Task UploadUser(UserEntity user, Stream file, string fileName);
         public Task<string> GetImage(string containerName, string fileName);
+        public Task DeleteContainer(string containerName);
     }
 }
