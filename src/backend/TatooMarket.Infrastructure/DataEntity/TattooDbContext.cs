@@ -9,11 +9,16 @@ using TatooMarket.Domain.Repositories.Tattoo;
 
 namespace TatooMarket.Infrastructure.DataEntity
 {
-    public class TattooDbContext : ITattooReadOnly
+    public class TattooDbContext : ITattooReadOnly, ITattooWriteOnly
     {
         private readonly ProjectDbContext _dbContext;
 
         public TattooDbContext(ProjectDbContext dbContext) => _dbContext = dbContext;
+
+        public async Task Add(TattooEntity tattoo)
+        {
+            await _dbContext.Tattos.AddAsync(tattoo);
+        }
 
         public async Task<IList<TattooEntity>> GetRecentTattoss(Studio studio)
         {

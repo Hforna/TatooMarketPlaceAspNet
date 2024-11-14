@@ -142,6 +142,33 @@ namespace TatooMarket.Exception.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Tattoo body placement out of enum.
+        /// </summary>
+        public static string TATTOO_PLACEMENT_OUT_ENUM {
+            get {
+                return ResourceManager.GetString("TATTOO_PLACEMENT_OUT_ENUM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Tattoo size out of enum.
+        /// </summary>
+        public static string TATTOO_SIZE_OUT_ENUM {
+            get {
+                return ResourceManager.GetString("TATTOO_SIZE_OUT_ENUM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Tattoo Style out of enum.
+        /// </summary>
+        public static string TATTOO_STYLE_OUT_ENUM {
+            get {
+                return ResourceManager.GetString("TATTOO_STYLE_OUT_ENUM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a User already has a studio.
         /// </summary>
         public static string USER_ALREADY_HAS_STUDIO {
@@ -157,6 +184,15 @@ namespace TatooMarket.Exception.Exceptions {
         public static string USER_DOESNT_EXISTS {
             get {
                 return ResourceManager.GetString("USER_DOESNT_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a User doesn&apos;t create a studio yet.
+        /// </summary>
+        public static string USER_WITHOUT_STUDIO {
+            get {
+                return ResourceManager.GetString("USER_WITHOUT_STUDIO", resourceCulture);
             }
         }
         

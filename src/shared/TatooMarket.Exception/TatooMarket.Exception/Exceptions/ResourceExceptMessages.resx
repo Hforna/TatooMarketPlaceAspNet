@@ -157,4 +157,16 @@
   <data name="EMAIL_IS_EMPTY" xml:space="preserve">
     <value>The e-mail field can't be empty</value>
   </data>
+  <data name="USER_WITHOUT_STUDIO" xml:space="preserve">
+    <value>User doesn't create a studio yet</value>
+  </data>
+  <data name="TATTOO_STYLE_OUT_ENUM" xml:space="preserve">
+    <value>Tattoo Style out of enum</value>
+  </data>
+  <data name="TATTOO_SIZE_OUT_ENUM" xml:space="preserve">
+    <value>Tattoo size out of enum</value>
+  </data>
+  <data name="TATTOO_PLACEMENT_OUT_ENUM" xml:space="preserve">
+    <value>Tattoo body placement out of enum</value>
+  </data>
 </root>

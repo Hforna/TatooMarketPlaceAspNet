@@ -68,6 +68,7 @@ namespace TatooMarket.Infrastructure
 
             //Tattoo
             services.AddScoped<ITattooReadOnly, TattooDbContext>();
+            services.AddScoped<ITattooWriteOnly, TattooDbContext>();
 
             //Studio
             services.AddScoped<IStudioReadOnly, StudioDbContext>();

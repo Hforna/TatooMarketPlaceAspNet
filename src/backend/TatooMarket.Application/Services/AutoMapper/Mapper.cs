@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TatooMarket.Communication.Requests.Studio;
+using TatooMarket.Communication.Requests.Tattoo;
 using TatooMarket.Communication.Requests.User;
 using TatooMarket.Communication.Responses.Studio;
 using TatooMarket.Communication.Responses.Tatto;
@@ -28,6 +29,8 @@ namespace TatooMarket.Application.Services.AutoMapper
                 .ForMember(u => u.Password, opt => opt.Ignore());
 
             CreateMap<RequestCreateStudio, Studio>();
+
+            CreateMap<RequestCreateTattoo, TattooEntity>();
         }
 
         private void EntitieToResponse()
