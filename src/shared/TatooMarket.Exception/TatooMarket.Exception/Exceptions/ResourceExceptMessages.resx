@@ -169,4 +169,16 @@
   <data name="TATTOO_PLACEMENT_OUT_ENUM" xml:space="preserve">
     <value>Tattoo body placement out of enum</value>
   </data>
+  <data name="NO_USER_ANONYMOUS_AND_SELLER" xml:space="preserve">
+    <value>User cannot be anonymous if is seller</value>
+  </data>
+  <data name="COMMENT_LENGTH_GREATER_THAN_500" xml:space="preserve">
+    <value>Comment field must have 500 or less digits</value>
+  </data>
+  <data name="REVIEW_NOTE_GREATER_THAN_5" xml:space="preserve">
+    <value>Review note must be 5 or less</value>
+  </data>
+  <data name="TATTOO_DOESNT_EXISTS" xml:space="preserve">
+    <value>Tattoo doesn't exists</value>
+  </data>
 </root>

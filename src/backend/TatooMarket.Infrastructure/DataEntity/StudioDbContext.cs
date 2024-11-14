@@ -42,5 +42,10 @@ namespace TatooMarket.Infrastructure.DataEntity
         {
             return await _dbContext.Studios.AnyAsync(d => d.StudioName == name);
         }
+
+        public async Task<Studio?> StudioById(long id)
+        {
+            return await _dbContext.Studios.SingleOrDefaultAsync(d => d.Id == id);
+        }
     }
 }

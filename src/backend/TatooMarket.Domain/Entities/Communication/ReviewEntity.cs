@@ -21,7 +21,7 @@ namespace TatooMarket.Domain.Entities.Communication
         [ForeignKey("TattooId")]
         public TattooEntity Tattoo { get; set; }
         [ForeignKey("Customer")]
-        public long CustomerId { get; set; }
+        public long? CustomerId { get; set; }
         public UserEntity Customer { get; set; }
         public int Note {  get; set; }
         [MaxLength(500, ErrorMessage = "Comment is very long")]

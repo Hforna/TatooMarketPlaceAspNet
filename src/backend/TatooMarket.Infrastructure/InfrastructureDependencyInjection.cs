@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TatooMarket.Domain.Repositories;
 using TatooMarket.Domain.Repositories.Azure;
+using TatooMarket.Domain.Repositories.Review;
 using TatooMarket.Domain.Repositories.Security.Cryptography;
 using TatooMarket.Domain.Repositories.Security.Token;
 using TatooMarket.Domain.Repositories.StudioRepository;
@@ -69,6 +70,10 @@ namespace TatooMarket.Infrastructure
             //Tattoo
             services.AddScoped<ITattooReadOnly, TattooDbContext>();
             services.AddScoped<ITattooWriteOnly, TattooDbContext>();
+
+            //Review
+            services.AddScoped<IReviewReadOnly, ReviewDbContext>();
+            services.AddScoped<IReviewWriteOnly, ReviewDbContext>();
 
             //Studio
             services.AddScoped<IStudioReadOnly, StudioDbContext>();

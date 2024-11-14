@@ -14,6 +14,7 @@ namespace TatooMarket.Domain.Repositories.StudioRepository
         public Task<bool> StudioNameExists(string name);
 
         public Task<Studio?> StudioByOwner(UserEntity user);
+        public Task<Studio?> StudioById(long id);
 
         public IPagedList<Studio?> GetStudios(int page);
     }

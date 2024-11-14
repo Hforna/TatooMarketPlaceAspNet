@@ -15,6 +15,7 @@ using TatooMarket.Domain.Repositories;
 using TatooMarket.Domain.Repositories.Azure;
 using TatooMarket.Domain.Repositories.Security.Token;
 using TatooMarket.Domain.Repositories.Tattoo;
+using TatooMarket.Domain.Repositories.User;
 using TatooMarket.Exception.Exceptions;
 
 namespace TatooMarket.Application.UseCases.Tattoo
@@ -27,10 +28,11 @@ namespace TatooMarket.Application.UseCases.Tattoo
         private readonly ITattooWriteOnly _tattooWrite; 
         private readonly IMapper _mapper;
         private readonly IAzureStorageService _azureStorage;
+        private readonly IUserReadRepository _userRead;
 
         public CreateTattoo(IGetUserByToken userByToken, IUnitOfWork unitOfWork, 
             SqidsEncoder<long> sqidsEncoder, ITattooWriteOnly tattooWrite, 
-            IMapper mapper, IAzureStorageService azureStorage)
+            IMapper mapper, IAzureStorageService azureStorage, IUserReadRepository userRead)
         {
             _userByToken = userByToken;
             _unitOfWork = unitOfWork;
@@ -38,6 +40,7 @@ namespace TatooMarket.Application.UseCases.Tattoo
             _tattooWrite = tattooWrite;
             _mapper = mapper;
             _azureStorage = azureStorage;
+            _userRead = userRead;
         }
 
         public async Task<ResponseShortTatto> Execute(RequestCreateTattoo request)
@@ -66,7 +69,17 @@ namespace TatooMarket.Application.UseCases.Tattoo
             }
 
             tattoo.StudioId = (long)user.StudioId;
-            tattoo.CustomerId = string.IsNullOrEmpty(request.CustomerId) == false ? _sqidsEncoder.Decode(request.CustomerId).Single() : null;
+
+            if (tattoo.CustomerId is not null)
+            {
+                var customer = await _userRead.UserById(_sqidsEncoder.Decode(request.CustomerId).Single());
+                
+                if(customer is null)
+                    throw new UserException(ResourceExceptMessages.USER_DOESNT_EXISTS);
+
+                if(!customer.IsAnonymous)
+                    tattoo.CustomerId = customer.Id;
+            }
 
             await _tattooWrite.Add(tattoo);
             await _unitOfWork.Commit();

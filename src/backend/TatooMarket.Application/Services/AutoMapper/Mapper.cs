@@ -10,6 +10,7 @@ using TatooMarket.Communication.Requests.User;
 using TatooMarket.Communication.Responses.Studio;
 using TatooMarket.Communication.Responses.Tatto;
 using TatooMarket.Communication.Responses.User;
+using TatooMarket.Domain.Entities.Communication;
 using TatooMarket.Domain.Entities.Identity;
 using TatooMarket.Domain.Entities.Tattoo;
 
@@ -29,6 +30,8 @@ namespace TatooMarket.Application.Services.AutoMapper
                 .ForMember(u => u.Password, opt => opt.Ignore());
 
             CreateMap<RequestCreateStudio, Studio>();
+
+            CreateMap<RequestCreateTattooReview, ReviewEntity>();
 
             CreateMap<RequestCreateTattoo, TattooEntity>();
         }

@@ -13,6 +13,7 @@ namespace TatooMarket.Communication.Requests.User
         public string Password { get; set; }
         public string RepeatPassword { get; set; }
         public bool IsSeller { get; set; }
+        public bool IsAnonymous { get; set; }
         public string Email { get; set; }
         public IFormFile? UserImage { get; set; }
     }

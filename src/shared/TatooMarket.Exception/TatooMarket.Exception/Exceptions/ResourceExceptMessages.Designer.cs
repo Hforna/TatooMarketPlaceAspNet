@@ -61,6 +61,15 @@ namespace TatooMarket.Exception.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Comment field must have 500 or less digits.
+        /// </summary>
+        public static string COMMENT_LENGTH_GREATER_THAN_500 {
+            get {
+                return ResourceManager.GetString("COMMENT_LENGTH_GREATER_THAN_500", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a This e-mail already exists.
         /// </summary>
         public static string EMAIL_EXISTS {
@@ -115,6 +124,15 @@ namespace TatooMarket.Exception.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a User cannot be anonymous if is seller.
+        /// </summary>
+        public static string NO_USER_ANONYMOUS_AND_SELLER {
+            get {
+                return ResourceManager.GetString("NO_USER_ANONYMOUS_AND_SELLER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Password must have 8 or more digits.
         /// </summary>
         public static string PASSWORD_GREATER_OR_EQUAL_EIGHT {
@@ -133,11 +151,29 @@ namespace TatooMarket.Exception.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Review note must be 5 or less.
+        /// </summary>
+        public static string REVIEW_NOTE_GREATER_THAN_5 {
+            get {
+                return ResourceManager.GetString("REVIEW_NOTE_GREATER_THAN_5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a This studio name already exists.
         /// </summary>
         public static string STUDIO_NAME_EXISTS {
             get {
                 return ResourceManager.GetString("STUDIO_NAME_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Tattoo doesn&apos;t exists.
+        /// </summary>
+        public static string TATTOO_DOESNT_EXISTS {
+            get {
+                return ResourceManager.GetString("TATTOO_DOESNT_EXISTS", resourceCulture);
             }
         }
         

@@ -24,6 +24,7 @@ namespace TatooMarket.Domain.Entities.Tattoo
         public TattooStyleEnum Style { get; set; }
         [ForeignKey("Customer")]
         public long? CustomerId { get; set; }
+        public float? Note { get; set; }
         public UserEntity? Customer { get; set; }
         public float Price { get; set; }
     }

@@ -10,5 +10,6 @@ namespace TatooMarket.Domain.Repositories.Tattoo
     public interface ITattooWriteOnly
     {
         public Task Add(TattooEntity tattoo);
+        public void Update(TattooEntity tattoo);
     }
 }

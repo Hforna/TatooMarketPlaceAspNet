@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TatooMarket.Domain.Entities.Communication;
 using TatooMarket.Domain.Entities.Tattoo;
 using TatooMarket.Domain.Repositories.Tattoo;
 
@@ -23,6 +24,21 @@ namespace TatooMarket.Infrastructure.DataEntity
         public async Task<IList<TattooEntity>> GetRecentTattoss(Studio studio)
         {
             return await _dbContext.Tattos.Where(d => d.Studio == studio).OrderBy(d => d.CreatedOn).Take(5).ToListAsync();
+        }
+
+        public async Task<IList<ReviewEntity>> GetTattooReviews(TattooEntity tattoo)
+        {
+            return await _dbContext.Reviews.Where(d => d.Tattoo == tattoo).ToListAsync();
+        }
+
+        public async Task<TattooEntity?> TattooById(long id)
+        {
+            return await _dbContext.Tattos.SingleOrDefaultAsync(d => d.Id == id);
+        }
+
+        public void Update(TattooEntity tattoo)
+        {
+            _dbContext.Tattos.Update(tattoo);
         }
     }
 }

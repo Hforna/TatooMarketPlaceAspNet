@@ -23,6 +23,7 @@ namespace TatooMarket.Domain.Entities.Identity
         [ForeignKey("StudioId")]
         public Studio? Studio { get; set; }
         public bool IsSeller { get; set; } = false;
+        public bool IsAnonymous { get; set; } = false;
         public string? UserImage { get; set; }
         public Guid UserIdentifier { get; set; }
     }
