@@ -11,6 +11,7 @@ using TatooMarket.Communication.Requests.Studio;
 using TatooMarket.Communication.Responses.Studio;
 using TatooMarket.Domain.Entities.Tattoo;
 using TatooMarket.Domain.Repositories;
+using TatooMarket.Domain.Repositories.Azure;
 using TatooMarket.Domain.Repositories.Security.Token;
 using TatooMarket.Domain.Repositories.StudioRepository;
 using TatooMarket.Domain.Repositories.User;
@@ -27,10 +28,11 @@ namespace TatooMarket.Application.UseCases.Studio
         private readonly IStudioReadOnly _studioRead;
         private readonly SqidsEncoder<long> _sqidsEncoder;
         private readonly IUserWriteRepository _userWrite;
+        private readonly IAzureStorageService _azureStorage;
 
         public CreateStudio(IMapper mapper, IStudioReadOnly studioRead, IStudioWriteOnly studioWrite, 
             IUnitOfWork unitOfWork, IGetUserByToken getUserByToken, 
-            SqidsEncoder<long> sqidsEncoder, IUserWriteRepository userWrite)
+            SqidsEncoder<long> sqidsEncoder, IUserWriteRepository userWrite, IAzureStorageService azureStorage)
         {
             _mapper = mapper;
             _studioRead = studioRead;
@@ -39,6 +41,7 @@ namespace TatooMarket.Application.UseCases.Studio
             _getUserByToken = getUserByToken;
             _sqidsEncoder = sqidsEncoder;
             _userWrite = userWrite;
+            _azureStorage = azureStorage;
         }
 
         
@@ -64,6 +67,8 @@ namespace TatooMarket.Application.UseCases.Studio
                     throw new StudioException(ResourceExceptMessages.FILE_FORMAT);
 
                 studio.ImageStudio = $"{Guid.NewGuid}{ext}";
+
+                await _azureStorage.UploadUser(user, image, ext);
             }
 
             studio.OwnerId = user.Id;
