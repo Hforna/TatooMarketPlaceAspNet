@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using TatooMarket.Api.BackgroundServices;
 using TatooMarket.Api.Filters;
+using TatooMarket.Api.Middlewares;
 using TatooMarket.Application;
 using TatooMarket.Application.UseCases.Repositories.User;
 using TatooMarket.Domain.Entities.Identity;
@@ -104,6 +105,8 @@ builder.Services.AddSingleton(cancellationTokenSource);
 builder.Services.AddRouting(d => d.LowercaseUrls = true);
 
 var app = builder.Build();
+
+app.UseMiddleware<CultureInfoMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
