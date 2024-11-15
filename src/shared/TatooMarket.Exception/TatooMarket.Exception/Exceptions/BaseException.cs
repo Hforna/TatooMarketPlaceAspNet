@@ -9,6 +9,7 @@ namespace TatooMarket.Exception.Exceptions
 {
     public abstract class BaseException : SystemException
     {
+        public List<string> Errors { get; set; } = [];
         public BaseException(string error) : base(error) { }
 
         public abstract string GetErrorMessage();

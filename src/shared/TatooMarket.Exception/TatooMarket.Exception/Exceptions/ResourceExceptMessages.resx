@@ -181,4 +181,7 @@
   <data name="TATTOO_DOESNT_EXISTS" xml:space="preserve">
     <value>Tattoo doesn't exists</value>
   </data>
+  <data name="REVIEW_DOESNT_EXISTS" xml:space="preserve">
+    <value>Review doesn't exists</value>
+  </data>
 </root>

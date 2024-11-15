@@ -7,14 +7,11 @@ using System.Threading.Tasks;
 
 namespace TatooMarket.Exception.Exceptions
 {
-    public class StudioException : BaseException
+    public class ReviewException : BaseException
     {
-
-        public StudioException(string message) : base(message) => Errors.Add(message);
-        public StudioException(List<string> errors) : base(string.Empty) => Errors = errors;
-
+        public ReviewException(string error) : base(error) => Errors.Add(error);
+        public ReviewException(List<string> errors) : base(string.Empty) => Errors = errors;
         public override string GetErrorMessage() => Message;
-
         public override HttpStatusCode GetStatusCode() => HttpStatusCode.BadRequest;
     }
 }

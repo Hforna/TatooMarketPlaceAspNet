@@ -9,9 +9,8 @@ namespace TatooMarket.Exception.Exceptions
 {
     public class TattooException : BaseException
     {
-        private IList<string> Errors { get; set; } = [];
         public TattooException(string error) : base(error) => Errors.Add(error);
-        public TattooException(IList<string> errors) : base(string.Empty) => Errors = errors;
+        public TattooException(List<string> errors) : base(string.Empty) => Errors = errors;
 
         public override string GetErrorMessage() => Message;
 

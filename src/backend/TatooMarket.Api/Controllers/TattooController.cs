@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TatooMarket.Api.Attributes;
+using TatooMarket.Api.Binders;
 using TatooMarket.Application.UseCases.Repositories.Tattoo;
 using TatooMarket.Communication.Requests.Tattoo;
 
@@ -23,6 +24,15 @@ namespace TatooMarket.Api.Controllers
         public async Task<IActionResult> CreateReview([FromBody]RequestCreateTattooReview request, [FromServices]ICreateTattooReview useCase)
         {
             await useCase.Execute(request);
+
+            return NoContent();
+        }
+
+        [AuthorizationUser]
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> DeleteReview([FromRoute][ModelBinder(typeof(BinderId))] long Id, [FromServices]IDeleteTattooReview useCase)
+        {
+            await useCase.Execute(Id);
 
             return NoContent();
         }

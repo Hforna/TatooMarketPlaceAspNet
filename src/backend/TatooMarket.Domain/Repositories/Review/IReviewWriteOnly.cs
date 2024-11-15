@@ -10,6 +10,7 @@ namespace TatooMarket.Domain.Repositories.Review
     public interface IReviewWriteOnly
     {
         public Task Add(ReviewEntity review);
+        public void Delete(ReviewEntity review);
     }
 
 }

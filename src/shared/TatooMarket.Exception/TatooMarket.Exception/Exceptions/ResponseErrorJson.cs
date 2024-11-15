@@ -9,8 +9,6 @@ namespace TatooMarket.Exception.Exceptions
 {
     public class ResponseErrorJson : BaseException
     {
-        private readonly List<string> Errors = new List<string>();
-
         public ResponseErrorJson(List<string> errors) : base(string.Empty) => Errors = errors;
         public ResponseErrorJson(string message) : base(message) => Errors.Add(message);
         public override string GetErrorMessage() => Message;

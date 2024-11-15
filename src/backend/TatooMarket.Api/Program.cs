@@ -26,6 +26,8 @@ builder.Services.AddMvc(f => f.Filters.Add(typeof(ExceptionFilter)));
 
 builder.Services.AddSwaggerGen(options =>
 {
+    options.OperationFilter<FilterBindId>();
+
     options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
     {
         Description = @"JWT Authorization header using the Bearer scheme.

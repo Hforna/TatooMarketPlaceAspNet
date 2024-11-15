@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,16 @@ namespace TatooMarket.Infrastructure.DataEntity
         public async Task Add(ReviewEntity review)
         {
             await _dbContext.Reviews.AddAsync(review);
+        }
+
+        public void Delete(ReviewEntity review)
+        {
+            _dbContext.Reviews.Remove(review);
+        }
+
+        public async Task<ReviewEntity?> ReviewById(long Id)
+        {
+            return await _dbContext.Reviews.SingleOrDefaultAsync(review => review.Id == Id);
         }
     }
 }
