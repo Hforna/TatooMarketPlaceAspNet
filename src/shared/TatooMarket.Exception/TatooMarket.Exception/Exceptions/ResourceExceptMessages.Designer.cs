@@ -22,21 +22,21 @@ namespace TatooMarket.Exception.Exceptions {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ResourceExceptMessages {
+    public class ResourceExceptMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ResourceExceptMessages() {
+        public ResourceExceptMessages() {
         }
         
         /// <summary>
         ///   Retorna a instância de ResourceManager armazenada em cache usada por essa classe.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TatooMarket.Exception.Exceptions.ResourceExceptMessages", typeof(ResourceExceptMessages).Assembly);
@@ -51,7 +51,7 @@ namespace TatooMarket.Exception.Exceptions {
         ///   pesquisas de recursos que usam essa classe de recurso de tipo de alta segurança.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Comment field must have 500 or less digits.
         /// </summary>
-        internal static string COMMENT_LENGTH_GREATER_THAN_500 {
+        public static string COMMENT_LENGTH_GREATER_THAN_500 {
             get {
                 return ResourceManager.GetString("COMMENT_LENGTH_GREATER_THAN_500", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a This e-mail already exists.
         /// </summary>
-        internal static string EMAIL_EXISTS {
+        public static string EMAIL_EXISTS {
             get {
                 return ResourceManager.GetString("EMAIL_EXISTS", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Email format is wrong.
         /// </summary>
-        internal static string EMAIL_FORMAT {
+        public static string EMAIL_FORMAT {
             get {
                 return ResourceManager.GetString("EMAIL_FORMAT", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The e-mail field can&apos;t be empty.
         /// </summary>
-        internal static string EMAIL_IS_EMPTY {
+        public static string EMAIL_IS_EMPTY {
             get {
                 return ResourceManager.GetString("EMAIL_IS_EMPTY", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a E-mail or password invalid.
         /// </summary>
-        internal static string EMAIL_PASSWORD_INVALID {
+        public static string EMAIL_PASSWORD_INVALID {
             get {
                 return ResourceManager.GetString("EMAIL_PASSWORD_INVALID", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a File format is wrong.
         /// </summary>
-        internal static string FILE_FORMAT {
+        public static string FILE_FORMAT {
             get {
                 return ResourceManager.GetString("FILE_FORMAT", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The authorization token is invaild or expired.
         /// </summary>
-        internal static string INVALID_TOKEN {
+        public static string INVALID_TOKEN {
             get {
                 return ResourceManager.GetString("INVALID_TOKEN", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a User cannot be anonymous if is seller.
         /// </summary>
-        internal static string NO_USER_ANONYMOUS_AND_SELLER {
+        public static string NO_USER_ANONYMOUS_AND_SELLER {
             get {
                 return ResourceManager.GetString("NO_USER_ANONYMOUS_AND_SELLER", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Password must have 8 or more digits.
         /// </summary>
-        internal static string PASSWORD_GREATER_OR_EQUAL_EIGHT {
+        public static string PASSWORD_GREATER_OR_EQUAL_EIGHT {
             get {
                 return ResourceManager.GetString("PASSWORD_GREATER_OR_EQUAL_EIGHT", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Password is not the same.
         /// </summary>
-        internal static string REPEAT_PASSWORD_ERROR {
+        public static string REPEAT_PASSWORD_ERROR {
             get {
                 return ResourceManager.GetString("REPEAT_PASSWORD_ERROR", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Review doesn&apos;t exists.
         /// </summary>
-        internal static string REVIEW_DOESNT_EXISTS {
+        public static string REVIEW_DOESNT_EXISTS {
             get {
                 return ResourceManager.GetString("REVIEW_DOESNT_EXISTS", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Review note must be 5 or less.
         /// </summary>
-        internal static string REVIEW_NOTE_GREATER_THAN_5 {
+        public static string REVIEW_NOTE_GREATER_THAN_5 {
             get {
                 return ResourceManager.GetString("REVIEW_NOTE_GREATER_THAN_5", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Studio doesn&apos;t exists.
         /// </summary>
-        internal static string STUDIO_DOESNT_EXISTS {
+        public static string STUDIO_DOESNT_EXISTS {
             get {
                 return ResourceManager.GetString("STUDIO_DOESNT_EXISTS", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a This studio name already exists.
         /// </summary>
-        internal static string STUDIO_NAME_EXISTS {
+        public static string STUDIO_NAME_EXISTS {
             get {
                 return ResourceManager.GetString("STUDIO_NAME_EXISTS", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Tattoo doesn&apos;t exists.
         /// </summary>
-        internal static string TATTOO_DOESNT_EXISTS {
+        public static string TATTOO_DOESNT_EXISTS {
             get {
                 return ResourceManager.GetString("TATTOO_DOESNT_EXISTS", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Tattoo body placement out of enum.
         /// </summary>
-        internal static string TATTOO_PLACEMENT_OUT_ENUM {
+        public static string TATTOO_PLACEMENT_OUT_ENUM {
             get {
                 return ResourceManager.GetString("TATTOO_PLACEMENT_OUT_ENUM", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Tattoo size out of enum.
         /// </summary>
-        internal static string TATTOO_SIZE_OUT_ENUM {
+        public static string TATTOO_SIZE_OUT_ENUM {
             get {
                 return ResourceManager.GetString("TATTOO_SIZE_OUT_ENUM", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Tattoo Style out of enum.
         /// </summary>
-        internal static string TATTOO_STYLE_OUT_ENUM {
+        public static string TATTOO_STYLE_OUT_ENUM {
             get {
                 return ResourceManager.GetString("TATTOO_STYLE_OUT_ENUM", resourceCulture);
             }
@@ -225,7 +225,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a User already has a studio.
         /// </summary>
-        internal static string USER_ALREADY_HAS_STUDIO {
+        public static string USER_ALREADY_HAS_STUDIO {
             get {
                 return ResourceManager.GetString("USER_ALREADY_HAS_STUDIO", resourceCulture);
             }
@@ -235,7 +235,7 @@ namespace TatooMarket.Exception.Exceptions {
         ///   Consulta uma cadeia de caracteres localizada semelhante a User doens&apos;t exists
         ///.
         /// </summary>
-        internal static string USER_DOESNT_EXISTS {
+        public static string USER_DOESNT_EXISTS {
             get {
                 return ResourceManager.GetString("USER_DOESNT_EXISTS", resourceCulture);
             }
@@ -244,7 +244,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a User doesn&apos;t create a studio yet.
         /// </summary>
-        internal static string USER_WITHOUT_STUDIO {
+        public static string USER_WITHOUT_STUDIO {
             get {
                 return ResourceManager.GetString("USER_WITHOUT_STUDIO", resourceCulture);
             }
@@ -253,7 +253,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a This username already exists.
         /// </summary>
-        internal static string USERNAME_EXISTS {
+        public static string USERNAME_EXISTS {
             get {
                 return ResourceManager.GetString("USERNAME_EXISTS", resourceCulture);
             }
@@ -262,7 +262,7 @@ namespace TatooMarket.Exception.Exceptions {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The username field can&apos;t be empty.
         /// </summary>
-        internal static string USERNAME_IS_EMPTY {
+        public static string USERNAME_IS_EMPTY {
             get {
                 return ResourceManager.GetString("USERNAME_IS_EMPTY", resourceCulture);
             }

@@ -23,6 +23,9 @@ namespace TatooMarket.Api.Controllers
         {
             var result = await useCase.Execute(numberPage);
 
+            if(!result.Studios.Any())
+                return NoContent();
+
             return Ok(result);
         }
     }
