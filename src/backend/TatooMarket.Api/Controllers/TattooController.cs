@@ -12,11 +12,23 @@ namespace TatooMarket.Api.Controllers
     {
         [Authorize(Policy = "OnlySeller")]
         [HttpPost]
-        public async Task<IActionResult> CreateTattoo([FromForm]RequestCreateTattoo request, [FromServices]ICreateTattoo useCase)
+        public async Task<IActionResult> CreateTattoo([FromForm] RequestCreateTattoo request, [FromServices] ICreateTattoo useCase)
         {
             var result = await useCase.Execute(request);
 
             return Created(string.Empty, result);
+        }
+
+        [HttpGet("{studioId}/{numberPage}")]
+        public async Task<IActionResult> GetStudioTattoos([FromRoute][ModelBinder(typeof(BinderId))]long studioId, [FromRoute]int numberPage,
+            [FromServices]IGetStudioTattoos useCase)
+        {
+            var result = await useCase.Execute(studioId, numberPage);
+
+            if(result.Tattoos.Count == 0)
+                return NoContent();
+
+            return Ok(result);
         }
 
         [HttpPost("create-review")]

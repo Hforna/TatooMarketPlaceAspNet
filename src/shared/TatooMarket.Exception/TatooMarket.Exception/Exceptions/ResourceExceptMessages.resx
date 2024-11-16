@@ -184,4 +184,7 @@
   <data name="REVIEW_DOESNT_EXISTS" xml:space="preserve">
     <value>Review doesn't exists</value>
   </data>
+  <data name="STUDIO_DOESNT_EXISTS" xml:space="preserve">
+    <value>Studio doesn't exists</value>
+  </data>
 </root>

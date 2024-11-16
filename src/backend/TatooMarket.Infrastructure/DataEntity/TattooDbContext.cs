@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TatooMarket.Domain.Entities.Communication;
 using TatooMarket.Domain.Entities.Tattoo;
 using TatooMarket.Domain.Repositories.Tattoo;
+using X.PagedList;
 
 namespace TatooMarket.Infrastructure.DataEntity
 {
@@ -24,6 +25,11 @@ namespace TatooMarket.Infrastructure.DataEntity
         public async Task<IList<TattooEntity>> GetRecentTattoss(Studio studio)
         {
             return await _dbContext.Tattos.Where(d => d.Studio == studio).OrderBy(d => d.CreatedOn).Take(5).ToListAsync();
+        }
+
+        public async Task<IPagedList<TattooEntity>> GetStudioTattoos(Studio studio, int pageNumber)
+        {
+            return await _dbContext.Tattos.Where(d => d.StudioId == studio.Id).ToPagedListAsync(pageNumber, 6);
         }
 
         public async Task<IList<ReviewEntity>> GetTattooReviews(TattooEntity tattoo)

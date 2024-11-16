@@ -169,6 +169,15 @@ namespace TatooMarket.Exception.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Studio doesn&apos;t exists.
+        /// </summary>
+        internal static string STUDIO_DOESNT_EXISTS {
+            get {
+                return ResourceManager.GetString("STUDIO_DOESNT_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a This studio name already exists.
         /// </summary>
         internal static string STUDIO_NAME_EXISTS {

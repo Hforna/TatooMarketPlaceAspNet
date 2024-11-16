@@ -10,6 +10,7 @@ namespace TatooMarket.Communication.Requests.User
     public class RequestUpdateUser
     {
         public string? UserName { get; set; }
+        public bool IsAnonymous { get; set; }
         public string? Email { get; set; }
         public IFormFile? UserImage { get; set; }
     }
