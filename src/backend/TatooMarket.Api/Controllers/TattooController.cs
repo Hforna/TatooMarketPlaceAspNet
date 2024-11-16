@@ -40,6 +40,15 @@ namespace TatooMarket.Api.Controllers
             return NoContent();
         }
 
+        [HttpPost("weeks-tattoos")]
+        public async Task<IActionResult> WeeksTattoos([FromBody]RequestSelectDate request, [FromServices]IGetWeeksTattoos useCase)
+        {
+            var result = await useCase.Execute(request);
+
+            return Ok(result);
+        }
+
+
         [AuthorizationUser]
         [HttpDelete("{Id}")]
         public async Task<IActionResult> DeleteReview([FromRoute][ModelBinder(typeof(BinderId))] long Id, [FromServices]IDeleteTattooReview useCase)

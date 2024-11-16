@@ -14,6 +14,7 @@ namespace TatooMarket.Domain.Repositories.Tattoo
         public Task<IList<TattooEntity>> GetRecentTattoss(Studio studio);
         public Task<TattooEntity?> TattooById(long id);
         public Task<IList<ReviewEntity>> GetTattooReviews(TattooEntity tattoo);
+        public Task<IList<TattooEntity>> WeeksTattoos(DateTime date);
         public Task<IPagedList<TattooEntity>> GetStudioTattoos(Studio studio, int pageNumbers);
     }
 }

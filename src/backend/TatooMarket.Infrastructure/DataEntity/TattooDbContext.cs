@@ -46,5 +46,14 @@ namespace TatooMarket.Infrastructure.DataEntity
         {
             _dbContext.Tattos.Update(tattoo);
         }
+
+        public async Task<IList<TattooEntity>> WeeksTattoos(DateTime date)
+        {
+            return await _dbContext.Tattos
+                .Where(d => d.CreatedOn.AddDays(7) >= date)
+                .OrderByDescending(d => d.Note)
+                .Take(10)
+                .ToListAsync();
+        }
     }
 }
