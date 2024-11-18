@@ -138,4 +138,52 @@
   <data name="EMAIL_PASSWORD_INVALID" xml:space="preserve">
     <value>E-mail ou senha incorreta</value>
   </data>
+  <data name="USER_DOESNT_EXISTS" xml:space="preserve">
+    <value>Usuario não existe</value>
+  </data>
+  <data name="INVALID_TOKEN" xml:space="preserve">
+    <value>O token de autorização é invalido ou expirado</value>
+  </data>
+  <data name="STUDIO_NAME_EXISTS" xml:space="preserve">
+    <value>Nome do studio já está em uso</value>
+  </data>
+  <data name="USER_ALREADY_HAS_STUDIO" xml:space="preserve">
+    <value>Usuario já possui um studio</value>
+  </data>
+  <data name="USERNAME_IS_EMPTY" xml:space="preserve">
+    <value>O campo do nome de usuario não pode ser vazio</value>
+  </data>
+  <data name="EMAIL_IS_EMPTY" xml:space="preserve">
+    <value>E-mail ou senha invalido</value>
+  </data>
+  <data name="USER_WITHOUT_STUDIO" xml:space="preserve">
+    <value>Usuario não criou um studio ainda</value>
+  </data>
+  <data name="TATTOO_STYLE_OUT_ENUM" xml:space="preserve">
+    <value>Estilo da tatuagem fora do enumerado</value>
+  </data>
+  <data name="TATTOO_SIZE_OUT_ENUM" xml:space="preserve">
+    <value>Tamanho da tatuagem fora do enumerado</value>
+  </data>
+  <data name="TATTOO_PLACEMENT_OUT_ENUM" xml:space="preserve">
+    <value>Lugar da tatuagem no corpo está fora do enumerado</value>
+  </data>
+  <data name="NO_USER_ANONYMOUS_AND_SELLER" xml:space="preserve">
+    <value>Usuario não pode ser anonimo se é vendedor</value>
+  </data>
+  <data name="COMMENT_LENGTH_GREATER_THAN_500" xml:space="preserve">
+    <value>Campo de comentario deve ter no maximo 500 digitod</value>
+  </data>
+  <data name="REVIEW_NOTE_GREATER_THAN_5" xml:space="preserve">
+    <value>Nota de review deve ser 5 ou menos</value>
+  </data>
+  <data name="TATTOO_DOESNT_EXISTS" xml:space="preserve">
+    <value>Tatuagem não existe</value>
+  </data>
+  <data name="REVIEW_DOESNT_EXISTS" xml:space="preserve">
+    <value>Review não existe</value>
+  </data>
+  <data name="STUDIO_DOESNT_EXISTS" xml:space="preserve">
+    <value>Studio não existe</value>
+  </data>
 </root>
