@@ -21,6 +21,7 @@ using TatooMarket.Infrastructure.Azure;
 using TatooMarket.Infrastructure.DataEntity;
 using TatooMarket.Infrastructure.Security.Cryptography;
 using TatooMarket.Infrastructure.Security.Token;
+using TatooMarket.Infrastructure.Services;
 
 namespace TatooMarket.Infrastructure
 {
@@ -34,6 +35,7 @@ namespace TatooMarket.Infrastructure
             AddStorageBlob(services, configuration);
             AddServiceBus(services, configuration);
             AddCryptography(services);
+            AddApiServices(services, configuration);
         }
 
         private static void AddDbContext(this IServiceCollection services, IConfiguration configuration)
@@ -79,6 +81,13 @@ namespace TatooMarket.Infrastructure
             services.AddScoped<IStudioReadOnly, StudioDbContext>();
             services.AddScoped<IStudioWriteOnly, StudioDbContext>();
 
+        }
+
+        private static void AddApiServices(IServiceCollection services, IConfiguration configuration)
+        {
+            var exchangeKey = configuration.GetValue<string>("currencyExchange:apiKey");
+
+            services.AddSingleton(new CurrencyExchangeService(exchangeKey!));
         }
 
         private static void AddServiceBus(IServiceCollection services, IConfiguration configuration)

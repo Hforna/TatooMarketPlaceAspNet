@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TatooMarket.Domain.Enum;
+using TatooMarket.Domain.Enums;
 
 namespace TatooMarket.Domain.Entities.Tattoo
 {
@@ -13,6 +14,7 @@ namespace TatooMarket.Domain.Entities.Tattoo
     {
         public TattooSizeEnum TattooSize { get; set; }
         public BodyPlacementEnum BodyPlacement { get; set; }
+        public CurrencyEnum CurrencyType { get; set; }
         public float Price { get; set; }
         [ForeignKey("Studio")]
         public long StudioId { get; set; }
