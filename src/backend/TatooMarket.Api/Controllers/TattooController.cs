@@ -49,12 +49,22 @@ namespace TatooMarket.Api.Controllers
         }
 
         [HttpPost("create-tattooprice")]
-        public async Task<IActionResult> CreateTattooPrice([FromBody]RequestCreateTattooPrice request, [FromServices]ICreateTattooPrice useCase)
+        public async Task<IActionResult> CreateTattooPrice([FromForm]RequestCreateTattooPrice request, [FromServices]ICreateTattooPrice useCase)
         {
             var result = await useCase.Execute(request);
 
             return Created(string.Empty, result);
         }
+
+        [HttpPut("update-tattooprice/{Id}")]
+        public async Task<IActionResult> UpdateTattooPrice([FromRoute][ModelBinder(typeof(BinderId))]long Id, [FromBody]RequestUpdateTattooPrice request,
+            [FromServices]IUpdateTattooPrice useCase)
+        {
+            var result = await useCase.Execute(request, Id);
+
+            return Ok(result);
+        }
+
 
 
         [AuthorizationUser]

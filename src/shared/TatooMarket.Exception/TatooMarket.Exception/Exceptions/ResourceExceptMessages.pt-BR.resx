@@ -186,4 +186,7 @@
   <data name="STUDIO_DOESNT_EXISTS" xml:space="preserve">
     <value>Studio não existe</value>
   </data>
+  <data name="TATTOOPRICE_DOESNT_EXISTS" xml:space="preserve">
+    <value>Preço da tatuagem não existe</value>
+  </data>
 </root>

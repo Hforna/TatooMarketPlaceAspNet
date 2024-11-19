@@ -9,6 +9,7 @@ using TatooMarket.Communication.Requests.Tattoo;
 using TatooMarket.Communication.Requests.User;
 using TatooMarket.Communication.Responses.Studio;
 using TatooMarket.Communication.Responses.Tatto;
+using TatooMarket.Communication.Responses.Tattoo;
 using TatooMarket.Communication.Responses.User;
 using TatooMarket.Domain.Entities.Communication;
 using TatooMarket.Domain.Entities.Identity;

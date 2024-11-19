@@ -223,6 +223,15 @@ namespace TatooMarket.Exception.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Tattoo price doesn&apos;t exists.
+        /// </summary>
+        public static string TATTOOPRICE_DOESNT_EXISTS {
+            get {
+                return ResourceManager.GetString("TATTOOPRICE_DOESNT_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a User already has a studio.
         /// </summary>
         public static string USER_ALREADY_HAS_STUDIO {

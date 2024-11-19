@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using TatooMarket.Application.Services.Validator.Tattoo;
 using TatooMarket.Application.UseCases.Repositories.Tattoo;
 using TatooMarket.Communication.Requests.Tattoo;
-using TatooMarket.Communication.Responses.Studio;
+using TatooMarket.Communication.Responses.Tattoo;
 using TatooMarket.Domain.Entities.Tattoo;
 using TatooMarket.Domain.Repositories;
 using TatooMarket.Domain.Repositories.Security.Token;
@@ -54,6 +54,7 @@ namespace TatooMarket.Application.UseCases.Tattoo
 
             var response = _mapper.Map<ResponseTattooPrice>(tattooPrice);
             response.StudioId = _sqids.Encode(tattooPrice.StudioId);
+            response.Id = _sqids.Encode(tattooPrice.Id);
 
             return response;
         }

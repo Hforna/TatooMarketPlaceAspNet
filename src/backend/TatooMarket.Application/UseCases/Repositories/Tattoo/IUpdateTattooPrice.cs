@@ -8,8 +8,8 @@ using TatooMarket.Communication.Responses.Tattoo;
 
 namespace TatooMarket.Application.UseCases.Repositories.Tattoo
 {
-    public interface ICreateTattooPrice
+    public interface IUpdateTattooPrice
     {
-        public Task<ResponseTattooPrice> Execute(RequestCreateTattooPrice request);
+        public Task<ResponseTattooPrice> Execute(RequestUpdateTattooPrice request, long id);
     }
 }
