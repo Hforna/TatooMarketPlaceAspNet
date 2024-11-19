@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TatooMarket.Application.UseCases.Repositories.Studio;
+using TatooMarket.Communication.Enums;
 using TatooMarket.Communication.Responses.Studio;
 using TatooMarket.Communication.Responses.Tatto;
 using TatooMarket.Communication.Responses.Tattoo;
@@ -45,17 +46,25 @@ namespace TatooMarket.Application.UseCases.Studio
 
             var currencyTattoo = tattooPrices.Select(d => d.CurrencyType).First();
 
+            var acceptedCurrencys = Enum.GetValues(typeof(CurrencyEnum)).Cast<CurrencyEnum>().Select(d => d.ToString()).ToList();
+
             var currencyExchange = await _exchangeService.CurrencyConvert(nameof(currencyTattoo));
+            var currencyAcceptedExchange = currencyExchange
+            .Where(d => acceptedCurrencys.Contains(d.Key) && 
+            tattooPrices.Select(d => d.CurrencyType.ToString()).Contains(d.Key) == false);
 
             var response = new ResponseFullStudioPriceCatalog();
             var catalogsResponse = new List<ResponseStudioPriceCatalogShort>();
 
-            foreach(var value in currencyExchange)
+            foreach(var value in currencyAcceptedExchange)
             {
                 var responseCurrency = new ResponseStudioPriceCatalogShort() { CurrencyType = value.Key, Catalog = [] };
 
                 foreach(var tattooPrice in tattooPrices)
                 {
+                    if (value.Key == tattooPrice.CurrencyType.ToString())
+                        break;
+
                     var responseTattooPrice = _mapper.Map<ResponseTattooPrice>(tattooPrice);
 
                     responseTattooPrice.Price *= value.Value;
