@@ -1,6 +1,7 @@
 ﻿using Azure.Messaging.ServiceBus;
 using Azure.Storage.Blobs;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -14,6 +15,7 @@ using TatooMarket.Domain.Repositories.Azure;
 using TatooMarket.Domain.Repositories.Review;
 using TatooMarket.Domain.Repositories.Security.Cryptography;
 using TatooMarket.Domain.Repositories.Security.Token;
+using TatooMarket.Domain.Repositories.Services;
 using TatooMarket.Domain.Repositories.StudioRepository;
 using TatooMarket.Domain.Repositories.Tattoo;
 using TatooMarket.Domain.Repositories.User;
@@ -87,7 +89,7 @@ namespace TatooMarket.Infrastructure
         {
             var exchangeKey = configuration.GetValue<string>("currencyExchange:apiKey");
 
-            services.AddSingleton(new CurrencyExchangeService(exchangeKey!));
+            services.AddScoped<ICurrencyExchangeService>(d => new CurrencyExchangeService(exchangeKey!));
         }
 
         private static void AddServiceBus(IServiceCollection services, IConfiguration configuration)

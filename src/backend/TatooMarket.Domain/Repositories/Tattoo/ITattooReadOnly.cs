@@ -17,5 +17,6 @@ namespace TatooMarket.Domain.Repositories.Tattoo
         public Task<IList<TattooEntity>> WeeksTattoos(DateTime date);
         public Task<IPagedList<TattooEntity>> GetStudioTattoos(Studio studio, int pageNumbers);
         public Task<TattooPriceEntity?> TattooPriceById(long id);
+        public Task<List<TattooPriceEntity>?> TattooByStudio(Studio studio);
     }
 }

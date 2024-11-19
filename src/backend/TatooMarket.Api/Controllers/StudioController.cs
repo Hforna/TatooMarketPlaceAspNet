@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TatooMarket.Api.Attributes;
+using TatooMarket.Api.Binders;
 using TatooMarket.Application.UseCases.Repositories.Studio;
 using TatooMarket.Communication.Requests.Studio;
 
@@ -16,6 +17,14 @@ namespace TatooMarket.Api.Controllers
            var result = await useCase.Execute(request);
 
             return Created(string.Empty, result);
+        }
+
+        [HttpGet("studio-price-catalog/{Id}")]
+        public async Task<IActionResult> GetStudioPriceCatalog([FromRoute][ModelBinder(typeof(BinderId))]long Id, [FromServices]IStudioPriceCatalog useCase)
+        {
+            var result = await useCase.Execute(Id);
+
+            return Ok(result);
         }
 
         [HttpGet("{numberPage}")]

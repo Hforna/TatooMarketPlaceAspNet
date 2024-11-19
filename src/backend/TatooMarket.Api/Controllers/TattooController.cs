@@ -66,7 +66,6 @@ namespace TatooMarket.Api.Controllers
         }
 
 
-
         [AuthorizationUser]
         [HttpDelete("{Id}")]
         public async Task<IActionResult> DeleteReview([FromRoute][ModelBinder(typeof(BinderId))] long Id, [FromServices]IDeleteTattooReview useCase)

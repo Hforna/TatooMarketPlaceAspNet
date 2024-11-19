@@ -12,6 +12,7 @@ namespace TatooMarket.Communication.Responses.Studio
         public string StudioName { get; set; }
         public string OwnerId { get; set; }
         public string ImageStudio {  get; set; }
+        public string StudioId { get; set; }
         public int Note {  get; set; }
         public IList<ResponseShortTatto>? RecentTattoss { get; set; }
     }

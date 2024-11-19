@@ -14,6 +14,7 @@ using TatooMarket.Communication.Responses.Tattoo;
 using TatooMarket.Domain.Entities.Tattoo;
 using TatooMarket.Domain.Repositories;
 using TatooMarket.Domain.Repositories.Security.Token;
+using TatooMarket.Domain.Repositories.Services;
 using TatooMarket.Domain.Repositories.Tattoo;
 using TatooMarket.Exception.Exceptions;
 
@@ -26,9 +27,9 @@ namespace TatooMarket.Application.UseCases.Tattoo
         private readonly IGetUserByToken _userByToken;
         private readonly SqidsEncoder<long> _sqids;
         private readonly IMapper _mapper;
-        
         public CreateTattooPrice(ITattooWriteOnly tattooWrite, IUnitOfWork unitOfWork,
-            IGetUserByToken userByToken, SqidsEncoder<long> sqidsEncoder, IMapper mapper)
+            IGetUserByToken userByToken, SqidsEncoder<long> sqidsEncoder, 
+            IMapper mapper)
         {
             _tattooWrite = tattooWrite;
             _unitOfWork = unitOfWork;

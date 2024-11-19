@@ -38,8 +38,10 @@ namespace TatooMarket.Application.UseCases.Studio
                 var response = _mapper.Map<ResponseShortStudio>(d);
 
                 response.OwnerId = _sqidsEncoder.Encode(d.OwnerId);
+                response.StudioId = _sqidsEncoder.Encode(d.Id);
 
-                response.ImageStudio = await _azureStorage.GetImage(d.Id.ToString(), d.ImageStudio);
+                //response.ImageStudio = await _azureStorage.GetImage(d.Id.ToString(), d.ImageStudio);
+                response.ImageStudio = "";
 
                 return response;
             });

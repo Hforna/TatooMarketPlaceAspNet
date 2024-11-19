@@ -12,5 +12,6 @@ namespace TatooMarket.Communication.Requests.Tattoo
         public TattooSizeEnum TattooSize { get; set; }
         public BodyPlacementEnum BodyPlacement { get; set; }
         public float Price { get; set; }
+        public CurrencyEnum CurrencyType { get; set; }
     }
 }
