@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TatooMarket.Infrastructure.DataEntity;
 
@@ -11,9 +12,11 @@ using TatooMarket.Infrastructure.DataEntity;
 namespace TatooMarket.Infrastructure.Migrations
 {
     [DbContext(typeof(ProjectDbContext))]
-    partial class ProjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241118155908_AddAnonymousColumnToUserTable")]
+    partial class AddAnonymousColumnToUserTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -204,7 +207,7 @@ namespace TatooMarket.Infrastructure.Migrations
                         {
                             Id = 1L,
                             ConcurrencyStamp = "System.Func`1[System.Guid]",
-                            CreatedOn = new DateTime(2024, 11, 18, 17, 13, 39, 278, DateTimeKind.Utc).AddTicks(6278),
+                            CreatedOn = new DateTime(2024, 11, 18, 15, 59, 7, 730, DateTimeKind.Utc).AddTicks(7391),
                             Name = "seller",
                             NormalizedName = "SELLER"
                         },
@@ -212,7 +215,7 @@ namespace TatooMarket.Infrastructure.Migrations
                         {
                             Id = 2L,
                             ConcurrencyStamp = "System.Func`1[System.Guid]",
-                            CreatedOn = new DateTime(2024, 11, 18, 17, 13, 39, 278, DateTimeKind.Utc).AddTicks(6294),
+                            CreatedOn = new DateTime(2024, 11, 18, 15, 59, 7, 730, DateTimeKind.Utc).AddTicks(7411),
                             Name = "customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -407,39 +410,6 @@ namespace TatooMarket.Infrastructure.Migrations
                     b.ToTable("tattoos");
                 });
 
-            modelBuilder.Entity("TatooMarket.Domain.Entities.Tattoo.TattooPriceEntity", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("BodyPlacement")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
-
-                    b.Property<long>("StudioId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("TattooSize")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StudioId");
-
-                    b.ToTable("tattoosPrice");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<long>", b =>
                 {
                     b.HasOne("TatooMarket.Domain.Entities.Identity.RoleEntity", null)
@@ -539,17 +509,6 @@ namespace TatooMarket.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Customer");
-
-                    b.Navigation("Studio");
-                });
-
-            modelBuilder.Entity("TatooMarket.Domain.Entities.Tattoo.TattooPriceEntity", b =>
-                {
-                    b.HasOne("TatooMarket.Domain.Entities.Tattoo.Studio", "Studio")
-                        .WithMany()
-                        .HasForeignKey("StudioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("Studio");
                 });

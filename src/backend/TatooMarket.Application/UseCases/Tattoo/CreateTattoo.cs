@@ -65,7 +65,7 @@ namespace TatooMarket.Application.UseCases.Tattoo
 
                 tattoo.TattooImage = $"{Guid.NewGuid}{ext}";
 
-                //await _azureStorage.UploadUser(user, image, tattoo.TattooImage);
+                await _azureStorage.UploadUser(user, image, tattoo.TattooImage);
             }
 
             tattoo.StudioId = (long)user.StudioId;

@@ -34,6 +34,8 @@ namespace TatooMarket.Application.Services.AutoMapper
             CreateMap<RequestCreateTattooReview, ReviewEntity>();
 
             CreateMap<RequestCreateTattoo, TattooEntity>();
+
+            CreateMap<RequestCreateTattooPrice, TattooPriceEntity>();
         }
 
         private void EntitieToResponse()
@@ -46,6 +48,9 @@ namespace TatooMarket.Application.Services.AutoMapper
             CreateMap<Studio, ResponseShortStudio>()
                 .ForMember(d => d.RecentTattoss, opt => opt.Ignore())
                 .ForMember(d => d.OwnerId, opt => opt.Ignore());
+
+            CreateMap<TattooPriceEntity, ResponseTattooPrice>()
+                .ForMember(d => d.StudioId, opt => opt.Ignore());
 
             CreateMap<TattooEntity, ResponseShortTatto>();
         }

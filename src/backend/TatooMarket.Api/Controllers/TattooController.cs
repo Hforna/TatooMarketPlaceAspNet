@@ -48,6 +48,14 @@ namespace TatooMarket.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost("create-tattooprice")]
+        public async Task<IActionResult> CreateTattooPrice([FromBody]RequestCreateTattooPrice request, [FromServices]ICreateTattooPrice useCase)
+        {
+            var result = await useCase.Execute(request);
+
+            return Created(string.Empty, result);
+        }
+
 
         [AuthorizationUser]
         [HttpDelete("{Id}")]

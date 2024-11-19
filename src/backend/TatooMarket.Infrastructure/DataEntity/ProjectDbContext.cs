@@ -19,6 +19,7 @@ namespace TatooMarket.Infrastructure.DataEntity
         public DbSet<TattooEntity> Tattos { get; set; }
         public DbSet<Studio> Studios { get; set; }
         public DbSet<ReviewEntity> Reviews { get; set; }
+        public DbSet<TattooPriceEntity> tattoosPrice { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

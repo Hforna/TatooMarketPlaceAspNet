@@ -22,6 +22,11 @@ namespace TatooMarket.Infrastructure.DataEntity
             await _dbContext.Tattos.AddAsync(tattoo);
         }
 
+        public async Task AddTattooPrice(TattooPriceEntity tattooPrice)
+        {
+            await _dbContext.tattoosPrice.AddAsync(tattooPrice);
+        }
+
         public async Task<IList<TattooEntity>> GetRecentTattoss(Studio studio)
         {
             return await _dbContext.Tattos.Where(d => d.Studio == studio).OrderBy(d => d.CreatedOn).Take(5).ToListAsync();
@@ -45,6 +50,11 @@ namespace TatooMarket.Infrastructure.DataEntity
         public void Update(TattooEntity tattoo)
         {
             _dbContext.Tattos.Update(tattoo);
+        }
+
+        public void UpdateTattooPrice(TattooPriceEntity tattooPrice)
+        {
+            _dbContext.tattoosPrice.Update(tattooPrice);
         }
 
         public async Task<IList<TattooEntity>> WeeksTattoos(DateTime date)
