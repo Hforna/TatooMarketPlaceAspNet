@@ -98,6 +98,11 @@ builder.Services.AddAuthorization(opt =>
     opt.AddPolicy("OnlySeller", opt => opt.RequireRole("seller"));
 });
 
+builder.Services.AddCors(d =>
+{
+    d.AddDefaultPolicy(d => d.WithOrigins("https://reqbin.com/").WithMethods("GET"));
+});
+
 var cancellationTokenSource = new CancellationTokenSource();
 
 builder.Services.AddHostedService<DeleteService>();
@@ -109,6 +114,8 @@ builder.Services.AddRouting(d => d.LowercaseUrls = true);
 var app = builder.Build();
 
 app.UseMiddleware<CultureInfoMiddleware>();
+
+app.UseCors();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
