@@ -18,5 +18,6 @@ namespace TatooMarket.Domain.Repositories.Tattoo
         public Task<IPagedList<TattooEntity>> GetStudioTattoos(Studio studio, int pageNumbers);
         public Task<TattooPriceEntity?> TattooPriceById(long id);
         public Task<List<TattooPriceEntity>?> TattooByStudio(Studio studio);
+        public Task<bool> StudioIsOwnTattoo(Studio studio, long Id);
     }
 }

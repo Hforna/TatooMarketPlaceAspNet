@@ -27,6 +27,11 @@ namespace TatooMarket.Infrastructure.DataEntity
             await _dbContext.tattoosPrice.AddAsync(tattooPrice);
         }
 
+        public void Delete(TattooEntity tattoo)
+        {
+            _dbContext.Tattos.Remove(tattoo);
+        }
+
         public async Task<IList<TattooEntity>> GetRecentTattoss(Studio studio)
         {
             return await _dbContext.Tattos.Where(d => d.Studio == studio).OrderBy(d => d.CreatedOn).Take(5).ToListAsync();
@@ -40,6 +45,11 @@ namespace TatooMarket.Infrastructure.DataEntity
         public async Task<IList<ReviewEntity>> GetTattooReviews(TattooEntity tattoo)
         {
             return await _dbContext.Reviews.Where(d => d.Tattoo == tattoo).ToListAsync();
+        }
+
+        public async Task<bool> StudioIsOwnTattoo(Studio studio, long Id)
+        {
+            return await _dbContext.Tattos.AnyAsync(d => d.Id == Id && d.StudioId == studio.Id);
         }
 
         public async Task<TattooEntity?> TattooById(long id)

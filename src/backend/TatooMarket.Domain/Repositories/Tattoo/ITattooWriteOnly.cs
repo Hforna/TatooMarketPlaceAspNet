@@ -11,6 +11,7 @@ namespace TatooMarket.Domain.Repositories.Tattoo
     {
         public Task Add(TattooEntity tattoo);
         public void Update(TattooEntity tattoo);
+        public void Delete(TattooEntity tattoo);
         public Task AddTattooPrice(TattooPriceEntity tattooPrice);
         public void UpdateTattooPrice(TattooPriceEntity tattooPrice);
     }

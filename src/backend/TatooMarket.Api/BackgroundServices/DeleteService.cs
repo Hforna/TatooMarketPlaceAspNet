@@ -1,4 +1,5 @@
 ﻿using Azure.Messaging.ServiceBus;
+using TatooMarket.Application.UseCases.Repositories.Tattoo;
 using TatooMarket.Application.UseCases.Repositories.User;
 using TatooMarket.Infrastructure.Azure;
 
@@ -39,6 +40,13 @@ namespace TatooMarket.Api.BackgroundServices
                 var userIdentifier = Guid.Parse(message);
 
                 await useCase.Execute(userIdentifier);
+            } else if(messageFrom == "DeleteTattoo")
+            {
+                var useCase = scope.ServiceProvider.GetRequiredService<IDeleteTattoo>();
+
+                var id = int.Parse(message);
+
+                await useCase.Execute(id);
             }
         }
 

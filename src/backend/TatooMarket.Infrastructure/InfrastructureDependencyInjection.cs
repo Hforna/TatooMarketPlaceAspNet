@@ -98,10 +98,13 @@ namespace TatooMarket.Infrastructure
 
             var client = new ServiceBusClient(connectionString, new ServiceBusClientOptions() { TransportType = ServiceBusTransportType.AmqpWebSockets});
 
-            var userSender = new DeleteUserSender(client.CreateSender("user"));
+            var userSender = new DeleteUserSender(client.CreateSender("delete"));
             services.AddScoped<IDeleteUserSender>(d => userSender);
 
-            var processor = new DeleteProcessor(client.CreateProcessor("user", new ServiceBusProcessorOptions()
+            var tattooSender = new DeleteTattooSender(client.CreateSender("delete"));
+            services.AddScoped<IDeleteTattooSender>(d => tattooSender);
+
+            var processor = new DeleteProcessor(client.CreateProcessor("delete", new ServiceBusProcessorOptions()
             {
                 MaxConcurrentCalls = 1
             }));

@@ -31,15 +31,6 @@ namespace TatooMarket.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPost("create-review")]
-        [AuthorizationUser]
-        public async Task<IActionResult> CreateReview([FromBody]RequestCreateTattooReview request, [FromServices]ICreateTattooReview useCase)
-        {
-            await useCase.Execute(request);
-
-            return NoContent();
-        }
-
         [HttpPost("weeks-tattoos")]
         public async Task<IActionResult> WeeksTattoos([FromBody]RequestSelectDate request, [FromServices]IGetWeeksTattoos useCase)
         {
@@ -48,6 +39,7 @@ namespace TatooMarket.Api.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "OnlySeller")]
         [HttpPost("create-tattooprice")]
         public async Task<IActionResult> CreateTattooPrice([FromForm]RequestCreateTattooPrice request, [FromServices]ICreateTattooPrice useCase)
         {
@@ -56,6 +48,7 @@ namespace TatooMarket.Api.Controllers
             return Created(string.Empty, result);
         }
 
+        [Authorize(Roles = "OnlySeller")]
         [HttpPut("update-tattooprice/{Id}")]
         public async Task<IActionResult> UpdateTattooPrice([FromRoute][ModelBinder(typeof(BinderId))]long Id, [FromBody]RequestUpdateTattooPrice request,
             [FromServices]IUpdateTattooPrice useCase)
@@ -65,10 +58,27 @@ namespace TatooMarket.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost("create-review")]
+        [AuthorizationUser]
+        public async Task<IActionResult> CreateReview([FromBody] RequestCreateTattooReview request, [FromServices] ICreateTattooReview useCase)
+        {
+            await useCase.Execute(request);
+
+            return NoContent();
+        }
 
         [AuthorizationUser]
         [HttpDelete("{Id}")]
         public async Task<IActionResult> DeleteReview([FromRoute][ModelBinder(typeof(BinderId))] long Id, [FromServices]IDeleteTattooReview useCase)
+        {
+            await useCase.Execute(Id);
+
+            return NoContent();
+        }
+
+        [HttpPost("delete-tattoo/{Id}")]
+        [Authorize(Policy = "OnlySeller")]
+        public async Task<IActionResult> DeleteTattoo([FromRoute][ModelBinder(typeof(BinderId))]long Id, [FromServices]IDeleteTattooRequest useCase)
         {
             await useCase.Execute(Id);
 

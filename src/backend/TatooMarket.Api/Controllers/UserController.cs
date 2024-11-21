@@ -43,7 +43,5 @@ namespace TatooMarket.Api.Controllers
 
             return NoContent();
         }
-
-
     }
 }
