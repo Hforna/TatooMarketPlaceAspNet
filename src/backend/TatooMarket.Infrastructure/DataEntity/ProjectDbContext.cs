@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using TatooMarket.Domain.Entities;
 using TatooMarket.Domain.Entities.Communication;
 using TatooMarket.Domain.Entities.Identity;
 using TatooMarket.Domain.Entities.Tattoo;
@@ -20,6 +21,7 @@ namespace TatooMarket.Infrastructure.DataEntity
         public DbSet<Studio> Studios { get; set; }
         public DbSet<ReviewEntity> Reviews { get; set; }
         public DbSet<TattooPriceEntity> tattoosPrice { get; set; }
+        public DbSet<StudioAddress> studioAddresses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
