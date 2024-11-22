@@ -8,6 +8,7 @@ namespace TatooMarket.Communication.Responses.Tatto
 {
     public class ResponseShortTatto
     {
+        public string Id { get; set; }
         public string StudioId { get; set; }
         public string? TattoImage { get; set; }
         public string? CustomerId { get; set; }

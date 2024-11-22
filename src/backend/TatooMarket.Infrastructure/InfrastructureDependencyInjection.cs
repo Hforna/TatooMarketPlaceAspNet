@@ -11,6 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using TatooMarket.Domain.Repositories;
+using TatooMarket.Domain.Repositories.Address;
 using TatooMarket.Domain.Repositories.Azure;
 using TatooMarket.Domain.Repositories.Review;
 using TatooMarket.Domain.Repositories.Security.Cryptography;
@@ -83,6 +84,10 @@ namespace TatooMarket.Infrastructure
             services.AddScoped<IStudioReadOnly, StudioDbContext>();
             services.AddScoped<IStudioWriteOnly, StudioDbContext>();
 
+            //Address
+            services.AddScoped<IAddressReadOnly, AddressDbContext>();
+            services.AddScoped<IAddressWriteOnly, AddressDbContext>();
+
         }
 
         private static void AddApiServices(IServiceCollection services, IConfiguration configuration)
@@ -90,6 +95,8 @@ namespace TatooMarket.Infrastructure
             var exchangeKey = configuration.GetValue<string>("currencyExchange:apiKey");
 
             services.AddScoped<ICurrencyExchangeService>(d => new CurrencyExchangeService(exchangeKey!));
+
+            services.AddScoped<IPostalCodeInfosService, PostalCodeInfosService>();
         }
 
         private static void AddServiceBus(IServiceCollection services, IConfiguration configuration)

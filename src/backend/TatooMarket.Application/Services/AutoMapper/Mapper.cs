@@ -4,13 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TatooMarket.Communication.Requests.Address;
 using TatooMarket.Communication.Requests.Studio;
 using TatooMarket.Communication.Requests.Tattoo;
 using TatooMarket.Communication.Requests.User;
+using TatooMarket.Communication.Responses.Address;
 using TatooMarket.Communication.Responses.Studio;
 using TatooMarket.Communication.Responses.Tatto;
 using TatooMarket.Communication.Responses.Tattoo;
 using TatooMarket.Communication.Responses.User;
+using TatooMarket.Domain.Entities;
 using TatooMarket.Domain.Entities.Communication;
 using TatooMarket.Domain.Entities.Identity;
 using TatooMarket.Domain.Entities.Tattoo;
@@ -37,6 +40,9 @@ namespace TatooMarket.Application.Services.AutoMapper
             CreateMap<RequestCreateTattoo, TattooEntity>();
 
             CreateMap<RequestCreateTattooPrice, TattooPriceEntity>();
+
+            CreateMap<RequestCreateAddress, StudioAddress>();
+                
         }
 
         private void EntitieToResponse()
@@ -54,6 +60,9 @@ namespace TatooMarket.Application.Services.AutoMapper
                 .ForMember(d => d.StudioId, opt => opt.Ignore());
 
             CreateMap<TattooEntity, ResponseShortTatto>();
+
+            CreateMap<StudioAddress, ResponseAddress>()
+                .ForMember(d => d.StudioId, opt => opt.Ignore());
         }
     }
 }

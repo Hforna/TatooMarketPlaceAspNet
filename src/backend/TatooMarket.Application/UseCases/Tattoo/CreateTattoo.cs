@@ -63,7 +63,7 @@ namespace TatooMarket.Application.UseCases.Tattoo
                 if (!isValid)
                     throw new TattooException(ResourceExceptMessages.FILE_FORMAT);
 
-                tattoo.TattooImage = $"{Guid.NewGuid}{ext}";
+                tattoo.TattooImage = $"{Guid.NewGuid()}{ext}";
 
                 await _azureStorage.UploadUser(user, image, tattoo.TattooImage);
             }

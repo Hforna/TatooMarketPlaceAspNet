@@ -16,6 +16,7 @@ namespace TatooMarket.Domain.Entities.Tattoo
     public class TattooEntity : BaseEntity
     {
         [ForeignKey("Studio")]
+        [InverseProperty("StudioTattoos")]
         public long StudioId { get; set; }
         public Studio? Studio { get; set; }
         public string? TattooImage { get; set; }

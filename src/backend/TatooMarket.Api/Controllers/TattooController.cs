@@ -68,7 +68,7 @@ namespace TatooMarket.Api.Controllers
         }
 
         [AuthorizationUser]
-        [HttpDelete("{Id}")]
+        [HttpDelete("delete-review/{Id}")]
         public async Task<IActionResult> DeleteReview([FromRoute][ModelBinder(typeof(BinderId))] long Id, [FromServices]IDeleteTattooReview useCase)
         {
             await useCase.Execute(Id);
@@ -76,11 +76,11 @@ namespace TatooMarket.Api.Controllers
             return NoContent();
         }
 
-        [HttpPost("delete-tattoo/{Id}")]
+        [HttpDelete("delete-tattoo/{Id}")]
         [Authorize(Policy = "OnlySeller")]
         public async Task<IActionResult> DeleteTattoo([FromRoute][ModelBinder(typeof(BinderId))]long Id, [FromServices]IDeleteTattooRequest useCase)
         {
-            await useCase.Execute(Id);
+            await useCase.Execute(Id);   
 
             return NoContent();
         }

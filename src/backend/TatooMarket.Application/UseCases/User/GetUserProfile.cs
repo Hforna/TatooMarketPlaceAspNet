@@ -44,7 +44,8 @@ namespace TatooMarket.Application.UseCases.User
 
             if(user.Studio is not null)
             {
-                response.UserStudio.RecentTattoss = _mapper.Map<IList<ResponseShortTatto>>(user.Studio.StudioTattoss.Take(5).OrderBy(d => d.CreatedOn).ToList());
+                if(user.Studio.StudioTattoss is not null)
+                    response.UserStudio.RecentTattoss = _mapper.Map<IList<ResponseShortTatto>>(user.Studio.StudioTattoss.Take(5).OrderBy(d => d.CreatedOn).ToList());
                 response.UserStudio.OwnerId = _sqidsEncoder.Encode(user.Id);
             }
 

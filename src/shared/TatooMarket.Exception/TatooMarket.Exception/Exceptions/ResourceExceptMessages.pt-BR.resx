@@ -189,4 +189,10 @@
   <data name="TATTOOPRICE_DOESNT_EXISTS" xml:space="preserve">
     <value>Preço da tatuagem não existe</value>
   </data>
+  <data name="INVALID_POSTALCODE" xml:space="preserve">
+    <value>Codigo postal invalido</value>
+  </data>
+  <data name="FORMAT_POSTALCODE_WRONG" xml:space="preserve">
+    <value>Formato do codigo postal está errado</value>
+  </data>
 </root>

@@ -23,7 +23,6 @@ namespace TatooMarket.Domain.Entities.Tattoo
         public int Note { get; set; } = 0;
         [NotMapped]
         public ICollection<UserEntity>? Customers { get; set; }
-        public string? Address { get; set; }
         public string? PhoneNumber { get; set; }
         public string? ImageStudio { get; set; }
         [InverseProperty("Studio")]

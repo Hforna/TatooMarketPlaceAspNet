@@ -8,7 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TatooMarket.Application.UseCases.Address;
 using TatooMarket.Application.UseCases.Login;
+using TatooMarket.Application.UseCases.Repositories.Address;
 using TatooMarket.Application.UseCases.Repositories.Login;
 using TatooMarket.Application.UseCases.Repositories.Studio;
 using TatooMarket.Application.UseCases.Repositories.Tattoo;
@@ -48,6 +50,7 @@ namespace TatooMarket.Application
             services.AddScoped<IStudioPriceCatalog, StudioPriceCatalog>();
             services.AddScoped<IDeleteTattooRequest, DeleteTattooRequest>();
             services.AddScoped<IDeleteTattoo, DeleteTattoo>();
+            services.AddScoped<ICreateAddress, CreateAddress>();
         }
 
         private static void AddSqIds(IServiceCollection services, IConfiguration configuration)

@@ -190,4 +190,10 @@
   <data name="TATTOOPRICE_DOESNT_EXISTS" xml:space="preserve">
     <value>Tattoo price doesn't exists</value>
   </data>
+  <data name="INVALID_POSTALCODE" xml:space="preserve">
+    <value>Invalid postal code</value>
+  </data>
+  <data name="FORMAT_POSTALCODE_WRONG" xml:space="preserve">
+    <value>Wrong postal code format</value>
+  </data>
 </root>

@@ -115,6 +115,24 @@ namespace TatooMarket.Exception.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Wrong postal code format.
+        /// </summary>
+        public static string FORMAT_POSTALCODE_WRONG {
+            get {
+                return ResourceManager.GetString("FORMAT_POSTALCODE_WRONG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Invalid postal code.
+        /// </summary>
+        public static string INVALID_POSTALCODE {
+            get {
+                return ResourceManager.GetString("INVALID_POSTALCODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The authorization token is invaild or expired.
         /// </summary>
         public static string INVALID_TOKEN {

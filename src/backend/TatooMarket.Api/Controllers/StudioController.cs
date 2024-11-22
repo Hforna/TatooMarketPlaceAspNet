@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TatooMarket.Api.Attributes;
 using TatooMarket.Api.Binders;
+using TatooMarket.Application.UseCases.Repositories.Address;
 using TatooMarket.Application.UseCases.Repositories.Studio;
+using TatooMarket.Communication.Requests.Address;
 using TatooMarket.Communication.Requests.Studio;
 
 namespace TatooMarket.Api.Controllers
@@ -26,6 +28,14 @@ namespace TatooMarket.Api.Controllers
             var result = await useCase.Execute(Id);
 
             return Ok(result);
+        }
+
+        [HttpPost("studio-address")]
+        public async Task<IActionResult> CreateAddress([FromBody]RequestCreateAddress request, [FromServices]ICreateAddress useCase)
+        {
+            var result = await useCase.Execute(request);
+
+            return Created(string.Empty, result);
         }
 
         [HttpGet("{numberPage}")]
