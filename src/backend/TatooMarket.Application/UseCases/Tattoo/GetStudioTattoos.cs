@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Sqids;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,15 @@ namespace TatooMarket.Application.UseCases.Tattoo
         private readonly ITattooReadOnly _tattooRead;
         private readonly IStudioReadOnly _studioRead;
         private readonly IMapper _mapper;
+        private readonly SqidsEncoder<long> _sqids;
 
-        public GetStudioTattoos(ITattooReadOnly tattooRead, IStudioReadOnly studioRead, IMapper mapper)
+        public GetStudioTattoos(ITattooReadOnly tattooRead, IStudioReadOnly studioRead, 
+            IMapper mapper, SqidsEncoder<long> sqids)
         {
             _tattooRead = tattooRead;
             _studioRead = studioRead;
             _mapper = mapper;
+            _sqids = sqids;
         }
 
         public async Task<ResponseStudioTattoos> Execute(long studioId, int pageNumber)
@@ -36,6 +40,14 @@ namespace TatooMarket.Application.UseCases.Tattoo
                 throw new StudioException(ResourceExceptMessages.STUDIO_DOESNT_EXISTS);
 
             var tattoos = await _tattooRead.GetStudioTattoos(studio, pageNumber);
+            var listTattoos = tattoos.Select(d =>
+            {
+                var response = _mapper.Map<ResponseShortTatto>(d);
+                response.Id = _sqids.Encode(d.Id);
+                response.StudioId = _sqids.Encode(d.StudioId);
+
+                return response;
+            }).ToList();
 
             var response = new ResponseStudioTattoos()
             {
@@ -51,7 +63,7 @@ namespace TatooMarket.Application.UseCases.Tattoo
                 PageNumber = tattoos.PageNumber,
                 PageSize = tattoos.PageSize
             };
-            response.Tattoos = _mapper.Map<List<ResponseShortTatto>>(tattoos);
+            response.Tattoos = _mapper.Map<List<ResponseShortTatto>>(listTattoos);
 
             return response;
         }
