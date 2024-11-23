@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using TatooMarket.Application.UseCases.Repositories.User;
 using TatooMarket.Communication.Responses.Tatto;
 using TatooMarket.Communication.Responses.User;
+using TatooMarket.Domain.Repositories.Azure;
 using TatooMarket.Domain.Repositories.Security.Token;
 using TatooMarket.Domain.Repositories.Tattoo;
 using TatooMarket.Domain.Repositories.User;
@@ -22,15 +23,17 @@ namespace TatooMarket.Application.UseCases.User
         private readonly IGetUserByToken _userByToken;
         private readonly ITattooReadOnly _tattooRead;
         private readonly SqidsEncoder<long> _sqidsEncoder;
+        private readonly IAzureStorageService _storageService;
 
         public GetUserProfile(IMapper mapper, IUserWriteRepository userWrite, IGetUserByToken userByToken, 
-            ITattooReadOnly tattooRead, SqidsEncoder<long> sqidsEncoder)
+            ITattooReadOnly tattooRead, SqidsEncoder<long> sqidsEncoder, IAzureStorageService storageService)
         {
             _mapper = mapper;
             _userWrite = userWrite;
             _userByToken = userByToken;
             _tattooRead = tattooRead;
             _sqidsEncoder = sqidsEncoder;
+            _storageService = storageService;
         }
 
         public async Task<ResponseGetUserProfile> Execute()
@@ -40,12 +43,31 @@ namespace TatooMarket.Application.UseCases.User
             if (user is null)
                 throw new UserException("User doesn't exists or is not logged");
 
+            var userTattoos = await _tattooRead.TattoosFromStudio(user.Studio);
+
             var response = _mapper.Map<ResponseGetUserProfile>(user);
 
             if(user.Studio is not null)
             {
-                if(user.Studio.StudioTattoss is not null)
-                    response.UserStudio.RecentTattoss = _mapper.Map<IList<ResponseShortTatto>>(user.Studio.StudioTattoss.Take(5).OrderBy(d => d.CreatedOn).ToList());
+                if(userTattoos is not null)
+                {
+                    var studioTattoss = userTattoos.Take(5).OrderBy(d => d.CreatedOn).Select(async tattoo =>
+                    {
+                        var response = _mapper.Map<ResponseShortTatto>(tattoo);
+
+                        response.TattoImage = await _storageService.GetImage(tattoo.Id.ToString(), tattoo.TattooImage);
+                        response.StudioId = _sqidsEncoder.Encode(tattoo.StudioId);
+                        response.CustomerId = tattoo.CustomerId != null ? _sqidsEncoder.Encode((long)tattoo.CustomerId) : "";
+                        response.Id = _sqidsEncoder.Encode(tattoo.Id);
+
+                        return response;
+                    }).ToList();
+
+                    var studioTattoosTask = await Task.WhenAll(studioTattoss);
+
+                    response.UserStudio.RecentTattoss = _mapper.Map<IList<ResponseShortTatto>>(studioTattoosTask);
+                }
+
                 response.UserStudio.OwnerId = _sqidsEncoder.Encode(user.Id);
             }
 
