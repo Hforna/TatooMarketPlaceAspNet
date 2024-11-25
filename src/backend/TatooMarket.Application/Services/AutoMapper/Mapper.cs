@@ -61,6 +61,8 @@ namespace TatooMarket.Application.Services.AutoMapper
 
             CreateMap<TattooEntity, ResponseShortTatto>();
 
+            CreateMap<Studio, ResponseFullStudio>().ForMember(d => d.OwnerId, opt => opt.Ignore());
+
             CreateMap<StudioAddress, ResponseAddress>()
                 .ForMember(d => d.StudioId, opt => opt.Ignore());
         }

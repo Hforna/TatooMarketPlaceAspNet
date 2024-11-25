@@ -43,9 +43,19 @@ namespace TatooMarket.Infrastructure.DataEntity
             return await _dbContext.Studios.AnyAsync(d => d.StudioName == name);
         }
 
-        public async Task<Studio?> StudioById(long id)
+        public async Task<Studio?> StudioById(long id, bool includeTattoos = false)
         {
-            return await _dbContext.Studios.FirstOrDefaultAsync(d => d.Id == id);
+            var studio = await _dbContext.Studios.Include(d => d.Owner).FirstOrDefaultAsync(d => d.Id == id);
+
+            if (includeTattoos && studio is not null)
+                await _dbContext.Entry(studio).Collection(d => d.StudioTattoss).LoadAsync();
+
+            return studio;
+        }
+
+        public void Update(Studio studio)
+        {
+            _dbContext.Studios.Update(studio);
         }
     }
 }
