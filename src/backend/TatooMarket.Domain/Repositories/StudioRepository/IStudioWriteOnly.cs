@@ -10,5 +10,6 @@ namespace TatooMarket.Domain.Repositories.StudioRepository
     public interface IStudioWriteOnly
     {
         public void Add(Studio studio);
+        public void Update(Studio studio);
     }
 }

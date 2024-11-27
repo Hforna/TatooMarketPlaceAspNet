@@ -21,13 +21,20 @@ namespace TatooMarket.Infrastructure.Security.Token
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            var readToken = tokenHandler.ReadJwtToken(_getHeader.GetToken());
+            var token = _getHeader.GetToken();
 
-            var userIdentfier = Guid.Parse(readToken.Claims.First(d => d.Type == ClaimTypes.Sid).Value);
+            if(String.IsNullOrEmpty(token) == false)
+            {
+                var readToken = tokenHandler.ReadJwtToken(token);
 
-            var user = await _userRead.UserByUid(userIdentfier);
+                var userIdentfier = Guid.Parse(readToken.Claims.First(d => d.Type == ClaimTypes.Sid).Value);
 
-            return user;
+                var user = await _userRead.UserByUid(userIdentfier);
+
+                return user;
+            }
+
+            return null;
         }
     }
 }

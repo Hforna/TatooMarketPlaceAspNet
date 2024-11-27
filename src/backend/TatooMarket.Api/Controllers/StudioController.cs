@@ -22,6 +22,14 @@ namespace TatooMarket.Api.Controllers
             return Created(string.Empty, result);
         }
 
+        [HttpGet("get-studio/{Id}")]
+        public async Task<IActionResult> GetStudio([FromRoute][ModelBinder(typeof(BinderId))] long Id, [FromServices]IGetStudio useCase)
+        {
+            var result = await useCase.Execute(Id);
+
+            return Ok(result);
+        }
+
         [HttpGet("studio-price-catalog/{Id}")]
         public async Task<IActionResult> GetStudioPriceCatalog([FromRoute][ModelBinder(typeof(BinderId))]long Id, [FromServices]IStudioPriceCatalog useCase)
         {
