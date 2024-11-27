@@ -278,6 +278,7 @@ namespace TatooMarket.Infrastructure.Migrations
                             Id = 1L,
                             ConcurrencyStamp = "System.Func`1[System.Guid]",
                             CreatedOn = new DateTime(2024, 11, 26, 23, 19, 31, 820, DateTimeKind.Utc).AddTicks(8135),
+                            CreatedOn = new DateTime(2024, 11, 23, 21, 32, 0, 765, DateTimeKind.Utc).AddTicks(7814),
                             Name = "seller",
                             NormalizedName = "SELLER"
                         },
@@ -285,7 +286,7 @@ namespace TatooMarket.Infrastructure.Migrations
                         {
                             Id = 2L,
                             ConcurrencyStamp = "System.Func`1[System.Guid]",
-                            CreatedOn = new DateTime(2024, 11, 26, 23, 19, 31, 820, DateTimeKind.Utc).AddTicks(8154),
+                            CreatedOn = new DateTime(2024, 11, 22, 3, 41, 19, 397, DateTimeKind.Utc).AddTicks(5039),
                             Name = "customer",
                             NormalizedName = "CUSTOMER"
                         });

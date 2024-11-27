@@ -55,6 +55,7 @@ namespace TatooMarket.Application.UseCases.Studio
 
             _customerSession.GetSessionIdentifier("SessionGetStudio");
 
+            if (!thereIsSession)
             {
                 studio.NumberVisits += 1;
 
