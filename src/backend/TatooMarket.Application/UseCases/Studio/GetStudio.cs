@@ -31,7 +31,7 @@ namespace TatooMarket.Application.UseCases.Studio
         public GetStudio(IGetUserByToken userByToken, IStudioReadOnly studioRead, 
             SqidsEncoder<long> sqids, IMapper mapper, 
             IStudioWriteOnly studioWrite, IUnitOfWork unitOfWork, 
-            IGetCustomerSession customerSession, IAzureStorageService storageService, IGetUserByToken getUserByToken)
+            IGetCustomerSession customerSession, IAzureStorageService storageService)
         {
             _userByToken = userByToken;
             _studioRead = studioRead;
@@ -55,9 +55,6 @@ namespace TatooMarket.Application.UseCases.Studio
 
             _customerSession.GetSessionIdentifier("SessionGetStudio");
 
-            var user = await _userByToken.GetUser();
-
-            if (!thereIsSession || (user is not null && studio.OwnerId != user.Id))
             {
                 studio.NumberVisits += 1;
 
