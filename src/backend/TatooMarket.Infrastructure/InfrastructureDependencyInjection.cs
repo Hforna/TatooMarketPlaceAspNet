@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using TatooMarket.Domain.Repositories;
 using TatooMarket.Domain.Repositories.Address;
 using TatooMarket.Domain.Repositories.Azure;
+using TatooMarket.Domain.Repositories.Finance;
 using TatooMarket.Domain.Repositories.Review;
 using TatooMarket.Domain.Repositories.Security.Cryptography;
 using TatooMarket.Domain.Repositories.Security.Token;
@@ -88,6 +89,9 @@ namespace TatooMarket.Infrastructure
             services.AddScoped<IAddressReadOnly, AddressDbContext>();
             services.AddScoped<IAddressWriteOnly, AddressDbContext>();
 
+            //Finance
+            services.AddScoped<IFinanceReadOnly, FinanceDbContext>();
+            services.AddScoped<IFinanceWriteOnly, FinanceDbContext>();
         }
 
         private static void AddApiServices(IServiceCollection services, IConfiguration configuration)

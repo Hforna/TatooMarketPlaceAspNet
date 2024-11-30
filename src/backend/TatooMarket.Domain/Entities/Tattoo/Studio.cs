@@ -25,6 +25,7 @@ namespace TatooMarket.Domain.Entities.Tattoo
         public ICollection<UserEntity>? Customers { get; set; }
         public string? PhoneNumber { get; set; }
         public string? ImageStudio { get; set; }
+        public long NumberVisits { get; set; } = 0;
         [InverseProperty("Studio")]
         public ICollection<TattooEntity>? StudioTattoss { get; set; }
     }

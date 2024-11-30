@@ -195,4 +195,7 @@
   <data name="FORMAT_POSTALCODE_WRONG" xml:space="preserve">
     <value>Formato do codigo postal está errado</value>
   </data>
+  <data name="CURRENCY_OUT_ENUM" xml:space="preserve">
+    <value>Tipo de moeda fora do enum</value>
+  </data>
 </root>

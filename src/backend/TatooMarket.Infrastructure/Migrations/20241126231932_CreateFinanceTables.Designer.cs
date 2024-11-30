@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TatooMarket.Infrastructure.DataEntity;
 
@@ -11,9 +12,11 @@ using TatooMarket.Infrastructure.DataEntity;
 namespace TatooMarket.Infrastructure.Migrations
 {
     [DbContext(typeof(ProjectDbContext))]
-    partial class ProjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241126231932_CreateFinanceTables")]
+    partial class CreateFinanceTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -285,7 +288,7 @@ namespace TatooMarket.Infrastructure.Migrations
                         {
                             Id = 2L,
                             ConcurrencyStamp = "System.Func`1[System.Guid]",
-                            CreatedOn = new DateTime(2024, 11, 22, 3, 41, 19, 397, DateTimeKind.Utc).AddTicks(5039),
+                            CreatedOn = new DateTime(2024, 11, 26, 23, 19, 31, 820, DateTimeKind.Utc).AddTicks(8154),
                             Name = "customer",
                             NormalizedName = "CUSTOMER"
                         });

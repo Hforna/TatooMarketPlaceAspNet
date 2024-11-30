@@ -70,6 +70,15 @@ namespace TatooMarket.Exception.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Currency type out of enum.
+        /// </summary>
+        public static string CURRENCY_OUT_ENUM {
+            get {
+                return ResourceManager.GetString("CURRENCY_OUT_ENUM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a This e-mail already exists.
         /// </summary>
         public static string EMAIL_EXISTS {

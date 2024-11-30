@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -12,6 +13,7 @@ using TatooMarket.Application;
 using TatooMarket.Application.UseCases.Repositories.User;
 using TatooMarket.Domain.Entities.Identity;
 using TatooMarket.Domain.Repositories.Security.Token;
+using TatooMarket.Domain.Repositories.Sessions;
 using TatooMarket.Infrastructure;
 using TatooMarket.Infrastructure.DataEntity;
 using TatooMarket.Infrastructure.Security.Token;
@@ -65,6 +67,8 @@ builder.Services.AddApplication(builder.Configuration);
 
 builder.Services.AddScoped<IGetHeaderToken, GetHeaderToken>();
 
+builder.Services.AddScoped<IGetCustomerSession, GetCustomerSession>();
+
 builder.Services.AddIdentity<UserEntity, RoleEntity>()
     .AddEntityFrameworkStores<ProjectDbContext>()
     .AddDefaultTokenProviders();
@@ -105,13 +109,32 @@ builder.Services.AddCors(d =>
 
 var cancellationTokenSource = new CancellationTokenSource();
 
+builder.Services.AddSession(d =>
+{
+    d.IdleTimeout = TimeSpan.FromMinutes(60);
+});
+
 builder.Services.AddHostedService<DeleteService>();
 
 builder.Services.AddSingleton(cancellationTokenSource);
 
 builder.Services.AddRouting(d => d.LowercaseUrls = true);
 
+builder.Services.AddHealthChecks().AddDbContextCheck<ProjectDbContext>();
+
 var app = builder.Build();
+
+app.MapHealthChecks("/Health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions()
+{
+    AllowCachingResponses = false,
+    ResultStatusCodes =
+    {
+        [HealthStatus.Healthy] = StatusCodes.Status200OK,
+        [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
+    }
+});
+
+app.UseSession();
 
 app.UseMiddleware<CultureInfoMiddleware>();
 

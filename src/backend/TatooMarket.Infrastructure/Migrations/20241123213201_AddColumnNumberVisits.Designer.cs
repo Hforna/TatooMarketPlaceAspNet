@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TatooMarket.Infrastructure.DataEntity;
 
@@ -11,9 +12,11 @@ using TatooMarket.Infrastructure.DataEntity;
 namespace TatooMarket.Infrastructure.Migrations
 {
     [DbContext(typeof(ProjectDbContext))]
-    partial class ProjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241123213201_AddColumnNumberVisits")]
+    partial class AddColumnNumberVisits
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -167,79 +170,6 @@ namespace TatooMarket.Infrastructure.Migrations
                     b.ToTable("reviews");
                 });
 
-            modelBuilder.Entity("TatooMarket.Domain.Entities.Finance.BalanceEntity", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("AmountDrawOut")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Balance")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("LastDrawOut")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long>("StudioId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("balances");
-                });
-
-            modelBuilder.Entity("TatooMarket.Domain.Entities.Finance.StudioBankAccountEntity", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("BranchCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CurrencyType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OwnerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("StudioId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("studioBankAccounts");
-                });
-
             modelBuilder.Entity("TatooMarket.Domain.Entities.Identity.RoleEntity", b =>
                 {
                     b.Property<long>("Id")
@@ -277,7 +207,7 @@ namespace TatooMarket.Infrastructure.Migrations
                         {
                             Id = 1L,
                             ConcurrencyStamp = "System.Func`1[System.Guid]",
-                            CreatedOn = new DateTime(2024, 11, 26, 23, 19, 31, 820, DateTimeKind.Utc).AddTicks(8135),
+                            CreatedOn = new DateTime(2024, 11, 23, 21, 32, 0, 765, DateTimeKind.Utc).AddTicks(7814),
                             Name = "seller",
                             NormalizedName = "SELLER"
                         },
@@ -285,7 +215,7 @@ namespace TatooMarket.Infrastructure.Migrations
                         {
                             Id = 2L,
                             ConcurrencyStamp = "System.Func`1[System.Guid]",
-                            CreatedOn = new DateTime(2024, 11, 22, 3, 41, 19, 397, DateTimeKind.Utc).AddTicks(5039),
+                            CreatedOn = new DateTime(2024, 11, 23, 21, 32, 0, 765, DateTimeKind.Utc).AddTicks(7849),
                             Name = "customer",
                             NormalizedName = "CUSTOMER"
                         });

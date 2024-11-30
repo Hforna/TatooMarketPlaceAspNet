@@ -5,16 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TatooMarket.Communication.Requests.Address;
+using TatooMarket.Communication.Requests.Finance;
 using TatooMarket.Communication.Requests.Studio;
 using TatooMarket.Communication.Requests.Tattoo;
 using TatooMarket.Communication.Requests.User;
 using TatooMarket.Communication.Responses.Address;
+using TatooMarket.Communication.Responses.Finance;
 using TatooMarket.Communication.Responses.Studio;
 using TatooMarket.Communication.Responses.Tatto;
 using TatooMarket.Communication.Responses.Tattoo;
 using TatooMarket.Communication.Responses.User;
 using TatooMarket.Domain.Entities;
 using TatooMarket.Domain.Entities.Communication;
+using TatooMarket.Domain.Entities.Finance;
 using TatooMarket.Domain.Entities.Identity;
 using TatooMarket.Domain.Entities.Tattoo;
 
@@ -32,6 +35,9 @@ namespace TatooMarket.Application.Services.AutoMapper
         {
             CreateMap<RequestCreateUser, UserEntity>()
                 .ForMember(u => u.Password, opt => opt.Ignore());
+
+            CreateMap<RequestCreateFinanceAccount, StudioBankAccountEntity>()
+                .ForMember(d => d.StudioId, opt => opt.Ignore());
 
             CreateMap<RequestCreateStudio, Studio>();
 
@@ -61,8 +67,14 @@ namespace TatooMarket.Application.Services.AutoMapper
 
             CreateMap<TattooEntity, ResponseShortTatto>();
 
+            CreateMap<Studio, ResponseFullStudio>().ForMember(d => d.OwnerId, opt => opt.Ignore());
+
             CreateMap<StudioAddress, ResponseAddress>()
                 .ForMember(d => d.StudioId, opt => opt.Ignore());
+
+            CreateMap<StudioBankAccountEntity, ResponseCreateFinanceAccount>()
+                .ForMember(d => d.BalanceId, opt => opt.Ignore())
+                .ForMember(d => d.AccountId, opt => opt.Ignore());
         }
     }
 }
