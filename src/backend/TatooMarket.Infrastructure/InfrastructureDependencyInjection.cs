@@ -40,6 +40,7 @@ namespace TatooMarket.Infrastructure
             AddServiceBus(services, configuration);
             AddCryptography(services);
             AddApiServices(services, configuration);
+            AddEmailSerice(services, configuration);
         }
 
         private static void AddDbContext(this IServiceCollection services, IConfiguration configuration)
@@ -101,6 +102,15 @@ namespace TatooMarket.Infrastructure
             services.AddScoped<ICurrencyExchangeService>(d => new CurrencyExchangeService(exchangeKey!));
 
             services.AddScoped<IPostalCodeInfosService, PostalCodeInfosService>();
+        }
+
+        private static void AddEmailSerice(IServiceCollection services, IConfiguration configuration)
+        {
+            var email = configuration.GetValue<string>("email:email")!;
+            var password = configuration.GetValue<string>("email:password")!;
+            var name = configuration.GetValue<string>("email:name")!;
+
+            services.AddScoped<ISendEmailService>(d => new SendEmailService(email, name, password));
         }
 
         private static void AddServiceBus(IServiceCollection services, IConfiguration configuration)
