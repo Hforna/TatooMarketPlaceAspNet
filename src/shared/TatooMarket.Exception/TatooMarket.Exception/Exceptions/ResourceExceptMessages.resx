@@ -199,4 +199,10 @@
   <data name="CURRENCY_OUT_ENUM" xml:space="preserve">
     <value>Currency type out of enum</value>
   </data>
+  <data name="EMAIL_NOT_VERIFIED" xml:space="preserve">
+    <value>User need verify e-mail before login</value>
+  </data>
+  <data name="EMAIL_CODE_WRONG" xml:space="preserve">
+    <value>E-mail code is wrong</value>
+  </data>
 </root>

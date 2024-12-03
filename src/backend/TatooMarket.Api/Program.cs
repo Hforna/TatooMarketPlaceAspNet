@@ -122,6 +122,11 @@ builder.Services.AddRouting(d => d.LowercaseUrls = true);
 
 builder.Services.AddHealthChecks().AddDbContextCheck<ProjectDbContext>();
 
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ListenAnyIP(8080);
+});
+
 var app = builder.Build();
 
 app.MapHealthChecks("/Health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions()

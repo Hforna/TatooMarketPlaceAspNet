@@ -13,6 +13,7 @@ using TatooMarket.Domain.Entities.Finance;
 using TatooMarket.Domain.Repositories;
 using TatooMarket.Domain.Repositories.Finance;
 using TatooMarket.Domain.Repositories.Security.Token;
+using TatooMarket.Domain.Repositories.Services;
 using TatooMarket.Domain.Repositories.User;
 using TatooMarket.Exception.Exceptions;
 
@@ -25,16 +26,18 @@ namespace TatooMarket.Application.UseCases.Finance
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFinanceWriteOnly _financeWrite;
         private readonly SqidsEncoder<long> _sqidsEncoder;
+        private readonly ISendEmailService _sendEmail;
 
         public CreateFinanceAccount(IMapper mapper, IGetUserByToken userByToken,
             IUnitOfWork unitOfWork, IUserWriteRepository userWrite, 
-            IFinanceWriteOnly financeWrite, SqidsEncoder<long> sqidsEncoder)
+            IFinanceWriteOnly financeWrite, SqidsEncoder<long> sqidsEncoder, ISendEmailService sendEmail)
         {
             _mapper = mapper;
             _userByToken = userByToken;
             _unitOfWork = unitOfWork;
             _financeWrite = financeWrite;
             _sqidsEncoder = sqidsEncoder;
+            _sendEmail = sendEmail;
         }
 
         public async Task<ResponseCreateFinanceAccount> Execute(RequestCreateFinanceAccount request)
@@ -61,6 +64,8 @@ namespace TatooMarket.Application.UseCases.Finance
             var response = _mapper.Map<ResponseCreateFinanceAccount>(accountBank);
             response.AccountId = _sqidsEncoder.Encode(accountBank.Id);
             response.BalanceId = _sqidsEncoder.Encode(balance.Id);
+
+            //await _sendEmail.SendEmail(request.Email, user.UserName);
 
             return response;
         }

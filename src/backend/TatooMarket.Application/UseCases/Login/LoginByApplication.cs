@@ -38,6 +38,9 @@ namespace TatooMarket.Application.UseCases.Login
             if (user is null || !_passwordCryptography.IsValid(request.Password, user.Password))
                 throw new UserException(ResourceExceptMessages.EMAIL_PASSWORD_INVALID);
 
+            if (!user.EmailConfirmed)
+                throw new UserException(ResourceExceptMessages.EMAIL_NOT_VERIFIED);
+
             var claims = new List<Claim>();
 
             foreach(var role in await _userManager.GetRolesAsync(user))

@@ -198,4 +198,10 @@
   <data name="CURRENCY_OUT_ENUM" xml:space="preserve">
     <value>Tipo de moeda fora do enum</value>
   </data>
+  <data name="EMAIL_NOT_VERIFIED" xml:space="preserve">
+    <value>Usuario precisa verificar e-mail para login</value>
+  </data>
+  <data name="EMAIL_CODE_WRONG" xml:space="preserve">
+    <value>Código de verificação do e-mail errado</value>
+  </data>
 </root>

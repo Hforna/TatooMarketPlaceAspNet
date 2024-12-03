@@ -14,6 +14,7 @@ using TatooMarket.Domain.Entities.Identity;
 using TatooMarket.Domain.Repositories;
 using TatooMarket.Domain.Repositories.Azure;
 using TatooMarket.Domain.Repositories.Security.Cryptography;
+using TatooMarket.Domain.Repositories.Services;
 using TatooMarket.Domain.Repositories.User;
 using TatooMarket.Exception.Exceptions;
 
@@ -28,11 +29,12 @@ namespace TatooMarket.Application.UseCases.User
         private readonly IPasswordCryptography _cryptography;
         private readonly IAzureStorageService _storageService;
         private readonly UserManager<UserEntity> _userManager;
+        private readonly ISendEmailService _sendEmail;
 
         public CreateUser(IUserWriteRepository userWrite, IUserReadRepository userRead,
             IUnitOfWork uof, IMapper mapper,
             IPasswordCryptography cryptography, IAzureStorageService storageService,
-            UserManager<UserEntity> userManager)
+            UserManager<UserEntity> userManager, ISendEmailService sendEmail)
         {
             _userWrite = userWrite;
             _userRead = userRead;
@@ -41,6 +43,7 @@ namespace TatooMarket.Application.UseCases.User
             _cryptography = cryptography;
             _storageService = storageService;
             _userManager = userManager;
+            _sendEmail = sendEmail;
         }
 
         public async Task<ResponseCreateUser> Execute(RequestCreateUser request)
@@ -69,8 +72,14 @@ namespace TatooMarket.Application.UseCases.User
             user.UserIdentifier = Guid.NewGuid();
             user.SecurityStamp = Guid.NewGuid().ToString();
 
+            user.EmailConfirmed = false;
+
+            var userVerificationCode = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
             await _userWrite.Add(user);
             await _uof.Commit();
+
+            await _sendEmail.SendEmail(user.Email, "Verificate e-mail", $"Click here for verify you e-mail: https://localhost:5069/user/verify-email?code{userVerificationCode}&email={user.Email}", user.UserName);
 
             var role = "customer";
 

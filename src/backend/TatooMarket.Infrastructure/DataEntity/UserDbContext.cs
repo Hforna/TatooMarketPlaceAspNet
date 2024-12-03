@@ -40,6 +40,11 @@ namespace TatooMarket.Infrastructure.DataEntity
             _dbContext.Users.Update(user);
         }
 
+        public async Task<UserEntity?> UserByEmail(string email)
+        {
+            return await _dbContext.Users.SingleOrDefaultAsync(d => d.Email == email);
+        }
+
         public async Task<UserEntity?> UserById(long id)
         {
             return await _dbContext.Users.SingleOrDefaultAsync(u => u.Id == id);

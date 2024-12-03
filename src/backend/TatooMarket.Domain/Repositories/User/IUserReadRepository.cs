@@ -14,5 +14,6 @@ namespace TatooMarket.Domain.Repositories.User
         public Task<UserEntity?> LoginByEmailAndPassword(string email);
         public Task<UserEntity?> UserByUid(Guid uid);
         public Task<UserEntity?> UserById(long id);
+        public Task<UserEntity?> UserByEmail(string email);
     }
 }

@@ -55,6 +55,7 @@ namespace TatooMarket.Application
             services.AddScoped<ICreateAddress, CreateAddress>();
             services.AddScoped<IGetStudio, GetStudio>();
             services.AddScoped<ICreateFinanceAccount, CreateFinanceAccount>();
+            services.AddScoped<IVerifyAccount, VerifyAccount>();
         }
 
         private static void AddSqIds(IServiceCollection services, IConfiguration configuration)

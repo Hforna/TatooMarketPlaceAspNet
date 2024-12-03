@@ -35,6 +35,14 @@ namespace TatooMarket.Api.Controllers
             return NoContent();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> VerifyAccount([FromQuery]string code, [FromQuery]string email, [FromServices]IVerifyAccount useCase)
+        {
+            await useCase.Execute(code, email);
+
+            return NoContent();
+        }
+
         [AuthorizationUser]
         [HttpPost("update-user")]
         public async Task<IActionResult> UpdateUser([FromServices]IUpdateUser useCase, [FromBody]RequestUpdateUser request)
