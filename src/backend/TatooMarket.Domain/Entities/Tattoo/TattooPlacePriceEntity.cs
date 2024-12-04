@@ -9,10 +9,9 @@ using TatooMarket.Domain.Enums;
 
 namespace TatooMarket.Domain.Entities.Tattoo
 {
-    [Table("tattoosPrice")]
-    public class TattooPriceEntity : BaseEntity
+    [Table("tattooPlacePrice")]
+    public class TattooPlacePriceEntity : BaseEntity
     {
-        public TattooSizeEnum TattooSize { get; set; }
         public BodyPlacementEnum BodyPlacement { get; set; }
         public CurrencyEnum CurrencyType { get; set; }
         public float Price { get; set; }
