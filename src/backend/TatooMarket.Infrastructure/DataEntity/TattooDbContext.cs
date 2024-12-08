@@ -22,9 +22,14 @@ namespace TatooMarket.Infrastructure.DataEntity
             await _dbContext.Tattos.AddAsync(tattoo);
         }
 
-        public async Task AddTattooPrice(TattooPriceEntity tattooPrice)
+        public async Task AddTattooPlacePrice(TattooPlacePriceEntity tattooPrice)
         {
-            await _dbContext.tattoosPrice.AddAsync(tattooPrice);
+            await _dbContext.tattoosPlacePrice.AddAsync(tattooPrice);
+        }
+
+        public async Task AddTattooStylePrice(TattooStylePriceEntity tattooPrice)
+        {
+            await _dbContext.tattoosStylePrice.AddAsync(tattooPrice);
         }
 
         public void Delete(TattooEntity tattoo)
@@ -57,14 +62,14 @@ namespace TatooMarket.Infrastructure.DataEntity
             return await _dbContext.Tattos.SingleOrDefaultAsync(d => d.Id == id);
         }
 
-        public async Task<List<TattooPriceEntity>?> TattooByStudio(Studio studio)
+        public async Task<List<TattooPlacePriceEntity>?> TattooPlacePriceByStudio(Studio studio)
         {
-            return await _dbContext.tattoosPrice.Where(d => d.StudioId == studio.Id).ToListAsync();
+            return await _dbContext.tattoosPlacePrice.Where(d => d.StudioId == studio.Id).ToListAsync();
         }
 
-        public async Task<TattooPriceEntity?> TattooPriceById(long id)
+        public async Task<TattooPlacePriceEntity?> TattooPriceById(long id)
         {
-            return await _dbContext.tattoosPrice.FirstOrDefaultAsync(d => d.Id == id);
+            return await _dbContext.tattoosPlacePrice.FirstOrDefaultAsync(d => d.Id == id);
         }
 
         public async Task<List<TattooEntity>> TattoosFromStudio(Studio studio)
@@ -77,9 +82,9 @@ namespace TatooMarket.Infrastructure.DataEntity
             _dbContext.Tattos.Update(tattoo);
         }
 
-        public void UpdateTattooPrice(TattooPriceEntity tattooPrice)
+        public void UpdateTattooPrice(TattooPlacePriceEntity tattooPrice)
         {
-            _dbContext.tattoosPrice.Update(tattooPrice);
+            _dbContext.tattoosPlacePrice.Update(tattooPrice);
         }
 
         public async Task<IList<TattooEntity>> WeeksTattoos(DateTime date)

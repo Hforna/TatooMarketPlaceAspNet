@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.18.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.10" />
+    <PackageReference Include="Stripe.net" Version="47.1.0" />
     <PackageReference Include="X.PagedList" Version="8.0.7" />
   </ItemGroup>
 

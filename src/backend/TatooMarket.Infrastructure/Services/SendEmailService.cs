@@ -53,9 +53,9 @@ namespace TatooMarket.Infrastructure.Services
 
             using(var smtp = new SmtpClient())
             {
-                smtp.Connect("smtp.server.address", 587, true);
+                smtp.Connect("smtp.gmail.com", 465, true);
 
-                await smtp.AuthenticateAsync(_fromName, _password);
+                smtp.Authenticate(_fromEmail, _password);
 
                 await smtp.SendAsync(mime);
 

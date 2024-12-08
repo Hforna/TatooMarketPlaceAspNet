@@ -9,11 +9,11 @@ using TatooMarket.Exception.Exceptions;
 
 namespace TatooMarket.Application.Services.Validator.Tattoo
 {
-    public class CreateTattooPriceValidator : AbstractValidator<RequestCreateTattooPrice>
+    public class CreateTattooPlacePriceValidator : AbstractValidator<RequestCreateTattooPlacePrice>
     {
-        public CreateTattooPriceValidator()
+        public CreateTattooPlacePriceValidator()
         {
-            RuleFor(d => d.TattooSize).IsInEnum().WithMessage(ResourceExceptMessages.TATTOO_SIZE_OUT_ENUM);
+            RuleFor(d => d.CurrencyType).IsInEnum().WithMessage(ResourceExceptMessages.TATTOO_SIZE_OUT_ENUM);
             RuleFor(d => d.BodyPlacement).IsInEnum().WithMessage(ResourceExceptMessages.TATTOO_PLACEMENT_OUT_ENUM);
         }
     }

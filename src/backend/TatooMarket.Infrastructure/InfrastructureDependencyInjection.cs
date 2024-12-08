@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using Stripe;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -26,6 +27,9 @@ using TatooMarket.Infrastructure.DataEntity;
 using TatooMarket.Infrastructure.Security.Cryptography;
 using TatooMarket.Infrastructure.Security.Token;
 using TatooMarket.Infrastructure.Services;
+using TatooMarket.Domain.Repositories.Payment;
+using TatooMarket.Infrastructure.Payment;
+using TatooMarket.Domain.Repositories.Orders;
 
 namespace TatooMarket.Infrastructure
 {
@@ -41,6 +45,7 @@ namespace TatooMarket.Infrastructure
             AddCryptography(services);
             AddApiServices(services, configuration);
             AddEmailSerice(services, configuration);
+            AddPaymentsService(services, configuration);
         }
 
         private static void AddDbContext(this IServiceCollection services, IConfiguration configuration)
@@ -93,6 +98,10 @@ namespace TatooMarket.Infrastructure
             //Finance
             services.AddScoped<IFinanceReadOnly, FinanceDbContext>();
             services.AddScoped<IFinanceWriteOnly, FinanceDbContext>();
+
+            //Order
+            services.AddScoped<IOrderReadOnly, OrderDbContext>();
+            services.AddScoped<IOrderWriteOnly, OrderDbContext>();
         }
 
         private static void AddApiServices(IServiceCollection services, IConfiguration configuration)
@@ -102,6 +111,15 @@ namespace TatooMarket.Infrastructure
             services.AddScoped<ICurrencyExchangeService>(d => new CurrencyExchangeService(exchangeKey!));
 
             services.AddScoped<IPostalCodeInfosService, PostalCodeInfosService>();
+        }
+
+        private static void AddPaymentsService(IServiceCollection services, IConfiguration configuration)
+        {
+            var secretKey = configuration.GetValue<string>("payment:stripe:secretKey");
+
+            StripeConfiguration.ApiKey = secretKey;
+
+            services.AddScoped<IStripeService, StripeService>();
         }
 
         private static void AddEmailSerice(IServiceCollection services, IConfiguration configuration)

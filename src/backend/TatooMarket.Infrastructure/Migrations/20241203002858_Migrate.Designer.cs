@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TatooMarket.Infrastructure.DataEntity;
 
@@ -11,9 +12,11 @@ using TatooMarket.Infrastructure.DataEntity;
 namespace TatooMarket.Infrastructure.Migrations
 {
     [DbContext(typeof(ProjectDbContext))]
-    partial class ProjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241203002858_Migrate")]
+    partial class Migrate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -198,69 +201,6 @@ namespace TatooMarket.Infrastructure.Migrations
                     b.ToTable("balances");
                 });
 
-            modelBuilder.Entity("TatooMarket.Domain.Entities.Finance.Order", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("TotalPrice")
-                        .HasColumnType("int");
-
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("TatooMarket.Domain.Entities.Finance.OrderItemEntity", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("BodyPlacement")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long>("OrderId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<long>("StudioId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("TattooStyle")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("orderItems");
-                });
-
             modelBuilder.Entity("TatooMarket.Domain.Entities.Finance.StudioBankAccountEntity", b =>
                 {
                     b.Property<long>("Id")
@@ -339,7 +279,7 @@ namespace TatooMarket.Infrastructure.Migrations
                         {
                             Id = 1L,
                             ConcurrencyStamp = "System.Func`1[System.Guid]",
-                            CreatedOn = new DateTime(2024, 12, 8, 21, 16, 5, 963, DateTimeKind.Utc).AddTicks(4513),
+                            CreatedOn = new DateTime(2024, 12, 3, 0, 28, 57, 677, DateTimeKind.Utc).AddTicks(8430),
                             Name = "seller",
                             NormalizedName = "SELLER"
                         },
@@ -347,7 +287,7 @@ namespace TatooMarket.Infrastructure.Migrations
                         {
                             Id = 2L,
                             ConcurrencyStamp = "System.Func`1[System.Guid]",
-                            CreatedOn = new DateTime(2024, 12, 8, 21, 16, 5, 963, DateTimeKind.Utc).AddTicks(4564),
+                            CreatedOn = new DateTime(2024, 12, 3, 0, 28, 57, 677, DateTimeKind.Utc).AddTicks(8455),
                             Name = "customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -584,7 +524,7 @@ namespace TatooMarket.Infrastructure.Migrations
                     b.ToTable("tattoos");
                 });
 
-            modelBuilder.Entity("TatooMarket.Domain.Entities.Tattoo.TattooPlacePriceEntity", b =>
+            modelBuilder.Entity("TatooMarket.Domain.Entities.Tattoo.TattooPriceEntity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -610,44 +550,14 @@ namespace TatooMarket.Infrastructure.Migrations
                     b.Property<long>("StudioId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("StudioId");
-
-                    b.ToTable("tattooPlacePrice");
-                });
-
-            modelBuilder.Entity("TatooMarket.Domain.Entities.Tattoo.TattooStylePriceEntity", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CurrencyType")
-                        .HasColumnType("int");
-
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
-
-                    b.Property<long>("StudioId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("TattooStyle")
+                    b.Property<int>("TattooSize")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("StudioId");
 
-                    b.ToTable("tattooStylePrice");
+                    b.ToTable("tattoosPrice");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<long>", b =>
@@ -726,26 +636,6 @@ namespace TatooMarket.Infrastructure.Migrations
                     b.Navigation("Tattoo");
                 });
 
-            modelBuilder.Entity("TatooMarket.Domain.Entities.Finance.Order", b =>
-                {
-                    b.HasOne("TatooMarket.Domain.Entities.Identity.UserEntity", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("TatooMarket.Domain.Entities.Finance.OrderItemEntity", b =>
-                {
-                    b.HasOne("TatooMarket.Domain.Entities.Finance.Order", null)
-                        .WithMany("OrderItems")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("TatooMarket.Domain.Entities.Identity.UserEntity", b =>
                 {
                     b.HasOne("TatooMarket.Domain.Entities.Tattoo.Studio", "Studio")
@@ -773,7 +663,7 @@ namespace TatooMarket.Infrastructure.Migrations
                     b.Navigation("Studio");
                 });
 
-            modelBuilder.Entity("TatooMarket.Domain.Entities.Tattoo.TattooPlacePriceEntity", b =>
+            modelBuilder.Entity("TatooMarket.Domain.Entities.Tattoo.TattooPriceEntity", b =>
                 {
                     b.HasOne("TatooMarket.Domain.Entities.Tattoo.Studio", "Studio")
                         .WithMany()
@@ -782,22 +672,6 @@ namespace TatooMarket.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Studio");
-                });
-
-            modelBuilder.Entity("TatooMarket.Domain.Entities.Tattoo.TattooStylePriceEntity", b =>
-                {
-                    b.HasOne("TatooMarket.Domain.Entities.Tattoo.Studio", "Studio")
-                        .WithMany()
-                        .HasForeignKey("StudioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Studio");
-                });
-
-            modelBuilder.Entity("TatooMarket.Domain.Entities.Finance.Order", b =>
-                {
-                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("TatooMarket.Domain.Entities.Tattoo.Studio", b =>

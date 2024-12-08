@@ -111,7 +111,7 @@ var cancellationTokenSource = new CancellationTokenSource();
 
 builder.Services.AddSession(d =>
 {
-    d.IdleTimeout = TimeSpan.FromMinutes(60);
+    d.IdleTimeout = TimeSpan.FromDays(7);
 });
 
 builder.Services.AddHostedService<DeleteService>();

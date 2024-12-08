@@ -47,7 +47,7 @@ namespace TatooMarket.Application
             services.AddScoped<IDeleteTattooReview, DeleteTattooReview>();
             services.AddScoped<IGetStudioTattoos, GetStudioTattoos>();
             services.AddScoped<IGetWeeksTattoos, GetWeeksTattoos>();
-            services.AddScoped<ICreateTattooPrice, CreateTattooPrice>();
+            services.AddScoped<ICreateTattooPlacePrice, CreateTattooPlacePrice>();
             services.AddScoped<IUpdateTattooPrice, UpdateTattooPrice>();
             services.AddScoped<IStudioPriceCatalog, StudioPriceCatalog>();
             services.AddScoped<IDeleteTattooRequest, DeleteTattooRequest>();
@@ -56,6 +56,8 @@ namespace TatooMarket.Application
             services.AddScoped<IGetStudio, GetStudio>();
             services.AddScoped<ICreateFinanceAccount, CreateFinanceAccount>();
             services.AddScoped<IVerifyAccount, VerifyAccount>();
+            services.AddScoped<IBuyTattoo, BuyTattoo>();
+            services.AddScoped<ICreateTattooStylePrice, CreateTattooStylePrice>();
         }
 
         private static void AddSqIds(IServiceCollection services, IConfiguration configuration)

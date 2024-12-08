@@ -42,7 +42,7 @@ namespace TatooMarket.Application.UseCases.Studio
             if (studio == null)
                 throw new StudioException(ResourceExceptMessages.STUDIO_DOESNT_EXISTS);
 
-            var tattooPrices = await _tattooRead.TattooByStudio(studio);
+            var tattooPrices = await _tattooRead.TattooPlacePriceByStudio(studio);
 
             var currencyTattoo = tattooPrices.Select(d => d.CurrencyType).First();
 
@@ -65,7 +65,7 @@ namespace TatooMarket.Application.UseCases.Studio
                     if (value.Key == tattooPrice.CurrencyType.ToString())
                         break;
 
-                    var responseTattooPrice = _mapper.Map<ResponseTattooPrice>(tattooPrice);
+                    var responseTattooPrice = _mapper.Map<ResponseTattooPlacePrice>(tattooPrice);
 
                     responseTattooPrice.Price *= value.Value;
 

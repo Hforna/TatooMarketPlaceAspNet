@@ -21,10 +21,13 @@ namespace TatooMarket.Infrastructure.DataEntity
         public DbSet<TattooEntity> Tattos { get; set; }
         public DbSet<Studio> Studios { get; set; }
         public DbSet<ReviewEntity> Reviews { get; set; }
-        public DbSet<TattooPriceEntity> tattoosPrice { get; set; }
+        public DbSet<TattooPlacePriceEntity> tattoosPlacePrice { get; set; }
+        public DbSet<TattooStylePriceEntity> tattoosStylePrice { get; set; }
         public DbSet<StudioAddress> studioAddresses { get; set; }
         public DbSet<BalanceEntity> balances { get; set; }
         public DbSet<StudioBankAccountEntity> studioBankAccounts { get; set; }
+        public DbSet<OrderItemEntity> orderItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

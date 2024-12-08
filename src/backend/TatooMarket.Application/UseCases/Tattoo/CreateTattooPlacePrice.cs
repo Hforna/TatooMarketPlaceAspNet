@@ -20,14 +20,14 @@ using TatooMarket.Exception.Exceptions;
 
 namespace TatooMarket.Application.UseCases.Tattoo
 {
-    public class CreateTattooPrice : ICreateTattooPrice
+    public class CreateTattooPlacePrice : ICreateTattooPlacePrice
     {
         private readonly ITattooWriteOnly _tattooWrite;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IGetUserByToken _userByToken;
         private readonly SqidsEncoder<long> _sqids;
         private readonly IMapper _mapper;
-        public CreateTattooPrice(ITattooWriteOnly tattooWrite, IUnitOfWork unitOfWork,
+        public CreateTattooPlacePrice(ITattooWriteOnly tattooWrite, IUnitOfWork unitOfWork,
             IGetUserByToken userByToken, SqidsEncoder<long> sqidsEncoder, 
             IMapper mapper)
         {
@@ -38,7 +38,7 @@ namespace TatooMarket.Application.UseCases.Tattoo
             _mapper = mapper;
         }
 
-        public async Task<ResponseTattooPrice> Execute(RequestCreateTattooPrice request)
+        public async Task<ResponseTattooPlacePrice> Execute(RequestCreateTattooPlacePrice request)
         {
             Validate(request);
             
@@ -47,22 +47,22 @@ namespace TatooMarket.Application.UseCases.Tattoo
             if (user.StudioId is null)
                 throw new StudioException(ResourceExceptMessages.USER_WITHOUT_STUDIO);
 
-            var tattooPrice = _mapper.Map<TattooPriceEntity>(request);
+            var tattooPrice = _mapper.Map<TattooPlacePriceEntity>(request);
             tattooPrice.StudioId = (long)user.StudioId;
 
-            await _tattooWrite.AddTattooPrice(tattooPrice);
+            await _tattooWrite.AddTattooPlacePrice(tattooPrice);
             await _unitOfWork.Commit();
 
-            var response = _mapper.Map<ResponseTattooPrice>(tattooPrice);
+            var response = _mapper.Map<ResponseTattooPlacePrice>(tattooPrice);
             response.StudioId = _sqids.Encode(tattooPrice.StudioId);
             response.Id = _sqids.Encode(tattooPrice.Id);
 
             return response;
         }
 
-        private void Validate(RequestCreateTattooPrice request)
+        private void Validate(RequestCreateTattooPlacePrice request)
         {
-            var validator = new CreateTattooPriceValidator();
+            var validator = new CreateTattooPlacePriceValidator();
             var result = validator.Validate(request);
 
             if(!result.IsValid)

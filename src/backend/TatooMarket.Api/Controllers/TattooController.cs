@@ -39,9 +39,18 @@ namespace TatooMarket.Api.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "OnlySeller")]
-        [HttpPost("create-tattooprice")]
-        public async Task<IActionResult> CreateTattooPrice([FromForm]RequestCreateTattooPrice request, [FromServices]ICreateTattooPrice useCase)
+        [Authorize(Policy = "OnlySeller")]
+        [HttpPost("create-tattooprice-place")]
+        public async Task<IActionResult> CreateTattooPlacePrice([FromForm]RequestCreateTattooPlacePrice request, [FromServices]ICreateTattooPlacePrice useCase)
+        {
+            var result = await useCase.Execute(request);
+
+            return Created(string.Empty, result);
+        }
+
+        [Authorize(Policy = "OnlySeller")]
+        [HttpPost("create-styletattoo-price")]
+        public async Task<IActionResult> CreateTattooStylePrice([FromForm]RequestCreateTattooStylePrice request, [FromServices]ICreateTattooStylePrice useCase)
         {
             var result = await useCase.Execute(request);
 

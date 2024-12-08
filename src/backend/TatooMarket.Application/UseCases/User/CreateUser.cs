@@ -79,7 +79,7 @@ namespace TatooMarket.Application.UseCases.User
 
             var userVerificationCode = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-            await _sendEmail.SendEmail(user.Email, "Verificate e-mail", $"Click here for verify you e-mail: http://localhost:8080/user/verify-email?code{userVerificationCode}&email={user.Email}", user.UserName);
+            await _sendEmail.SendEmail(user.Email, "Verificate e-mail", $"Click here for verify you e-mail: http://localhost:8080/user/verify-email?code={userVerificationCode}&email={user.Email}", user.UserName);
 
             var role = "customer";
 

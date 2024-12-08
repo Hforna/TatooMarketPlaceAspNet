@@ -35,7 +35,7 @@ namespace TatooMarket.Application.UseCases.Login
         {
             var user = await _userRead.LoginByEmailAndPassword(request.Email);
 
-            if (user is null || !_passwordCryptography.IsValid(request.Password, user.Password))
+            if (user is null || _passwordCryptography.IsValid(request.Password, user.Password) == false)
                 throw new UserException(ResourceExceptMessages.EMAIL_PASSWORD_INVALID);
 
             if (!user.EmailConfirmed)

@@ -36,7 +36,7 @@ namespace TatooMarket.Application.UseCases.Tattoo
             _tattooWrite = tattooWrite;
         }
 
-        public async Task<ResponseTattooPrice> Execute(RequestUpdateTattooPrice request, long id)
+        public async Task<ResponseTattooPlacePrice> Execute(RequestUpdateTattooPrice request, long id)
         {
             var user = await _userByToken.GetUser();
 
@@ -53,7 +53,7 @@ namespace TatooMarket.Application.UseCases.Tattoo
             _tattooWrite.UpdateTattooPrice(tattooPrice);
             await _unitOfWork.Commit();
 
-            var response = _mapper.Map<ResponseTattooPrice>(tattooPrice);
+            var response = _mapper.Map<ResponseTattooPlacePrice>(tattooPrice);
             response.StudioId = _sqidsEncoder.Encode(tattooPrice.StudioId);
             response.Id = _sqidsEncoder.Encode(tattooPrice.Id);
 

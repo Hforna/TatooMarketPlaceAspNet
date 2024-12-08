@@ -10,6 +10,6 @@ namespace TatooMarket.Communication.Responses.Studio
     public class ResponseStudioPriceCatalogShort
     {
         public string CurrencyType { get; set; }
-        public List<ResponseTattooPrice> Catalog { get; set; }
+        public List<ResponseTattooPlacePrice> Catalog { get; set; }
     }
 }

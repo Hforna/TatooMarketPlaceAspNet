@@ -30,7 +30,7 @@ namespace TatooMarket.Infrastructure.DataEntity
 
         public  X.PagedList.IPagedList<Studio?> GetStudios(int page)
         {
-            var studios = _dbContext.Set<Studio>().Where(d => d.Active);
+            var studios = _dbContext.Set<Studio>().Where(d => d.Active).OrderByDescending(d => d.NumberVisits);
 
             if (studios is null)
                 return null!;

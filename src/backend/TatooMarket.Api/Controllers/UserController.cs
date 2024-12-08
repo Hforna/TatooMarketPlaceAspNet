@@ -35,7 +35,7 @@ namespace TatooMarket.Api.Controllers
             return NoContent();
         }
 
-        [HttpGet]
+        [HttpGet("verify-email")]
         public async Task<IActionResult> VerifyAccount([FromQuery]string code, [FromQuery]string email, [FromServices]IVerifyAccount useCase)
         {
             await useCase.Execute(code, email);

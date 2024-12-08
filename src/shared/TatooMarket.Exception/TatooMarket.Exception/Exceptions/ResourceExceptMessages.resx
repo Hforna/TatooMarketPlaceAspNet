@@ -205,4 +205,8 @@
   <data name="EMAIL_CODE_WRONG" xml:space="preserve">
     <value>E-mail code is wrong</value>
   </data>
+  <data name="ORDER_DOESNT_EXISTS" xml:space="preserve">
+    <value>Order doesn't exists
+</value>
+  </data>
 </root>

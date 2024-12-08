@@ -15,7 +15,7 @@ namespace TatooMarket.Domain.Entities.Tattoo
         public long StudioId { get; set; }
         public TattooStyleEnum TattooStyle { get; set; }
         public CurrencyEnum CurrencyType { get; set; }
-        public int Price { get; set; }
+        public float Price { get; set; }
         [ForeignKey("StudioId")]
         public Studio Studio { get; set; }
     }

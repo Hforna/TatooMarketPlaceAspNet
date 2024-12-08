@@ -204,4 +204,7 @@
   <data name="EMAIL_CODE_WRONG" xml:space="preserve">
     <value>Código de verificação do e-mail errado</value>
   </data>
+  <data name="ORDER_DOESNT_EXISTS" xml:space="preserve">
+    <value>Pedido não existe</value>
+  </data>
 </root>
