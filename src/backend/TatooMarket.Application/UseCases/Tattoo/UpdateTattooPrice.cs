@@ -43,7 +43,7 @@ namespace TatooMarket.Application.UseCases.Tattoo
             if (user.StudioId is null)
                 throw new StudioException(ResourceExceptMessages.USER_WITHOUT_STUDIO);
 
-            var tattooPrice = await _tattooRead.TattooPriceById(id);
+            var tattooPrice = await _tattooRead.TattooPlacePriceById(id);
 
             if (tattooPrice is null)
                 throw new TattooException(ResourceExceptMessages.TATTOOPRICE_DOESNT_EXISTS);

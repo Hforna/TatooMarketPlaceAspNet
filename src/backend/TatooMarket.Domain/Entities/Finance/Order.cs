@@ -14,7 +14,7 @@ namespace TatooMarket.Domain.Entities.Finance
         public long UserId { get; set; }
         [ForeignKey("UserId")]
         public UserEntity? User { get; set; }
-        public int TotalPrice { get; set; }
-        public IList<OrderItemEntity> OrderItems { get; set; }
+        public float TotalPrice { get; set; }
+        public IList<OrderItemEntity> OrderItems { get; set; } = [];
     }
 }

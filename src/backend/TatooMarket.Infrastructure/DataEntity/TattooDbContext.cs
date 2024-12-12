@@ -105,5 +105,15 @@ namespace TatooMarket.Infrastructure.DataEntity
         {
             return await _dbContext.tattoosStylePrice.FirstOrDefaultAsync(d => d.Studio == studio);
         }
+
+        public async Task<List<TattooPlacePriceEntity>?> TattooPlacesPriceByStudio(Studio studio)
+        {
+            return await _dbContext.tattoosPlacePrice.Where(d => d.StudioId == studio.Id && d.Active).ToListAsync();
+        }
+
+        public async Task<List<TattooStylePriceEntity>?> TattooStylesPriceByStudio(Studio studio)
+        {
+            return await _dbContext.tattoosStylePrice.Where(d => d.StudioId == studio.Id && d.Active).ToListAsync();
+        }
     }
 }

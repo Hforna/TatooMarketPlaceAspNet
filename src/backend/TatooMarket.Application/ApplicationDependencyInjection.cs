@@ -11,9 +11,11 @@ using System.Threading.Tasks;
 using TatooMarket.Application.UseCases.Address;
 using TatooMarket.Application.UseCases.Finance;
 using TatooMarket.Application.UseCases.Login;
+using TatooMarket.Application.UseCases.Order;
 using TatooMarket.Application.UseCases.Repositories.Address;
 using TatooMarket.Application.UseCases.Repositories.Finance;
 using TatooMarket.Application.UseCases.Repositories.Login;
+using TatooMarket.Application.UseCases.Repositories.Order;
 using TatooMarket.Application.UseCases.Repositories.Studio;
 using TatooMarket.Application.UseCases.Repositories.Tattoo;
 using TatooMarket.Application.UseCases.Repositories.User;
@@ -58,6 +60,7 @@ namespace TatooMarket.Application
             services.AddScoped<IVerifyAccount, VerifyAccount>();
             services.AddScoped<IBuyTattoo, BuyTattoo>();
             services.AddScoped<ICreateTattooStylePrice, CreateTattooStylePrice>();
+            services.AddScoped<IAddTattooToOrder, AddTattooToOrder>();
         }
 
         private static void AddSqIds(IServiceCollection services, IConfiguration configuration)

@@ -58,11 +58,11 @@ namespace TatooMarket.Application.UseCases.Order
             if (user == null)
             {
                 var orderItemsString = new List<String>();
-                if(session.TryGetValue("order", out var _))
+                if (session.TryGetValue("order", out var _))
                 {
                     var sessionOrderItems = session.GetString("orderItems");
 
-                    orderItemsString = System.Text.Json.JsonSerializer.Deserialize<List<string>>(sessionOrderItems);                                                             
+                    orderItemsString = System.Text.Json.JsonSerializer.Deserialize<List<string>>(sessionOrderItems);
                 } else
                 {
                     session.SetString("order", "true");
@@ -79,17 +79,18 @@ namespace TatooMarket.Application.UseCases.Order
                 orderItems.Price = tattooPlace.Price + tattooStyle.Price;
 
                 customerOrder.TotalPrice += orderItems.Price;
-                _orderWrite.UpdateOrder(customerOrder);
 
 
-                if (customerOrder is null)
-                {
-                    customerOrder.OrderItems.Add(orderItems);
-                    customerOrder.TotalPrice = orderItems.Price;
-
-                    await _orderWrite.AddOrder(customerOrder);
-                }
+                customerOrder.OrderItems.Add(orderItems);
                 orderItems.OrderId = customerOrder.Id;
+
+                if (customerOrder.Id == 0)
+                {
+                    await _orderWrite.AddOrder(customerOrder);
+                } else
+                {
+                    _orderWrite.UpdateOrder(customerOrder);
+                }
 
                 await _orderWrite.AddOrderItem(orderItems);
                 await _unitOfWork.Commit();

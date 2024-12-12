@@ -8,11 +8,16 @@ using TatooMarket.Domain.Entities.Finance;
 using TatooMarket.Domain.Entities.Identity;
 using Stripe.Checkout;
 using TatooMarket.Domain.Repositories.Payment;
+using TatooMarket.Domain.Repositories.Tattoo;
 
 namespace TatooMarket.Infrastructure.Payment
 {
     public class StripeService : IStripeService
     {
+        private readonly ITattooReadOnly _tattooRead;
+
+        public StripeService(ITattooReadOnly tattooRead) => _tattooRead = tattooRead;
+
         public async Task<Session> GenerateSession(Order order)
         {
             var domain = "localhost:8080/payment/";
@@ -24,6 +29,8 @@ namespace TatooMarket.Infrastructure.Payment
                 LineItems = new List<SessionLineItemOptions>()
             };
 
+            var bodyPlacement = await _tattooRead.TattooPlacePriceById(order.OrderItems.FirstOrDefault().BodyPlacement);
+
             foreach(var orderItem in order.OrderItems)
             {
                 var sessionLineItem =  new SessionLineItemOptions()
@@ -34,8 +41,8 @@ namespace TatooMarket.Infrastructure.Payment
                         {
                             Name = orderItem.ToString(),
                         },
-                        Currency = "brl",
-                        UnitAmountDecimal = orderItem.Price
+                        Currency = bodyPlacement.CurrencyType.ToString(),
+                        UnitAmount = (long)orderItem.Price
                     },
                 };
                 session.LineItems.Add(sessionLineItem);
@@ -48,4 +55,3 @@ namespace TatooMarket.Infrastructure.Payment
         }
     }
 }
-;

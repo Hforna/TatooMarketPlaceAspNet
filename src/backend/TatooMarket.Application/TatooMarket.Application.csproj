@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+  	<FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\shared\TatooMarket.Communication\TatooMarket.Communication.csproj" />
     <ProjectReference Include="..\..\shared\TatooMarket.Exception\TatooMarket.Exception\TatooMarket.Exception.csproj" />
     <ProjectReference Include="..\TatooMarket.Domain\TatooMarket.Domain.csproj" />

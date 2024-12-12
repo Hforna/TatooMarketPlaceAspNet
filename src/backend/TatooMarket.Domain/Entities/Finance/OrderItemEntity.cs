@@ -13,9 +13,9 @@ namespace TatooMarket.Domain.Entities.Finance
     {
         public long StudioId { get; set; }
         public long OrderId { get; set; }
-        public int Price { get; set; }
-        public TattooStyleEnum TattooStyle { get; set; }
-        public BodyPlacementEnum BodyPlacement { get; set; }
+        public float Price { get; set; }
+        public long TattooStyle { get; set; }
+        public long BodyPlacement { get; set; }
 
         public override string ToString()
         {

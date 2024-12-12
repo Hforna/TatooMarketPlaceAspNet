@@ -112,6 +112,7 @@ var cancellationTokenSource = new CancellationTokenSource();
 builder.Services.AddSession(d =>
 {
     d.IdleTimeout = TimeSpan.FromDays(7);
+    d.Cookie.IsEssential = true;
 });
 
 builder.Services.AddHostedService<DeleteService>();
