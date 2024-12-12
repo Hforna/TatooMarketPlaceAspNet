@@ -25,5 +25,15 @@ namespace TatooMarket.Infrastructure.DataEntity
         {
             return await _dbContext.Orders.FirstOrDefaultAsync(o => o.User == user && o.Active);
         }
+
+        public void UpdateOrder(Order order)
+        {
+            _dbContext.Orders.Update(order);
+        }
+
+        public async Task AddOrderItem(OrderItemEntity orderItem)
+        {
+            await _dbContext.orderItems.AddAsync(orderItem);
+        }
     }
 }

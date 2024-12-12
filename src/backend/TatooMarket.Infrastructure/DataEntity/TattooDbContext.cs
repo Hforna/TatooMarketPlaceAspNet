@@ -62,14 +62,14 @@ namespace TatooMarket.Infrastructure.DataEntity
             return await _dbContext.Tattos.SingleOrDefaultAsync(d => d.Id == id);
         }
 
-        public async Task<List<TattooPlacePriceEntity>?> TattooPlacePriceByStudio(Studio studio)
+        public async Task<TattooPlacePriceEntity?> TattooPlacePriceByStudio(Studio studio)
         {
-            return await _dbContext.tattoosPlacePrice.Where(d => d.StudioId == studio.Id).ToListAsync();
+            return await _dbContext.tattoosPlacePrice.FirstOrDefaultAsync(d => d.StudioId == studio.Id);
         }
 
-        public async Task<TattooPlacePriceEntity?> TattooPriceById(long id)
+        public async Task<TattooStylePriceEntity?> TattooStylePriceById(long id)
         {
-            return await _dbContext.tattoosPlacePrice.FirstOrDefaultAsync(d => d.Id == id);
+            return await _dbContext.tattoosStylePrice.FirstOrDefaultAsync(d => d.Id == id);
         }
 
         public async Task<List<TattooEntity>> TattoosFromStudio(Studio studio)
@@ -94,6 +94,16 @@ namespace TatooMarket.Infrastructure.DataEntity
                 .OrderByDescending(d => d.Note)
                 .Take(10)
                 .ToListAsync();
+        }
+
+        public async Task<TattooPlacePriceEntity?> TattooPlacePriceById(long id)
+        {
+            return await _dbContext.tattoosPlacePrice.FirstOrDefaultAsync(d => d.Id == id);
+        }
+
+        public async Task<TattooStylePriceEntity?> TattooStylePriceByStudio(Studio studio)
+        {
+            return await _dbContext.tattoosStylePrice.FirstOrDefaultAsync(d => d.Studio == studio);
         }
     }
 }
