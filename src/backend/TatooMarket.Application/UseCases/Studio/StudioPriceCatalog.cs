@@ -42,25 +42,28 @@ namespace TatooMarket.Application.UseCases.Studio
             if (studio == null)
                 throw new StudioException(ResourceExceptMessages.STUDIO_DOESNT_EXISTS);
 
-            var tattooPrices = await _tattooRead.TattooPlacePriceByStudio(studio);
+            var tattooPlacePrices = await _tattooRead.TattooPlacesPriceByStudio(studio);
 
-            var currencyTattoo = tattooPrices.Select(d => d.CurrencyType).First();
+            var tattooStylePrices = await _tattooRead.TattooStylesPriceByStudio(studio);
+
+            var currencyTattoo = tattooPlacePrices.Select(d => d.CurrencyType).First();
 
             var acceptedCurrencys = Enum.GetValues(typeof(CurrencyEnum)).Cast<CurrencyEnum>().Select(d => d.ToString()).ToList();
 
             var currencyExchange = await _exchangeService.CurrencyConvert(nameof(currencyTattoo));
+
             var currencyAcceptedExchange = currencyExchange
-            .Where(d => acceptedCurrencys.Contains(d.Key) && 
-            tattooPrices.Select(d => d.CurrencyType.ToString()).Contains(d.Key) == false);
+            .Where(d => acceptedCurrencys.Contains(d.Key) &&
+            tattooPlacePrices.Select(d => d.CurrencyType.ToString()).Contains(d.Key) == false);
 
             var response = new ResponseFullStudioPriceCatalog();
             var catalogsResponse = new List<ResponseStudioPriceCatalogShort>();
 
             foreach(var value in currencyAcceptedExchange)
             {
-                var responseCurrency = new ResponseStudioPriceCatalogShort() { CurrencyType = value.Key, Catalog = [] };
+                var responseCurrency = new ResponseStudioPriceCatalogShort() { CurrencyType = value.Key, PlaceCatalog = [], StyleCatalog = [] };
 
-                foreach(var tattooPrice in tattooPrices)
+                foreach(var tattooPrice in tattooPlacePrices)
                 {
                     if (value.Key == tattooPrice.CurrencyType.ToString())
                         break;
@@ -72,7 +75,21 @@ namespace TatooMarket.Application.UseCases.Studio
                     responseTattooPrice.Id = _sqidsEncoder.Encode(tattooPrice.Id);
                     responseTattooPrice.StudioId = _sqidsEncoder.Encode(tattooPrice.StudioId);
 
-                    responseCurrency.Catalog.Add(responseTattooPrice);
+                    responseCurrency.PlaceCatalog.Add(responseTattooPrice);
+                }
+                foreach(var tattooPrice in tattooStylePrices)
+                {
+                    if (value.Key == tattooPrice.CurrencyType.ToString())
+                        break;
+
+                    var responseStyleTattooPrice = _mapper.Map<ResponseTattooStylePrice>(tattooPrice);
+
+                    responseStyleTattooPrice.Price *= value.Value;
+
+                    responseStyleTattooPrice.Id = _sqidsEncoder.Encode(tattooPrice.Id);
+                    responseStyleTattooPrice.StudioId = _sqidsEncoder.Encode(tattooPrice.StudioId);
+
+                    responseCurrency.StyleCatalog.Add(responseStyleTattooPrice);
                 }
                 catalogsResponse.Add(responseCurrency);
             }
