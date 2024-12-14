@@ -207,4 +207,7 @@
   <data name="ORDER_DOESNT_EXISTS" xml:space="preserve">
     <value>Pedido não existe</value>
   </data>
+  <data name="INVALID_TATTOO_PRICE" xml:space="preserve">
+    <value>Preço de tipo da tatuagem não existe</value>
+  </data>
 </root>

@@ -7,6 +7,7 @@ namespace TatooMarket.Api.Controllers
 {
     public class OrderController : BaseController
     {
+        [HttpPost("add_tattoo")]
         public async Task<IActionResult> AddTattooToOrder([FromServices]IAddTattooToOrder useCase, [FromBody]RequestAddTattooToOrder request)
         {
             var session = HttpContext.Session;

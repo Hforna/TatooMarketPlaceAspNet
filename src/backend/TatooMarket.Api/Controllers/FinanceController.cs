@@ -6,12 +6,13 @@ using TatooMarket.Api.Binders;
 using TatooMarket.Application.UseCases.Repositories.Finance;
 using TatooMarket.Communication.Enums;
 using TatooMarket.Communication.Requests.Finance;
+using TatooMarket.Domain.Repositories.Payment;
 
 namespace TatooMarket.Api.Controllers
 {
-    [Authorize(Policy = "OnlySeller")]
     public class FinanceController : BaseController
     {
+        [Authorize(Policy = "OnlySeller")]
         [HttpPost("create-account")]
         public async Task<IActionResult> CreateAccount([FromBody]RequestCreateFinanceAccount request, [FromServices]ICreateFinanceAccount useCase)
         {
@@ -27,6 +28,14 @@ namespace TatooMarket.Api.Controllers
             var result = await UseCase.Execute();
 
             return Ok(result);
+        }
+
+        [HttpPost("webhook")]
+        public async Task<IActionResult> WebHook([FromServices]IStripeService stripeService)
+        {
+            await stripeService.WebHookService(HttpContext.Request.Body.ToString(), Request.Headers["Stripe-Signature"]);
+
+            return NoContent();
         }
     }
 }

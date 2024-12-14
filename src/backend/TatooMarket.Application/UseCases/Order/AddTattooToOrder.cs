@@ -75,7 +75,7 @@ namespace TatooMarket.Application.UseCases.Order
             {
                 var customerOrder = await _orderRead.OrderByUser(user) ?? new TatooMarket.Domain.Entities.Finance.Order() { UserId = user.Id };
 
-                var orderItems = new OrderItemEntity() { BodyPlacement = tattooPlaceId, TattooStyle = tattooStyleId, StudioId = tattooStyle.StudioId };
+                var orderItems = new OrderItemEntity() { BodyPlacementId = tattooPlaceId, TattooStyleId = tattooStyleId, StudioId = tattooStyle.StudioId };
                 orderItems.Price = tattooPlace.Price + tattooStyle.Price;
 
                 customerOrder.TotalPrice += orderItems.Price;

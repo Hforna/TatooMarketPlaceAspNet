@@ -187,7 +187,7 @@
   <data name="STUDIO_DOESNT_EXISTS" xml:space="preserve">
     <value>Studio doesn't exists</value>
   </data>
-  <data name="TATTOOPRICE_DOESNT_EXISTS" xml:space="preserve">
+  <data name="TATTOO_PRICE_DOESNT_EXISTS" xml:space="preserve">
     <value>Tattoo price doesn't exists</value>
   </data>
   <data name="INVALID_POSTALCODE" xml:space="preserve">
@@ -208,5 +208,8 @@
   <data name="ORDER_DOESNT_EXISTS" xml:space="preserve">
     <value>Order doesn't exists
 </value>
+  </data>
+  <data name="INVALID_TATTOO_PRICE" xml:space="preserve">
+    <value>Tattoo price doesn't exists</value>
   </data>
 </root>

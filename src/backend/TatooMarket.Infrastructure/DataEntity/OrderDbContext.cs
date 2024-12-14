@@ -23,7 +23,7 @@ namespace TatooMarket.Infrastructure.DataEntity
 
         public async Task<Order?> OrderByUser(UserEntity user)
         {
-            return await _dbContext.Orders.FirstOrDefaultAsync(o => o.User == user && o.Active);
+            return await _dbContext.Orders.Include(d => d.OrderItems).FirstOrDefaultAsync(o => o.UserId == user.Id && o.Active);
         }
 
         public void UpdateOrder(Order order)

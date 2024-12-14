@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TatooMarket.Domain.Entities.Tattoo;
 using TatooMarket.Domain.Enum;
 
 namespace TatooMarket.Domain.Entities.Finance
@@ -12,14 +13,17 @@ namespace TatooMarket.Domain.Entities.Finance
     public class OrderItemEntity : BaseEntity
     {
         public long StudioId { get; set; }
+        public Studio Studio { get; set; }
         public long OrderId { get; set; }
         public float Price { get; set; }
-        public long TattooStyle { get; set; }
-        public long BodyPlacement { get; set; }
+        public long TattooStyleId { get; set; }
+        public long BodyPlacementId { get; set; }
+        public TattooStyleEnum TattooStyle { get; set; }
+        public BodyPlacementEnum BodyPlacement { get; set; }
 
         public override string ToString()
         {
-            return $"{TattooStyle} on {BodyPlacement}";
+            return $"{TattooStyle.ToString()} on {BodyPlacement.ToString()}";
         }
     }
 }

@@ -11,5 +11,6 @@ namespace TatooMarket.Domain.Repositories.Payment
     public interface IStripeService
     {
         public Task<Session> GenerateSession(Order order);
+        public Task WebHookService(string jsonBody, string stripeSignature);
     }
 }
