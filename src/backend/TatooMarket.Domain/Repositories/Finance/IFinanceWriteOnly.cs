@@ -11,5 +11,6 @@ namespace TatooMarket.Domain.Repositories.Finance
     {
         public Task AddBankAccount(StudioBankAccountEntity bankAccount);
         public Task AddBalance(BalanceEntity balance);
+        public void UpdateBalance(BalanceEntity balance);
     }
 }

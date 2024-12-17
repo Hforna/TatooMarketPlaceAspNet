@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TatooMarket.Domain.Entities.Communication;
 using TatooMarket.Domain.Entities.Tattoo;
+using TatooMarket.Domain.Enum;
 using X.PagedList;
 
 namespace TatooMarket.Domain.Repositories.Tattoo
@@ -23,6 +24,8 @@ namespace TatooMarket.Domain.Repositories.Tattoo
         public Task<List<TattooStylePriceEntity>?> TattooStylesPriceByStudio(Studio studio);
         public Task<TattooStylePriceEntity?> TattooStylePriceByStudio(Studio studio);
         public Task<List<TattooEntity>> TattoosFromStudio(Studio studio);
+        public Task<TattooPlacePriceEntity?> TattooPlacePriceByEnum(BodyPlacementEnum bodyPlacement, long studioId);
+        public Task<TattooStylePriceEntity?> TattooStylePriceByEnum(TattooStyleEnum styleEnum, long studioId);
         public Task<bool> StudioIsOwnTattoo(Studio studio, long Id);
     }
 }

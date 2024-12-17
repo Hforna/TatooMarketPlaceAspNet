@@ -11,8 +11,8 @@ namespace TatooMarket.Domain.Entities.Finance
     public class BalanceEntity : BaseEntity
     {
         public long StudioId { get; set; }
-        public int Balance { get; set; } = 0;
-        public int AmountDrawOut { get; set; } = 0;
+        public float Balance { get; set; } = 0;
+        public float AmountDrawOut { get; set; } = 0;
         public DateTime? LastDrawOut { get; set; }
     }
 }

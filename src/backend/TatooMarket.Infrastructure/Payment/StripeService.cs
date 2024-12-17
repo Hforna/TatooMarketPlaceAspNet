@@ -16,6 +16,7 @@ using TatooMarket.Domain.Repositories.Orders;
 using TatooMarket.Domain.Repositories;
 using TatooMarket.Domain.Repositories.Services;
 using TatooMarket.Domain.Entities.Tattoo;
+using TatooMarket.Domain.Repositories.Finance;
 
 namespace TatooMarket.Infrastructure.Payment
 {
@@ -28,10 +29,13 @@ namespace TatooMarket.Infrastructure.Payment
         private readonly IOrderWriteOnly _orderWrite;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ISendEmailService _sendEmail;
+        private readonly IFinanceReadOnly _financeRead;
+        private readonly IFinanceWriteOnly _financeWrite;
 
         public StripeService(ITattooReadOnly tattooRead, IConfiguration configuration, 
             IUserReadRepository userRead, IOrderReadOnly orderRead,
-            IOrderWriteOnly orderWrite, IUnitOfWork unitOfWork, ISendEmailService sendEmail)
+            IOrderWriteOnly orderWrite, IUnitOfWork unitOfWork, 
+            ISendEmailService sendEmail, IFinanceReadOnly financeRead, IFinanceWriteOnly financeWrite)
         {
             _tattooRead = tattooRead;
             _secretKey = configuration.GetValue<string>("payment:stripe:secretKey")!;
@@ -41,6 +45,8 @@ namespace TatooMarket.Infrastructure.Payment
             _orderWrite = orderWrite;
             _unitOfWork = unitOfWork;
             _sendEmail = sendEmail;
+            _financeRead = financeRead;
+            _financeWrite = financeWrite;
         }
 
         public async Task<Session> GenerateSession(Order order)
@@ -106,13 +112,23 @@ namespace TatooMarket.Infrastructure.Payment
                         } else
                         {
                             orderItemsDict[orderItem.Studio] = new List<List<string>>() { tattoosType };
+                            var studioBalance = await _financeRead.BalanceByStudio(orderItem.StudioId);
+
+                            studioBalance.Balance += orderItem.Price;
+                            _financeWrite.UpdateBalance(studioBalance);
                         }
                     }
 
                     foreach(var studio in orderItemsDict)
                     {
+                        var tattoosPurhcased = new StringBuilder();
+                        foreach (var tattoo in studio.Value)
+                        {
+                            tattoosPurhcased.AppendLine($"TattooStyle: {tattoo[0]}, Body placement: {tattoo[1]}");
+                        }
+
                         await _sendEmail.SendEmail(studio.Key.Owner.Email, 
-                            $"customer: {user}\nTattoo style: {studio.Value[0]}, Body placement: {studio.Value[1]}", "You got a new purchase", 
+                            $"customer: {user}\n{tattoosPurhcased.ToString()}", "You got a new purchase", 
                             studio.Key.Owner.UserName);
                     }
 

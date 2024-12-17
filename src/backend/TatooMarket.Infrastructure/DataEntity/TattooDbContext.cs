@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TatooMarket.Domain.Entities.Communication;
 using TatooMarket.Domain.Entities.Tattoo;
+using TatooMarket.Domain.Enum;
 using TatooMarket.Domain.Repositories.Tattoo;
 using X.PagedList;
 
@@ -114,6 +115,16 @@ namespace TatooMarket.Infrastructure.DataEntity
         public async Task<List<TattooStylePriceEntity>?> TattooStylesPriceByStudio(Studio studio)
         {
             return await _dbContext.tattoosStylePrice.Where(d => d.StudioId == studio.Id && d.Active).ToListAsync();
+        }
+
+        public async Task<TattooPlacePriceEntity?> TattooPlacePriceByEnum(BodyPlacementEnum bodyPlacement, long studioId)
+        {
+            return await _dbContext.tattoosPlacePrice.FirstOrDefaultAsync(d => d.BodyPlacement == bodyPlacement && d.StudioId == studioId && d.Active);
+        }
+
+        public async Task<TattooStylePriceEntity?> TattooStylePriceByEnum(TattooStyleEnum styleEnum, long studioId)
+        {
+            return await _dbContext.tattoosStylePrice.FirstOrDefaultAsync(d => d.TattooStyle == styleEnum && d.StudioId == studioId && d.Active);
         }
     }
 }
