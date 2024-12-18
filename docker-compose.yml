@@ -1,0 +1,22 @@
+services:
+  tatoomarket.api:
+    image: ${DOCKER_REGISTRY-}tatoomarketapi
+    build:
+      context: .
+      dockerfile: src/backend/TatooMarket.Api/Dockerfile
+    ports:
+    - "3000:3000"
+    container_name: tatoomarket
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    volumes:
+    - tatoomarketplace_dbvolume:/data/db
+    environment:
+     MONGO_INITDB_ROOT_PASSWORD: 
+     MONGO_INITDB_ROOT_USERNAME: root
+
+volumes:
+  tatoomarketplace_dbvolume:
+    
