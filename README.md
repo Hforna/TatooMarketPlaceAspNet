@@ -63,13 +63,3 @@
 ## 🤝 Contribuições
 
 Contribuições são bem-vindas! Sinta-se à vontade para enviar pull requests ou abrir issues.
-
----
-
-## 📝 Licença
-
-Este projeto está licenciado sob a [MIT License](LICENSE).
-
----
-
-**Desenvolvido com ❤️ para a comunidade de tatuagem!**
