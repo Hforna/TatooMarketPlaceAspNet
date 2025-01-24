@@ -32,7 +32,6 @@
 - **Banco de Dados**: SQL Server  
 - **API de Pagamento**: Stripe  
 - **API de Conversão de Moedas**: Exchange Rates API  
-- **Frontend**: React  
 - **Infraestrutura**: Azure Service Bus (para mensageria)  
 
 ---
