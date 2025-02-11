@@ -29,7 +29,7 @@
 ## 🛠️ Tecnologias Utilizadas
 
 - **Backend**: ASP.NET Core  
-- **Banco de Dados**: SQL Server  
+- **Banco de Dados**: SQL Server com CQRS
 - **API de Pagamento**: Stripe  
 - **API de Conversão de Moedas**: Exchange Rates API  
 - **Infraestrutura**: Azure Service Bus (para mensageria)  
