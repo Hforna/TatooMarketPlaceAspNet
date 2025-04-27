@@ -1,4 +1,4 @@
-# TatooMarketPlace 🎨🖊️
+l# TatooMarketPlace 🎨🖊️
 
 **TatooMarketPlace** é uma plataforma que conecta estúdios de tatuagem a clientes, oferecendo uma experiência prática, segura e personalizada.
 
@@ -23,6 +23,8 @@
   - Escolha o estilo e a região do corpo.
   - Realize pagamentos via **API Stripe**.
 - **Conversão de Moedas**: Ajuste automático de valores para a moeda local com uma **API de Exchange**.
+- **Analise**:
+-   Vendedores avaliam suas compras para analise
 
 ---
 
